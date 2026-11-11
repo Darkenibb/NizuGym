@@ -8,15 +8,18 @@ import { lazyAssets, stampSw } from './scripts/sw-stamp.mjs'
 import { mobileViewport } from './src/lib/viewport-zoom.js'
 
 const backend = process.env.API_TARGET || 'http://127.0.0.1:3000'
-// The API refuses a state-changing request that a browser sent from anywhere other than its own
-// ORIGIN (the CSRF guard in api/server.js). The dev server is on a different port, so the page's
-// real Origin is not ORIGIN — modern browsers get through on Sec-Fetch-Site: same-origin, and
-// presenting the expected Origin here covers the ones that don't send it. Match your .env if you
-// changed ORIGIN: API_ORIGIN=https://gym.example.com npm run dev
+
+// A API recusa uma requisição que altera o estado se o navegador a enviou de qualquer lugar 
+// que não seja sua própria ORIGIN (a proteção CSRF em api/server.js). O servidor de desenvolvimento 
+// fica em uma porta diferente, então a Origin real da página não é a ORIGIN — navegadores modernos 
+// passam via Sec-Fetch-Site: same-origin, e apresentar a Origin esperada aqui cobre os que não a enviam. 
+// Combine com seu .env se você alterou a ORIGIN: API_ORIGIN=https://gym.example.com npm run dev
 const apiOrigin = process.env.API_ORIGIN || 'http://localhost:8080'
-// Exercise media: served straight from catalogue/media in dev (see catalogueMedia below), or
-// proxied to a server of your choice with MEDIA_TARGET.
+
+// Mídia de exercícios: servida diretamente de catalogue/media em dev (veja catalogueMedia abaixo), 
+// ou roteada para um servidor de sua escolha com MEDIA_TARGET.
 const media = process.env.MEDIA_TARGET
+
 const catalogueMedia = {
   name: 'opengym-catalogue-media',
   configureServer(server) {
@@ -36,9 +39,9 @@ const catalogueMedia = {
   }
 }
 
-// Optional web analytics (Umami). Injected only when BOTH vars are set at build time,
-// so a plain `npm run build` — and every self-hosted install — stays telemetry-free.
-// Set for the public instance: VITE_UMAMI_SRC=https://stats.example/script.js VITE_UMAMI_ID=<uuid>
+// Análise web opcional (Umami). Injetado apenas quando AMBAS as variáveis estão definidas no momento do build,
+// então um `npm run build` comum — e toda instalação self-hosted — permanece livre de telemetria.
+// Defina para a instância pública: VITE_UMAMI_SRC=https://stats.example/script.js VITE_UMAMI_ID=<uuid>
 const umamiSrc = process.env.VITE_UMAMI_SRC
 const umamiId = process.env.VITE_UMAMI_ID
 
@@ -54,14 +57,13 @@ const umami = {
   }
 }
 
-// The service worker's cache is named after the build (public/sw.js carries a `__BUILD__`
-// placeholder): a deploy is then a new worker with its own cache, and the previous build's
-// shell and chunks are dropped on activate instead of piling up under one fixed name. The
-// stamp is a hash of the built index.html — it changes exactly when the bundle does.
-// The directory is the one this build wrote to (`--outDir` included), not a fixed ./dist/: a
-// build into a private outDir left `__BUILD__` unstamped in its sw.js.
-// The worker also gets the build's code that loads on demand (`__LAZY__`, scripts/sw-stamp.mjs),
-// so it is there offline before the page has ever needed it.
+// O cache do service worker é nomeado de acordo com o build (public/sw.js carrega um placeholder `__BUILD__`):
+// um deploy é então um novo worker com seu próprio cache, e a casca e os pedaços do build anterior são 
+// descartados na ativação em vez de se acumularem sob um nome fixo. A marcação é um hash do index.html construído — 
+// ela muda exatamente quando o bundle muda. O diretório é aquele para o qual este build escreveu 
+// (`--outDir` incluído), não um ./dist/ fixo: um build para um outDir privado deixava `__BUILD__` sem marcação em seu sw.js. 
+// O worker também recebe o código do build que carrega sob demanda (`__LAZY__`, scripts/sw-stamp.mjs), 
+// para que ele esteja lá offline antes mesmo de a página precisar dele.
 let outDir = fileURLToPath(new URL('./dist/', import.meta.url))
 let lazy = []
 const swStamp = {
@@ -77,12 +79,12 @@ const swStamp = {
   }
 }
 
-// The phone flavour says so in its index.html. A web build that ran into the same dist/ between
-// the mobile build and `cap sync` (two builds in one worktree) shipped the web shell inside an
-// APK: no Android-only settings, a service worker, the passkey login. scripts/check-mobile-bundle.mjs
-// reads this tag in the synced copy after `cap sync` and fails the build without it.
-// The phone flavour also keeps zooming off (src/lib/viewport-zoom.js): the web build lets people
-// pinch, the Capacitor apps stay as they were.
+// A versão de celular indica isso no seu index.html. Um build web que rodou no mesmo dist/ entre
+// o build mobile e o `cap sync` (dois builds em uma árvore de trabalho) enviou a casca web dentro de um
+// APK: sem configurações exclusivas do Android, um service worker, o login por passkey. scripts/check-mobile-bundle.mjs
+// lê esta tag na cópia sincronizada após o `cap sync` e falha o build se ela não estiver lá.
+// A versão de celular também mantém o zoom desativado (src/lib/viewport-zoom.js): o build web permite
+// que as pessoas façam pinça, os apps Capacitor permanecem como estavam.
 const flavor = {
   name: 'opengym-flavor',
   transformIndexHtml(html) {
@@ -91,15 +93,15 @@ const flavor = {
   }
 }
 
-// The version people are asked for in #install-help and on every bug report. Read from
-// package.json so it cannot drift from the release it was built in, and inlined at build
-// time so no runtime fetch is involved.
+// A versão que as pessoas são solicitadas a informar em #install-help e em cada 
+// relatório de bug. Lida do package.json para que não se desvie da versão em que foi construída, 
+// e embutida no momento do build para que nenhuma busca em tempo de execução esteja envolvida.
 //
-// APP_BUILD, when the build sets it, is appended as "1.3.8+<build>". A packaged build carries a
-// version its package.json cannot know — every image built between two releases reports the same
-// number, so the one question a bug report turns on, "which build were you running?", had no
-// answer from inside the app. Unset (the ordinary case, and every upstream build) it changes
-// nothing: the string is exactly package.json's version.
+// APP_BUILD, quando o build o define, é anexado como "1.3.8+<build>". Um build empacotado carrega uma
+// versão que seu package.json não pode saber — toda imagem construída entre dois lançamentos relata o mesmo
+// número, então a pergunta que um relatório de bug faz, "qual build você estava rodando?", não tinha
+// resposta de dentro do app. Indefinido (o caso comum, e todo build upstream) não muda
+// nada: a string é exatamente a versão do package.json.
 const pkgVersion = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')).version
 const appVersion = process.env.APP_BUILD ? `${pkgVersion}+${process.env.APP_BUILD}` : pkgVersion
 
@@ -108,9 +110,12 @@ export default defineConfig({
   plugins: [react(), umami, flavor, swStamp, catalogueMedia],
   base: './',
   server: {
-    // The Coach's core (payload, validator, prompts, HTTP adapters) lives in ../api/coach/core
-    // and is imported by the phone build. vite build and vitest already reach it; the dev
-    // server needs to be told the workspace is wider than frontend/.
+    // <-- ADICIONADO AQUI: Força o servidor a rodar na porta 8080 para bater com a API -->
+    port: 8080,
+    
+    // O núcleo do Coach (payload, validador, prompts, adaptadores HTTP) fica em ../api/coach/core
+    // e é importado pelo build do celular. vite build e vitest já o alcançam; o servidor de dev
+    // precisa ser informado de que o workspace é mais amplo que frontend/.
     fs: { allow: ['..'] },
     proxy: {
       '/api': { target: backend, changeOrigin: true, headers: { Origin: apiOrigin } },
@@ -119,11 +124,11 @@ export default defineConfig({
       } : {})
     }
   },
-  // The iOS app's deployment target is 15.5 (ios/App), so its WebView is Safari 15.5, and the web
-  // app follows the same floor. Vite's own default is Safari 16.4: syntax newer than 15.5 went out
-  // unlowered and one regex lookbehind kept 1.4.2 on its splash there. What the transpiler cannot
-  // lower, scripts/check-bundle-syntax.mjs catches (its test builds the bundle).
+  // A meta de implantação do app iOS é 15.5 (ios/App), então sua WebView é Safari 15.5, e o app web
+  // segue o mesmo piso. O padrão do próprio Vite é Safari 16.4: sintaxe mais nova que 15.5 saía
+  // sem rebaixamento e um regex lookbehind manteve a 1.4.2 na tela de abertura lá. O que o transpilador não consegue
+  // rebaixar, scripts/check-bundle-syntax.mjs captura (seu teste constrói o bundle).
   build: { chunkSizeWarningLimit: 1500, target: ['safari15', 'chrome100', 'firefox100', 'edge100'] },
-  // Gives happy-dom tests a working localStorage on Node 24+ (#733).
+  // Dá aos testes happy-dom um localStorage funcional no Node 24+ (#733).
   test: { setupFiles: ['./src/test-setup.js'] }
 })
