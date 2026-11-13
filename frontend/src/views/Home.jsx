@@ -86,6 +86,61 @@ export default function Home() {
   const progChip = programmeChip(S)
   const onQueueStart = id => { if (S.active) nav('/workout'); else startFlow([id]) }
 
+  // --- LÓGICA DA IMAGEM DO CARD ---
+  const heroImageName = doneToday ? 'descanso' : todayName;
+  const heroImageCustom = doneToday ? null : routine?.image;
+  // --------------------------------
+
+  // Função atualizada: Tenta a imagem do usuário primeiro, depois busca os arquivos locais (.png)
+  const getHeroImage = (name, customImage) => {
+    if (customImage) return `url(${customImage})`;
+    if (!name) return "url('/descanso.png')";
+    
+    const lower = name.toLowerCase();
+    
+    if (lower.includes('push') || lower.includes('peito') || lower.includes('chest') || lower.includes('supino')) {
+      return "url('/peito.png')";
+    }
+    if (lower.includes('pull') || lower.includes('costa') || lower.includes('back') || lower.includes('remada') || lower.includes('puxada')) {
+      return "url('/costas.png')";
+    }
+    if (lower.includes('leg') || lower.includes('perna') || lower.includes('lower') || lower.includes('agachamento') || lower.includes(' c')) {
+      return "url('/perna.png')";
+    }
+    if (lower.includes('ombro') || lower.includes('shoulder')) {
+      return "url('/ombro.png')";
+    }
+    if (lower.includes('braço') || lower.includes('braco') || lower.includes('arm') || lower.includes('biceps') || lower.includes('triceps')) {
+      return "url('/braco.png')";
+    }
+    
+    return "url('/descanso.png')";
+  };
+
+  // Função para customizar o enquadramento e tamanho de cada imagem
+  const getHeroStyle = (name) => {
+    if (!name) return { backgroundPosition: 'center', minHeight: '320px' };
+    const lower = name.toLowerCase();
+
+    if (lower.includes('push') || lower.includes('peito') || lower.includes('chest')) {
+      return { backgroundPosition: 'center 25%', minHeight: '320px' };
+    }
+    if (lower.includes('pull') || lower.includes('costa') || lower.includes('back')) {
+      return { backgroundPosition: 'center 30%', minHeight: '320px' };
+    }
+    if (lower.includes('leg') || lower.includes('perna') || lower.includes('lower')) {
+      return { backgroundPosition: 'center 15%', minHeight: '380px' };
+    }
+    if (lower.includes('ombro') || lower.includes('shoulder')) {
+      return { backgroundPosition: 'center 20%', minHeight: '320px' };
+    }
+    if (lower.includes('braço') || lower.includes('braco') || lower.includes('arm')) {
+      return { backgroundPosition: 'center 25%', minHeight: '320px' };
+    }
+    
+    return { backgroundPosition: 'center', minHeight: '320px' };
+  };
+
   return <div className="narrow">
     <div className="hdr" style={{ position: 'relative' }}>
       <SeasonDeco spot="header-bats" />
@@ -113,27 +168,45 @@ export default function Home() {
       {left && <div className={'small dim wkleft' + (left.left > 0 ? '' : ' done')}>
         {left.left > 0 ? tn('{0} of {1} left this week', '{0} of {1} left this week', left.left, left.of) : t('All done this week. Nice.')}
       </div>}
-      <div className="today-row" data-tour="today" {...tappable(onToday)}>
-        <div className="row" style={{ gap: 9, minWidth: 0 }}>
-          <span className="lrow-i" style={{ background: S.active ? 'var(--orange)' : doneToday ? 'var(--surface-3)' : routine ? 'var(--acc)' : 'var(--surface-3)',
-            ...(!S.active && !doneToday && !routine ? { color: 'var(--label-2)' } : {}) }}>
-            <Icon name={S.active ? (editingSaved ? 'pencil' : 'play') : doneToday ? 'checkCircle' : routine ? glyphOf(routine.emoji) : 'moon'}
-              style={doneToday && !S.active ? { color: 'var(--green)' } : undefined} />
-          </span>
-          <div style={{ minWidth: 0 }}>
-            <div className="lbl2">{t('Today')}</div>
-            <div className="ttl">{S.active ? (editingSaved ? S.active.name : t('{0} (in progress)', S.active.name))
-              : doneToday ? (doneToday.name ? t('{0} (done)', doneToday.name) : t('Workout done'))
-              : routine ? todayName : t('Rest day')}{todayOvr && routine && !doneToday ? ' · ' + t('rescheduled') : ''}</div>
-            {next && !doneToday && <div className="ss">{t('Next session: {0}, {1}', t(DAYN[next.weekday]), next.routine.name)}</div>}
+
+      {/* CARD DE TREINO DINÂMICO */}
+      <div className="hero-workout-card" onClick={onToday}>
+        <div 
+          className="hero-bg" 
+          style={{ 
+            backgroundImage: getHeroImage(heroImageName, heroImageCustom),
+            ...getHeroStyle(heroImageName) 
+          }}
+        ></div>
+        
+        <div className="hero-content">
+          <div className="hero-header">
+            <h2>{S.active ? t('{0} (em andamento)', S.active.name) : doneToday ? t('Treino Concluído') : routine ? todayName : t('Dia de Descanso')}</h2>
+            <span className="hero-date">{t(DAYS[today.getDay()])}, {today.getDate()} {today.toLocaleDateString(dateLocale(), { month: 'short' })}</span>
           </div>
+
+          {routine && !doneToday && (
+            <div className="hero-stats">
+              <div className="h-stat">
+                <Icon name="calendar" /> <span>Séries</span> <b>5</b>
+              </div>
+              <div className="h-stat">
+                <Icon name="activity" /> <span>Exercícios</span> <b>{routine.exercises?.length || 0}</b>
+              </div>
+              <div className="h-stat">
+                <Icon name="clock" /> <span>Descanso</span> <b>60s</b>
+              </div>
+            </div>
+          )}
+
+          <button className="hero-btn">
+            <Icon name={doneToday ? "checkCircle" : "play"} />
+            {S.active ? t('Continuar Treino') : doneToday ? t('Ver Detalhes') : routine ? t('Iniciar Treino') : t('Escolher Treino')}
+          </button>
         </div>
-        {S.active ? <span className="tag" style={{ color: 'var(--orange)', background: 'color-mix(in srgb,var(--orange) 16%,transparent)' }}>{editingSaved ? t('Edit') : t('Resume')}</span>
-          : doneToday ? <span className="tag" style={{ color: 'var(--green)', background: 'color-mix(in srgb,var(--green) 16%,transparent)' }}>{t('Done')}</span>
-          : routine ? <span className="row" style={{ gap: 8 }}><MiniBodyMap routines={todayRoutines} body={S.body} /><span className="tag acc">{t('Start')}</span></span>
-          : <Icon name="plus" className="chev" />}
       </div>
-      {!S.active && <div style={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
+
+      {!S.active && <div style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
         <Button size="sm" variant="ghost" className="dim" icon="swap" onClick={() => nav('/workout')}>
           {t('Choose a different workout')}
         </Button>
