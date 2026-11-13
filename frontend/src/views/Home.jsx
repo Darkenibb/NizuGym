@@ -82,19 +82,18 @@ export default function Home() {
   const on = id => isOn(S, id)
   const bwPoints = S.bodyweight.slice(-30).map(b => ({ t: weighInAt(b), y: b.w, d: b.d }))
 
-  // --- CORREÇÃO DO CLIQUE DO CARD (Ver Detalhes) ---
+  // --- CORREÇÃO DO CLIQUE ---
   const onToday = () => { 
     if (S.active) {
-      nav('/workout'); // Se tem treino rodando, volta pra ele
+      nav('/workout');
     } else if (doneToday) {
-      nav('/history'); // Se já acabou, vai para o histórico ver os detalhes
+      nav('/history');
     } else if (todayRoutines.length) {
-      startFlow(effectiveRoutineIds(S, todayISO())); // Inicia o treino do dia
+      startFlow(effectiveRoutineIds(S, todayISO()));
     } else {
-      dayOverrideSheet(todayISO()); // Abre o modal de escolha para o dia de descanso
+      dayOverrideSheet(todayISO());
     }
   }
-  // ------------------------------------------------
 
   const progChip = programmeChip(S)
   const onQueueStart = id => { if (S.active) nav('/workout'); else startFlow([id]) }
@@ -102,7 +101,6 @@ export default function Home() {
   // --- LÓGICA DA IMAGEM DO CARD ---
   const heroImageName = doneToday ? 'descanso' : todayName;
   const heroImageCustom = doneToday ? null : routine?.image;
-  // --------------------------------
 
   const getHeroImage = (name, customImage) => {
     if (customImage) return `url(${customImage})`;
@@ -110,6 +108,10 @@ export default function Home() {
     
     const lower = name.toLowerCase();
     
+    // CORREÇÃO AQUI: Verifica explicitamente se é descanso
+    if (lower.includes('descanso') || lower.includes('rest') || lower.includes('off')) {
+      return "url('/descanso.png')";
+    }
     if (lower.includes('push') || lower.includes('peito') || lower.includes('chest') || lower.includes('supino')) {
       return "url('/peito.png')";
     }
@@ -126,13 +128,16 @@ export default function Home() {
       return "url('/braco.png')";
     }
     
-    return "url('/descanso.png')";
+    return "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop')";
   };
 
   const getHeroStyle = (name) => {
     if (!name) return { backgroundPosition: 'center', minHeight: '380px' };
     const lower = name.toLowerCase();
 
+    if (lower.includes('descanso') || lower.includes('rest')) {
+      return { backgroundPosition: 'center', minHeight: '380px' };
+    }
     if (lower.includes('push') || lower.includes('peito') || lower.includes('chest')) {
       return { backgroundPosition: 'center 25%', minHeight: '380px' };
     }
@@ -151,6 +156,10 @@ export default function Home() {
     
     return { backgroundPosition: 'center', minHeight: '380px' };
   };
+
+  // --- CÁLCULO REAL DE SÉRIES E DESCANSO ---
+  const totalSets = routine?.exercises?.reduce((acc, ex) => acc + (Number(ex.sets) || 3), 0) || 0;
+  const restTime = routine?.rest || S.rest || S.defaultRest || 60;
 
   return <div className="narrow">
     <div className="hdr" style={{ position: 'relative' }}>
@@ -180,6 +189,7 @@ export default function Home() {
         {left.left > 0 ? tn('{0} of {1} left this week', '{0} of {1} left this week', left.left, left.of) : t('All done this week. Nice.')}
       </div>}
 
+      {/* CARD DE TREINO DINÂMICO */}
       <div className="hero-workout-card" onClick={onToday}>
         <div 
           className="hero-bg" 
@@ -198,21 +208,21 @@ export default function Home() {
           {routine && !doneToday && (
             <div className="hero-stats">
               <div className="h-stat">
-                <Icon name="calendar" /> <span>Séries</span> <b>5</b>
+                <Icon name="calendar" /> <span>Séries</span> <b>{totalSets}</b>
               </div>
               <div className="h-stat">
                 <Icon name="activity" /> <span>Exercícios</span> <b>{routine.exercises?.length || 0}</b>
               </div>
               <div className="h-stat">
-                <Icon name="clock" /> <span>Descanso</span> <b>60s</b>
+                <Icon name="clock" /> <span>Descanso</span> <b>{restTime}s</b>
               </div>
             </div>
           )}
 
-          <button className="hero-btn" type="button">
+          <div className="hero-btn">
             <Icon name={doneToday ? "checkCircle" : "play"} />
             {S.active ? t('Continuar Treino') : doneToday ? t('Ver Detalhes') : routine ? t('Iniciar Treino') : t('Escolher Treino')}
-          </button>
+          </div>
         </div>
       </div>
 
