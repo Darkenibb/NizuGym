@@ -316,3 +316,4 @@ describe('the superset card after a rating', () => {
     expect(seen).toEqual([container.querySelectorAll('.setrow')[0]])
   })
 })
+

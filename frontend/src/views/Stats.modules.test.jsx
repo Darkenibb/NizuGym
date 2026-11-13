@@ -65,3 +65,4 @@ describe('Stats follows the modules', () => {
     expect(parts()).toContain('Effort')
   })
 })
+

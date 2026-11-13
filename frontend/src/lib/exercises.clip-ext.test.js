@@ -24,3 +24,4 @@ describe('gifSrc and VITE_CLIP_EXT', () => {
     expect(gifSrc({ ...ex, gif: '0025.gif', fv: undefined }, 'male')).toBe('exercise-media/clip/0025.gif')
   })
 })
+

@@ -86,3 +86,4 @@ describe('safe active exercise swap', () => {
     expect(active.cur).toBe(cursor)
   })
 })
+

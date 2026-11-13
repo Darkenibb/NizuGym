@@ -146,3 +146,4 @@ describe('back from a root tab', () => {
     expect(h.handler({ canGoBack: true })).toBe('exit')
   })
 })
+

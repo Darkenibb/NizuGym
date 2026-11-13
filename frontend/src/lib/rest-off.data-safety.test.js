@@ -51,3 +51,4 @@ describe('an exercise on "No timer"', () => {
     expect(restSecFor([{ target: NEW().routines[0].ex[1], sets: [] }], [0], 90)).toBe(0)
   })
 })
+

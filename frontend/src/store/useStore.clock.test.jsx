@@ -56,3 +56,4 @@ describe('update stamps after what the copy has seen', () => {
     expect(useStore.getState().S.bodyweight[0].t).toBe(50)
   })
 })
+

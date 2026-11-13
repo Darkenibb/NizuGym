@@ -39,3 +39,4 @@ export function fromSpeed(value, unit) {
 
 /** "8 km/h" or "5 mph" — a stored km/h speed, shown in `unit`. */
 export const fmtSpeed = (kmh, unit) => `${fmtNum(toSpeed(Number(kmh) || 0, unit))} ${speedLabel(unit)}`
+

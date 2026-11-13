@@ -95,3 +95,4 @@ describe('"Last time means"', () => {
     expect(lastEntryFor(st, BENCH, 'THU').rid).toBe('MON')
   })
 })
+

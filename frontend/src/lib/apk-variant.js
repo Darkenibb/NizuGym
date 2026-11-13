@@ -14,3 +14,4 @@ export const variantFor = (env, px = BUILTIN_PX) => APK_VARIANTS.includes(env)
 export const APK_VARIANT = variantFor(ENV.VITE_APK_VARIANT)
 /** The kind's name as the download page and the file names call it. */
 export const VARIANT_NAMES = { standard: 'Standard', plus: 'Plus', hd: 'HD' }
+

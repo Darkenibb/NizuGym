@@ -35,3 +35,4 @@ export function rungWeight(rung, work, grid, floor = 0) {
 
 /** Whether a set row was made from a rung (a generated or a saved warm-up), not by halving. */
 export const isRungRow = row => !!row && (row.wb === true || Number.isFinite(row.wp))
+

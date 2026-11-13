@@ -64,3 +64,4 @@ export function hush() {
   if (MOBILE) hushNative()
   try { webSpeech()?.cancel() } catch { /* nothing to stop */ }
 }
+

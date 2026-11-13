@@ -95,3 +95,4 @@ describe('the IndexedDB media backend', () => {
     expect(await bytesOf(await be.getBlob('h4'))).toEqual([7, 8])
   })
 })
+

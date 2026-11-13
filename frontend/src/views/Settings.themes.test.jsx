@@ -134,3 +134,4 @@ describe('Seasonal themes', () => {
     expect(mocks.S.seasonal).toEqual({ halloweenWorkout: false })
   })
 })
+

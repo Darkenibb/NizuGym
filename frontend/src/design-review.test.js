@@ -269,3 +269,4 @@ describe('Stats redesign', () => {
     expect(rule('.mchip.miss')).toBe('background:var(--surface-2);color:var(--label)')
   })
 })
+

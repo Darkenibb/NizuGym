@@ -70,3 +70,4 @@ describe('the web build', () => {
     expect(mocks.registered).toBe(0)
   })
 })
+

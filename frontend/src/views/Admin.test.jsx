@@ -150,3 +150,4 @@ describe('Admin roles', () => {
     expect(page.querySelector('[aria-label="clear log"]')).toBeNull()
   })
 })
+

@@ -62,3 +62,4 @@ describe('Stats: lifted in total', () => {
     expect(mount({}, [])).toBeNull()
   })
 })
+

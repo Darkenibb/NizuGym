@@ -13,7 +13,7 @@
 //   remove({ packId })
 //   localPath({ packId, probe })             → { base } (older native sides: { path })
 //
-// A pack's files are read from `base` + '/<drawing>.webp'. On iOS that is opengym-pack://<packId>,
+// A pack's files are read from `base` + '/<drawing>.webp'. On iOS that is NizuGym-pack://<packId>,
 // which the app answers from Background Assets itself: a downloaded pack is not a folder a page
 // could be pointed at (build 30: "downloaded, 0.1 MB", no new animations). `probe` is one drawing
 // the pack holds, the native side's test that the pack can really be read.
@@ -224,3 +224,4 @@ export function _resetAnimPacks(next = {}) {
   pluginP = null; progressHooked = false; downloads.clear()
   state = { available: false, testflight: false, offered: null, checked: false, packs: {}, prefs: readPrefs(), ...next }
 }
+

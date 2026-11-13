@@ -79,3 +79,4 @@ describe('the moments', () => {
     expect(speak.mock.calls.every(c => c[1].queue === false && c[1].rate === 1.25)).toBe(true)
   })
 })
+

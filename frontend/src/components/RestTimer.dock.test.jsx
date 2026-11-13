@@ -184,3 +184,4 @@ describe('the docked rest bar', () => {
     expect(useUI.getState().timer).toMatchObject({ left: 60, paused: true })
   })
 })
+

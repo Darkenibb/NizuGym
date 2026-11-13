@@ -205,3 +205,4 @@ describe('superset stepper — one tap moves one step', () => {
     expect(mocks.S.active.entries[0].sets[0].w).toBe(57.5)
   })
 })
+

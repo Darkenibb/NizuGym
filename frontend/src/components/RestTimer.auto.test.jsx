@@ -111,3 +111,4 @@ describe('for a screen reader', () => {
     expect(host.querySelector('[aria-live="polite"]')).toBe(region)
   })
 })
+

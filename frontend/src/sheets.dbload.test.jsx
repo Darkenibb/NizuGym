@@ -85,3 +85,4 @@ describe('weight means', () => {
     expect(onSave.mock.calls[1][0].dbLoad).toBe('as')
   })
 })
+

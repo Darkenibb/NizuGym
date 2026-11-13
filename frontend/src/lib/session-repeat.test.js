@@ -111,3 +111,4 @@ describe('repeatSessionEntries (#58)', () => {
     expect(entries[0].sets.map(s => s.side)).toEqual(['L', 'R', 'L', 'R'])
   })
 })
+

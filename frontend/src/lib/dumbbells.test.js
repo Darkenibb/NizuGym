@@ -250,3 +250,4 @@ describe('the no-dumbbells switch', () => {
     expect(mergeStates(on, off).dumbbells.kg.weights).toEqual([10])
   })
 })
+

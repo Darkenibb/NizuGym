@@ -1,6 +1,6 @@
 {
-  "name": "openGym",
-  "short_name": "openGym",
+  "name": "NizuGym",
+  "short_name": "NizuGym",
   "description": "Personal gym & body weight tracker",
   "start_url": "./",
   "scope": "./",
@@ -13,3 +13,4 @@
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
+

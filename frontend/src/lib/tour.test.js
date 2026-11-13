@@ -219,3 +219,4 @@ describe('placeCard', () => {
     expect(placeCard(null, card, view)).toMatchObject({ side: 'center', left: 45 })
   })
 })
+

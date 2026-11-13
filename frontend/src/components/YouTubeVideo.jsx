@@ -37,3 +37,4 @@ export default function YouTubeVideo({ videoId, compact, mini }) {
     </button>}
   </div>
 }
+

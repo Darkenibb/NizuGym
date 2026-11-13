@@ -94,3 +94,4 @@ describe('the incline column', () => {
     expect(container.querySelector('button[aria-label="Increase incline"]')).toBe(null)
   })
 })
+

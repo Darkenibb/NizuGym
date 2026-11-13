@@ -96,3 +96,4 @@ export function streakCelebration (S, info, tally = {}) {
   if (weekDone && seen.wk !== info.weekKey) return { kind: 'week', weeks: info.current, seen: { badge: Number(seen.badge) || 0, wk } }
   return null
 }
+

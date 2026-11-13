@@ -87,3 +87,4 @@ describe('insertRowAt (undo of a removed set)', () => {
     expect(removeRowAt(rows, 0)).toEqual(rows)
   })
 })
+

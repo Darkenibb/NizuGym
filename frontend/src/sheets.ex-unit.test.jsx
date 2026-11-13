@@ -139,3 +139,4 @@ describe('the exercise’s weight unit', () => {
     expect(valueOf(again, 'Weight (lb)')).toBe('47.5')
   })
 })
+

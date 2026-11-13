@@ -48,3 +48,4 @@ describe('deviceLabel', () => {
     expect(deviceLabel('')).toBe('')
   })
 })
+

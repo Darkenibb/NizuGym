@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs'
 import { REST_SOUNDS, REST_SOUND_IDS } from './rest-sounds.js'
 import { TIMBRES } from './sound.js'
 
-const java = name => readFileSync(new URL(`../../android/app/src/main/java/ch/duartesantos/opengym/${name}.java`, import.meta.url), 'utf8')
+const java = name => readFileSync(new URL(`../../android/app/src/main/java/ch/duartesantos/NizuGym/${name}.java`, import.meta.url), 'utf8')
 const tone = java('RestTone')
 const numbers = text => text.match(/-?\d+(\.\d+)?/g).map(Number)
 // `{{a, b, c}, {d, e, f, g}}` → [[a, b, c], [d, e, f, g]]
@@ -63,3 +63,4 @@ describe('RestTone.java plays what the page plays', () => {
     expect(alert).toMatch(/RestTone\.render\(tone\)/)
   })
 })
+

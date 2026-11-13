@@ -160,3 +160,4 @@ export function fmtWhen(ts, now = Date.now()) {
   if (now - ts < 6 * 86400000 && ts <= now) return d.toLocaleDateString(dateLocale(), { weekday: 'short' }) + ' ' + time
   return d.toLocaleDateString(dateLocale(), { day: 'numeric', month: 'short' }) + ' ' + time
 }
+

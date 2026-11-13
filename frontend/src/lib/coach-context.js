@@ -34,3 +34,4 @@ export function todayForCoach(S, now = Date.now()) {
     })),
   }
 }
+

@@ -52,7 +52,7 @@ const s = sec => NOW - 3600e3 + sec * 1000
 const dense = (from, to, bpm) => { const out = []; for (let x = from; x <= to; x++) out.push([s(x), bpm]); return out }
 const workout = (id, endSec = 600, extra = {}) => ({ id, d: '2026-10-15', name: 'Push', start: s(0), end: s(endSec), entries: [{ id: '0025', target: { mode: 'reps' }, sets: [{ w: 60, r: 8, done: true, at: s(100) }] }], ...extra })
 const reads = kind => h.calls.filter(c => c[0] === kind)
-const file = () => JSON.parse(h.files.get('opengym-health.json') || 'null')
+const file = () => JSON.parse(h.files.get('NizuGym-health.json') || 'null')
 
 let hs, S, applied
 const getState = () => S
@@ -149,7 +149,7 @@ describe('weigh-ins', () => {
   const rec = (hAgo, kg, extra = {}) => ({ t: NOW - hAgo * 3600e3, kg, id: 'r' + hAgo, origin: 'com.withings.wiscale2', clientId: null, ...extra })
 
   it('reads the last 30 days the first time, then from the newest seen', async () => {
-    h.weights = [rec(2, 80.4), rec(26, 81, { clientId: 'opengym-bw-2026-10-14' })]
+    h.weights = [rec(2, 80.4), rec(26, 81, { clientId: 'NizuGym-bw-2026-10-14' })]
     await hs.enableRead('weight', getState, { apply })
     expect(h.calls[0]).toEqual(['request', { read: ['weight'], write: [] }])
     expect(reads('readWeights')[0][1].since).toBe(NOW - 30 * 24 * 3600e3)
@@ -170,7 +170,7 @@ describe('weigh-ins', () => {
   })
 
   // #859: the scale's weigh-in joins the typed one at its own time; the typed one is not touched.
-  it('keeps a weigh-in typed into openGym that day, the scale\'s beside it', async () => {
+  it('keeps a weigh-in typed into NizuGym that day, the scale\'s beside it', async () => {
     S.bodyweight = [{ d: '2026-10-15', w: 82, t: NOW - 10 * 3600e3 }]
     h.weights = [rec(2, 80.4)]
     await hs.enableRead('weight', getState, { apply })
@@ -248,3 +248,4 @@ describe('weigh-ins with the history permission', () => {
     expect(h.calls[0]).toEqual(['request', { read: ['weight'], write: [] }])
   })
 })
+

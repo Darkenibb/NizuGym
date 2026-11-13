@@ -73,3 +73,4 @@ describe('session volume in the workout header', () => {
     expect(shown()).toBeNull()
   })
 })
+

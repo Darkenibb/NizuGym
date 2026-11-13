@@ -79,3 +79,4 @@ describe('Play asset packs', () => {
     fs.rmSync(dir, { recursive: true, force: true })
   })
 })
+

@@ -184,3 +184,4 @@ describe('badges on a workout logged into the past', () => {
     expect(mountTopSheet().textContent).toContain('New PR:')
   })
 })
+

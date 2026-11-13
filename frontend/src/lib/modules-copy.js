@@ -13,7 +13,7 @@ export const moduleCopy = () => ({
   checkin: [t('Gym check-in'), t('Your membership codes on Home, and NFC stickers that start a workout.')],
   body: [t('Body'), t('Weigh-ins, measurements, progress photos and your weight goal.')],
   health: [t('Health'), t('Apple Health or Health Connect, heart rate and recovery tips.')],
-  motivation: [t('Motivation'), t('Streaks, challenges, badges, recaps and your year in openGym.')],
+  motivation: [t('Motivation'), t('Streaks, challenges, badges, recaps and your year in NizuGym.')],
   coach: [t('AI Coach'), t('Reviews your training and suggests changes. You still say yes or no.')],
   integrations: [t('Integrations'), t('Webhooks for Home Assistant and friends, and the MCP server.')],
   seasonal: [t('Seasonal themes'), t('Halloween, Christmas and the advent calendar. Spooky, festive, optional.')],
@@ -30,3 +30,4 @@ export const presetCopy = () => ({
   body: [t('Training and body'), t('Plus weigh-ins, measurements, photos and your health apps.')],
   all: [t('Everything'), t('Streaks, the Coach, themes, the lot.')],
 })
+

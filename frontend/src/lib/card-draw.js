@@ -1,4 +1,4 @@
-// What every shared picture of openGym has in common: the two formats, the light and dark looks
+// What every shared picture of NizuGym has in common: the two formats, the light and dark looks
 // and the logo in the corner. Pure drawing, no DOM: the workout card (lib/workout-card.js, after a
 // workout and in History) and Your year (lib/wrapped-cards.js) both paint with it, and
 // lib/share-image.js gets the picture out of the app. No exercise picture or clip is ever drawn
@@ -8,7 +8,7 @@
 export const FORMATS = { story: { width: 1080, height: 1920 }, square: { width: 1080, height: 1080 } }
 export const FORMAT_IDS = Object.keys(FORMATS)
 export const STYLE_IDS = ['dark', 'light']
-export const SITE = 'opengym.ch'
+export const SITE = 'NizuGym.ch'
 
 /**
  * The colours of a card, the app's own (index.css) in a fixed light or dark look, whatever the
@@ -66,7 +66,7 @@ export function drawMark(ctx, x, y, h, color) {
 }
 
 /**
- * The footer every card ends with: the mark, "openGym" with "Gym" in the accent, and the site at
+ * The footer every card ends with: the mark, "NizuGym" with "Gym" in the accent, and the site at
  * the other end. `y` is the text's baseline. Drawn left to right whatever the language: it is a
  * logo, and a logo does not mirror.
  */
@@ -99,4 +99,5 @@ export function roundRect(ctx, x, y, w, h, r) {
   ctx.arcTo(x, y, x + w, y, rr)
   ctx.closePath()
 }
+
 

@@ -238,3 +238,4 @@ export const TEMPLATES = {
 
 export const TEMPLATE_LIST = Object.values(TEMPLATES)
 export const DEFAULT_TEMPLATE_ID = 'poliquin'
+

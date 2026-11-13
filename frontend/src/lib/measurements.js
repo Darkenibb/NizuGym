@@ -201,3 +201,4 @@ export const fromCsvUnit = (v, unit) => unit === 'in' ? v * 2.54 : unit === 'lb'
 export const sameMeasurementKind = (a, b) => unitKind(unitOf({ unit: a })) === unitKind(unitOf({ unit: b }))
 // A custom reading as the field shows it: in the field's unit, or cm for a legacy field.
 export const customDisplayValue = (value, unit) => unitOf({ unit }) ? toMeasurementDisplay(value, 'kg', { unit }) : value
+

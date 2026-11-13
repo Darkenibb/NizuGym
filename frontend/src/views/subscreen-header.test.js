@@ -25,3 +25,4 @@ describe('the title beside a page back button', () => {
     })
   }
 })
+

@@ -249,3 +249,4 @@ export function jobErrorText(cls, detail) {
   const why = own && detail ? String(detail).trim().slice(0, 300) : ''
   return why ? `${base}\n${why}` : base
 }
+

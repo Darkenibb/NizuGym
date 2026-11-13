@@ -27,3 +27,4 @@ describe('setLang', () => {
     expect(log.indexOf('names')).toBeLessThan(log.indexOf('words done'))
   })
 })
+

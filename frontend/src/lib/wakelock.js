@@ -55,3 +55,4 @@ export function useWakeLock(enabled) {
     return releaseWakeLock
   }, [enabled])
 }
+

@@ -111,3 +111,4 @@ describe('Home party', () => {
     expect(render(<Party inf={info()} />).querySelector('.streak-party')).toBeNull()
   })
 })
+

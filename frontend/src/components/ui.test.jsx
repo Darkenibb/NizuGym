@@ -329,3 +329,4 @@ describe('Stepper display word', () => {
     act(() => root.unmount()); host.remove()
   })
 })
+

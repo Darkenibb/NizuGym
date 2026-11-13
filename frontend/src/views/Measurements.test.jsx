@@ -120,3 +120,4 @@ describe('logging body measurements', () => {
     expect(entries().map(e => e.d)).toEqual(['2026-09-01'])
   })
 })
+

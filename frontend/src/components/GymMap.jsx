@@ -78,3 +78,4 @@ export default function GymMap({ pos, radius, onMove, label }) {
   }, [radius])
   return <div className="gym-map" ref={host} role="application" aria-label={label} />
 }
+

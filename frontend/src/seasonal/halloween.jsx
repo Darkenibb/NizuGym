@@ -294,3 +294,4 @@ function PeekPumpkin() {
 }
 // Where each bat of the burst ends up, relative to the pumpkin: mostly up and out.
 const BURST = [[-120, -150, -18], [-60, -210, -8], [10, -240, 4], [80, -190, 12], [140, -120, 20], [-150, -60, -24], [160, -40, 26]]
+

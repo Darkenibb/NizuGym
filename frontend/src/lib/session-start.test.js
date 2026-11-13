@@ -221,3 +221,4 @@ describe('builtOutOfProgression', () => {
     expect(builtOutOfProgression(null, deload)).toBe(false)
   })
 })
+

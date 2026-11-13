@@ -130,3 +130,4 @@ export const LIFTOSAUR_EXERCISES = [
   ['hollowBodyHold', 'Hollow Body Hold', 'bodyweight'], ['deadBug', 'Dead Bug', 'bodyweight'],
   ['shoulderPassThrough', 'Shoulder Pass Through', 'band'],
 ]
+

@@ -1,4 +1,4 @@
-// The pairing file (opengym-remote.json) holds the phone's session token. On iOS it lives in
+// The pairing file (NizuGym-remote.json) holds the phone's session token. On iOS it lives in
 // Library/NoCloud, which the Filesystem plugin excludes from iCloud and computer backups, and an
 // iPhone paired before that has its file moved there out of Documents once. Android keeps it in
 // the app's files, excluded by name in its backup rules (android-backup.test.js).
@@ -35,15 +35,15 @@ describe('the pairing file', () => {
   it('on iOS is written to Library/NoCloud, never to Documents, and the folder is marked right away', async () => {
     expect(M.MOBILE).toBe(true)
     await M.saveRemoteFile(PAIRED)
-    expect([...h.files.keys()]).toEqual(['LIBRARY_NO_CLOUD/opengym-remote.json'])
-    expect(h.stats).toEqual(['LIBRARY_NO_CLOUD/opengym-remote.json'])
+    expect([...h.files.keys()]).toEqual(['LIBRARY_NO_CLOUD/NizuGym-remote.json'])
+    expect(h.stats).toEqual(['LIBRARY_NO_CLOUD/NizuGym-remote.json'])
     expect(await M.loadRemoteFile()).toEqual(PAIRED)
   })
 
   it('on iOS moves a pairing made before out of Documents, once', async () => {
-    h.files.set('DATA/opengym-remote.json', JSON.stringify(PAIRED))
+    h.files.set('DATA/NizuGym-remote.json', JSON.stringify(PAIRED))
     expect(await M.loadRemoteFile()).toEqual(PAIRED)
-    expect([...h.files.keys()]).toEqual(['LIBRARY_NO_CLOUD/opengym-remote.json'])
+    expect([...h.files.keys()]).toEqual(['LIBRARY_NO_CLOUD/NizuGym-remote.json'])
     expect(await M.loadRemoteFile()).toEqual(PAIRED)
   })
 
@@ -54,8 +54,9 @@ describe('the pairing file', () => {
   it('on Android stays where its backup rules exclude it', async () => {
     h.platform = 'android'
     await M.saveRemoteFile(PAIRED)
-    expect([...h.files.keys()]).toEqual(['DATA/opengym-remote.json'])
+    expect([...h.files.keys()]).toEqual(['DATA/NizuGym-remote.json'])
     expect(h.stats).toEqual([])
     expect(await M.loadRemoteFile()).toEqual(PAIRED)
   })
 })
+

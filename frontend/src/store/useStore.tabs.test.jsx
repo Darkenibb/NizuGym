@@ -212,7 +212,7 @@ describe('other ways a push could go out without a conflict check', () => {
     const srv = server({ ...clone(DEF), _ts: 100, workouts: [w('w1')], _rev: 1 })
     savedCopy(srv.doc, 1)
     const A = await openTab()
-    h.api = async () => { throw Object.assign(new Error('not openGym data'), { status: 200, code: 'bad-response' }) }
+    h.api = async () => { throw Object.assign(new Error('not NizuGym data'), { status: 200, code: 'bad-response' }) }
     A.getState().update(s => { s.workouts.push(w('local', '2026-09-03')) })
     await A.getState().pushState()
     expect(localStorage.getItem('gym_dirty')).toBe('1')
@@ -244,3 +244,4 @@ describe('routines edited on two devices', () => {
     expect(A.getState().S.routines[0]._ts).toBeGreaterThan(0)
   })
 })
+

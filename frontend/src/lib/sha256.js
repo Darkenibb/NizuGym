@@ -107,3 +107,4 @@ export async function sha256Hex(input, { subtle = globalThis.crypto?.subtle } = 
   } else h.update(input instanceof Uint8Array ? input : new Uint8Array(input))
   return h.hex()
 }
+

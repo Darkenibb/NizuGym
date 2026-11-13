@@ -29,3 +29,4 @@ export function useCoachGate() {
   }, [ready, ok, fresh, asked])
   return { known: ok || (ready && (fresh || asked)), ok }
 }
+

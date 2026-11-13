@@ -119,3 +119,4 @@ describe('Plan — the menu', () => {
     expect(menu.subtitle).toContain('Add an exercise to a routine first')
   })
 })
+

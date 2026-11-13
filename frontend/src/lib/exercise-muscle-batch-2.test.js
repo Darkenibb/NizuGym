@@ -135,3 +135,4 @@ describe('machine muscle metadata batch 2', () => {
     expect(musclesOf(EXIDX['0577'])).toEqual({ chest: 1, deltoids: 0.4, triceps: 0.4 })
   })
 })
+

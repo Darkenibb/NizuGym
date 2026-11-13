@@ -176,3 +176,4 @@ describe('report and workout printouts', () => {
     expect(lineChartSVG([])).toBe('')
   })
 })
+

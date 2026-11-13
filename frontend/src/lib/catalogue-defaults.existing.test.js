@@ -32,3 +32,4 @@ describe('catalogue defaults leave existing plans alone', () => {
     expect(routineFromSession(w, 'Pull').ex[0].side).toBeUndefined()
   })
 })
+

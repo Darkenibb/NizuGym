@@ -73,3 +73,4 @@ describe('ChatInput', () => {
     expect(onSend).toHaveBeenCalledTimes(1)
   })
 })
+

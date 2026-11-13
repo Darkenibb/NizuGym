@@ -239,3 +239,4 @@ describe('don’t count this session for progression', () => {
     expect(menuItem(openMenu(), 'Don’t count for progression')).toBeUndefined()
   })
 })
+

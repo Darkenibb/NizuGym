@@ -541,7 +541,7 @@ export function fitSnapshot (snap, max = SNAPSHOT_MAX_BYTES) {
 export const HEALTH_GONE_MAX = 60
 
 /**
- * The Apple Health sync ids of workouts deleted in openGym (S.deleted, newest first), for the watch
+ * The Apple Health sync ids of workouts deleted in NizuGym (S.deleted, newest first), for the watch
  * to take its own copies out of Health: a workout the watch app saved is the watch's, and the phone
  * may not delete it, nor the heart rate and calories saved with it (lib/health-connect.js goneIds
  * names the same ids for the phone's own copies).
@@ -552,7 +552,7 @@ export function healthGoneFor (S, max = HEALTH_GONE_MAX) {
     .filter(([, at]) => Number(at) > 0)
     .sort((a, b) => Number(b[1]) - Number(a[1]))
     .slice(0, max)
-    .map(([id]) => 'opengym-w-' + id)
+    .map(([id]) => 'NizuGym-w-' + id)
 }
 
 // Workouts discarded on the phone (#776), newest last: the snapshot names them for a while, so a
@@ -711,7 +711,7 @@ async function runLink (p, { useStore, useUI }, { health = true, clips: withClip
       // discarded ones too: a copy saved before the watch heard (it was away, or ended the workout
       // itself as forgotten) is taken out once it does.
       if (hOn) {
-        const gone = [...healthGoneFor(S), ...discarded.map(id => 'opengym-w-' + id).reverse()]
+        const gone = [...healthGoneFor(S), ...discarded.map(id => 'NizuGym-w-' + id).reverse()]
         if (gone.length) snap.healthGone = [...new Set(gone)]
       }
       const json = JSON.stringify(fitSnapshot(snap))
@@ -858,3 +858,4 @@ export async function watchStatus () {
     return { paired: !!st?.paired, installed: !!st?.installed, activated: st?.activated !== false, reachable: !!st?.reachable }
   } catch { return { paired: false, installed: false } }
 }
+

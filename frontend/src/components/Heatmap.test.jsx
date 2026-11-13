@@ -112,3 +112,4 @@ it.each([0, 1])('retains week start %i when switching the activity metric', week
   expect(dayLabels()).toEqual(labels)
   expect(host.textContent).toContain('More volume')
 })
+

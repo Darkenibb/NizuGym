@@ -146,3 +146,4 @@ describe('effort in a backup', () => {
     expect(effortOf(roundTrip({ workouts: [], routines: [] }))).toBe('none')
   })
 })
+

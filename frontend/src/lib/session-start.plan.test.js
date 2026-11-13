@@ -338,3 +338,4 @@ describe('"Your last session" for an exercise with progression off', () => {
     expect(work(e).map(s => [s.w, s.r])).toEqual([[50, 10], [50, 10]])
   })
 })
+

@@ -110,3 +110,4 @@ describe('installChipDrag', () => {
     expect(row.scrollLeft).toBe(0)
   })
 })
+

@@ -193,3 +193,4 @@ describe('active workout move locale coverage', () => {
     expect(Object.hasOwn(PT_BR_OVERRIDES, 'Move down')).toBe(true)
   })
 })
+

@@ -32,3 +32,4 @@ describe('the toast', () => {
     expect(rule).toMatch(/width:max-content;max-width:88vw/)
   })
 })
+

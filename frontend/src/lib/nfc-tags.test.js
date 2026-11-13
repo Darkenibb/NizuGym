@@ -20,10 +20,10 @@ describe('tagUrl / parseTagUrl', () => {
     ]) expect(parseTagUrl(tagUrl(tag))).toEqual(tag)
   })
 
-  it('writes short https links on opengym.ch', () => {
-    expect(tagUrl({ kind: 'checkin', start: true })).toBe('https://opengym.ch/nfc?do=start')
-    expect(tagUrl({ kind: 'checkin', start: false, card: 'c1' })).toBe('https://opengym.ch/nfc?do=checkin&card=c1')
-    expect(tagUrl({ kind: 'exercise', id: '0025' })).toBe('https://opengym.ch/nfc?ex=0025')
+  it('writes short https links on NizuGym.ch', () => {
+    expect(tagUrl({ kind: 'checkin', start: true })).toBe('https://NizuGym.ch/nfc?do=start')
+    expect(tagUrl({ kind: 'checkin', start: false, card: 'c1' })).toBe('https://NizuGym.ch/nfc?do=checkin&card=c1')
+    expect(tagUrl({ kind: 'exercise', id: '0025' })).toBe('https://NizuGym.ch/nfc?ex=0025')
     // NTAG213 holds 137 bytes of NDEF: even a long custom id stays far below.
     expect(tagUrl({ kind: 'exercise', id: 'x'.repeat(64) }).length).toBeLessThan(110)
   })
@@ -33,31 +33,31 @@ describe('tagUrl / parseTagUrl', () => {
     expect(() => tagUrl({ kind: 'exercise', id: '' })).toThrow()
     expect(() => tagUrl({ kind: 'nope' })).toThrow()
     // A card id that is not one is left off, not written.
-    expect(tagUrl({ kind: 'checkin', card: 'a b' })).toBe('https://opengym.ch/nfc?do=checkin')
+    expect(tagUrl({ kind: 'checkin', card: 'a b' })).toBe('https://NizuGym.ch/nfc?do=checkin')
   })
 
-  it('reads the opengym:// forms, from opengym.ch/nfc and written by hand', () => {
-    expect(parseTagUrl('opengym://nfc?do=start')).toEqual({ kind: 'checkin', start: true, card: null })
-    expect(parseTagUrl('opengym://nfc?ex=0032')).toEqual({ kind: 'exercise', id: '0032' })
-    expect(parseTagUrl('opengym://checkin')).toEqual({ kind: 'checkin', start: false, card: null })
-    expect(parseTagUrl('opengym://checkin?start=1&card=c1')).toEqual({ kind: 'checkin', start: true, card: 'c1' })
-    expect(parseTagUrl('opengym://start')).toEqual({ kind: 'checkin', start: true, card: null })
-    expect(parseTagUrl('opengym://exercise/0025')).toEqual({ kind: 'exercise', id: '0025' })
-    expect(parseTagUrl('OPENGYM://exercise/0025/')).toEqual({ kind: 'exercise', id: '0025' })
+  it('reads the NizuGym:// forms, from NizuGym.ch/nfc and written by hand', () => {
+    expect(parseTagUrl('NizuGym://nfc?do=start')).toEqual({ kind: 'checkin', start: true, card: null })
+    expect(parseTagUrl('NizuGym://nfc?ex=0032')).toEqual({ kind: 'exercise', id: '0032' })
+    expect(parseTagUrl('NizuGym://checkin')).toEqual({ kind: 'checkin', start: false, card: null })
+    expect(parseTagUrl('NizuGym://checkin?start=1&card=c1')).toEqual({ kind: 'checkin', start: true, card: 'c1' })
+    expect(parseTagUrl('NizuGym://start')).toEqual({ kind: 'checkin', start: true, card: null })
+    expect(parseTagUrl('NizuGym://exercise/0025')).toEqual({ kind: 'exercise', id: '0025' })
+    expect(parseTagUrl('NizuGym://exercise/0025/')).toEqual({ kind: 'exercise', id: '0025' })
   })
 
   it('takes www, a trailing slash and the .html page', () => {
-    expect(parseTagUrl('https://www.opengym.ch/nfc/?do=start')).toEqual({ kind: 'checkin', start: true, card: null })
-    expect(parseTagUrl('https://opengym.ch/nfc.html?ex=0025')).toEqual({ kind: 'exercise', id: '0025' })
+    expect(parseTagUrl('https://www.NizuGym.ch/nfc/?do=start')).toEqual({ kind: 'checkin', start: true, card: null })
+    expect(parseTagUrl('https://NizuGym.ch/nfc.html?ex=0025')).toEqual({ kind: 'exercise', id: '0025' })
   })
 
   it('answers null for anything that is not one of ours', () => {
     for (const raw of [
-      null, undefined, 42, '', 'not a url', 'https://evil.example/nfc?do=start', 'https://opengym.ch.evil.example/nfc?do=start',
-      'https://opengym.ch/privacy?do=start', 'https://opengym.ch/nfc', 'https://opengym.ch/nfc?do=launch-missiles',
-      'https://opengym.ch/nfc?ex=', 'https://opengym.ch/nfc?ex=%3Cscript%3E', 'opengym://exercise/', 'opengym://exercise/a/b',
-      'opengym://settings', 'opengym://checkin/extra', 'javascript:alert(1)', 'tel:123', 'opengym://nfc?ex=' + 'x'.repeat(65),
-      'https://opengym.ch/nfc?ex=' + 'x'.repeat(600),
+      null, undefined, 42, '', 'not a url', 'https://evil.example/nfc?do=start', 'https://NizuGym.ch.evil.example/nfc?do=start',
+      'https://NizuGym.ch/privacy?do=start', 'https://NizuGym.ch/nfc', 'https://NizuGym.ch/nfc?do=launch-missiles',
+      'https://NizuGym.ch/nfc?ex=', 'https://NizuGym.ch/nfc?ex=%3Cscript%3E', 'NizuGym://exercise/', 'NizuGym://exercise/a/b',
+      'NizuGym://settings', 'NizuGym://checkin/extra', 'javascript:alert(1)', 'tel:123', 'NizuGym://nfc?ex=' + 'x'.repeat(65),
+      'https://NizuGym.ch/nfc?ex=' + 'x'.repeat(600),
     ]) expect(parseTagUrl(raw), String(raw)).toBeNull()
   })
 })
@@ -139,3 +139,4 @@ describe('tagDebouncer', () => {
     expect(fresh('a', 1_000)).toBe(true)
   })
 })
+

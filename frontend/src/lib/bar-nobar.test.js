@@ -35,3 +35,4 @@ describe('no bar at all', () => {
     expect(barWeightFor(S({}), bb)).toBe(20)
   })
 })
+

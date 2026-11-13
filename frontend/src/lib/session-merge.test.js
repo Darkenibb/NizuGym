@@ -78,3 +78,4 @@ describe('deriveSessionName', () => {
     expect(deriveSessionName(['A', 'B', 'C', 'D', 'E'])).toBe('A + B + 3 more')
   })
 })
+

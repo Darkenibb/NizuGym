@@ -21,7 +21,7 @@ const apiOrigin = process.env.API_ORIGIN || 'http://localhost:8080'
 const media = process.env.MEDIA_TARGET
 
 const catalogueMedia = {
-  name: 'opengym-catalogue-media',
+  name: 'NizuGym-catalogue-media',
   configureServer(server) {
     if (media) return
     const dirs = { '/exercise-media/still/': ['still', '.webp'], '/exercise-media/clip/': ['clip', '.mp4'] }
@@ -46,7 +46,7 @@ const umamiSrc = process.env.VITE_UMAMI_SRC
 const umamiId = process.env.VITE_UMAMI_ID
 
 const umami = {
-  name: 'opengym-umami',
+  name: 'NizuGym-umami',
   transformIndexHtml() {
     if (!umamiSrc || !umamiId) return
     return [{
@@ -67,7 +67,7 @@ const umami = {
 let outDir = fileURLToPath(new URL('./dist/', import.meta.url))
 let lazy = []
 const swStamp = {
-  name: 'opengym-sw-stamp',
+  name: 'NizuGym-sw-stamp',
   apply: 'build',
   configResolved(config) { outDir = resolve(config.root, config.build.outDir) },
   generateBundle(_, bundle) { lazy = lazyAssets(bundle) },
@@ -86,10 +86,10 @@ const swStamp = {
 // A versão de celular também mantém o zoom desativado (src/lib/viewport-zoom.js): o build web permite
 // que as pessoas façam pinça, os apps Capacitor permanecem como estavam.
 const flavor = {
-  name: 'opengym-flavor',
+  name: 'NizuGym-flavor',
   transformIndexHtml(html) {
     if (process.env.VITE_MOBILE !== '1') return
-    return { html: mobileViewport(html), tags: [{ tag: 'meta', attrs: { name: 'opengym-flavor', content: 'mobile' }, injectTo: 'head' }] }
+    return { html: mobileViewport(html), tags: [{ tag: 'meta', attrs: { name: 'NizuGym-flavor', content: 'mobile' }, injectTo: 'head' }] }
   }
 }
 

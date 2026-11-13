@@ -31,3 +31,4 @@ describe('last time and next time on the finish summary (#324)', () => {
     expect(row.next).toBeNull()
   })
 })
+

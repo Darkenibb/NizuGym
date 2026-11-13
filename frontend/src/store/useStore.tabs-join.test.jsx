@@ -211,3 +211,4 @@ describe('two tabs of one browser keep each other\'s changes', () => {
     expect(JSON.parse(localStorage.getItem('gym_adopt')).pre.workouts.sort()).toEqual(['g1', 'g2'])
   })
 })
+

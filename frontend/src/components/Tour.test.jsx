@@ -523,3 +523,4 @@ describe('Create your own exercise', () => {
     expect(step()).toBe('c-new')
   })
 })
+

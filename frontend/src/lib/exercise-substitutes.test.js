@@ -43,3 +43,4 @@ describe('reviewed substitutes', () => {
     expect(suggestedSubstitutes(EXDB, { id: '0025' })).toEqual([])
   })
 })
+

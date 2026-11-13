@@ -67,3 +67,4 @@ describe('jumping-jack logging', () => {
     expect(defaultConfig(id)).toEqual({ sets: 1, min: 20, speed: 8 })
   })
 })
+

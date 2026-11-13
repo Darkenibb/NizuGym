@@ -84,3 +84,4 @@ describe('Home — the way to the Start screen when a plan already owns today', 
     expect(row.querySelector('.tag').textContent).toBe('Resume')
   })
 })
+

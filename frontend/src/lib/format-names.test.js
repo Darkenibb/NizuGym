@@ -38,3 +38,4 @@ describe('ACCENT_NAMES', () => {
       for (const name of Object.values(ACCENT_NAMES)) expect(pack[name], `${file}: ${name}`).toBeTruthy()
   })
 })
+

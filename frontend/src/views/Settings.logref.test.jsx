@@ -104,3 +104,4 @@ describe('Settings — shown under each exercise', () => {
     expect(mocks.S.logRef).toBe('last')
   })
 })
+

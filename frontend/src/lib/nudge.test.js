@@ -88,3 +88,4 @@ describe('buildNudgeNotifications (mobile)', () => {
     expect([n[0].schedule.at.getHours(), n[0].schedule.at.getMinutes()]).toEqual([21, 0])
   })
 })
+

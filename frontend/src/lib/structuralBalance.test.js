@@ -715,3 +715,4 @@ describe('a role waiting on its anchor says so', () => {
     expect(incline.status).not.toBe(BALANCE_STATUSES.NO_DATA)
   })
 })
+

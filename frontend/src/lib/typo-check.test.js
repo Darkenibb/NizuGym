@@ -52,3 +52,4 @@ describe('typo check', () => {
     expect(oddValues({ w: 500, r: 500 }, { w: 0, r: 0 })).toEqual([])
   })
 })
+

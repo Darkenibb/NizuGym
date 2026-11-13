@@ -104,3 +104,4 @@ export function doneToday(key, now = new Date()) {
 export const reducedMotion = () => {
   try { return !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches } catch (e) { return false }
 }
+

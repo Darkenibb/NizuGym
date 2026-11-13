@@ -114,3 +114,4 @@ describe('releaseWakeLock', () => {
     expect(requests).toBe(1)         // and we did not start wanting it again
   })
 })
+

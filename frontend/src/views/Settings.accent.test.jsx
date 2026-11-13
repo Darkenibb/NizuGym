@@ -181,3 +181,4 @@ describe('Settings: your own accent colour', () => {
     }
   })
 })
+

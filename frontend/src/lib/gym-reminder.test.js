@@ -241,3 +241,4 @@ describe('a tap on the notification', () => {
     expect(cb).toHaveBeenCalledTimes(1)
   })
 })
+

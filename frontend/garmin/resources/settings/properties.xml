@@ -2,3 +2,4 @@
 <properties>
     <property id="recordGc" type="boolean">true</property>
 </properties>
+

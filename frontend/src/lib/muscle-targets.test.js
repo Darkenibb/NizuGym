@@ -41,3 +41,4 @@ describe('weekly sets per muscle', () => {
     expect(mostRoom([{ slug: 'c', status: 'in' }])).toBe(null)
   })
 })
+

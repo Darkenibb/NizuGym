@@ -1,7 +1,7 @@
-<!-- openGym on Garmin, rus. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
+<!-- NizuGym on Garmin, rus. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
 <strings>
     <string id="all_sets_done">Все подходы сделаны</string>
-    <string id="app_name">openGym</string>
+    <string id="app_name">NizuGym</string>
     <string id="bodyweight">Собственный вес</string>
     <string id="continue_workout">Продолжить тренировку</string>
     <string id="discard_q">Отменить тренировку?</string>
@@ -21,7 +21,7 @@
     <string id="next_set">Далее: $1$, подход $2$</string>
     <string id="no_workout">Тренировка не идёт</string>
     <string id="not_synced">Ещё не синхронизировано</string>
-    <string id="open_phone_once">Откройте openGym на телефоне один раз, и ваши программы появятся здесь.</string>
+    <string id="open_phone_once">Откройте NizuGym на телефоне один раз, и ваши программы появятся здесь.</string>
     <string id="phone_away">Телефон вне зоны. Ваши подходы ждут здесь.</string>
     <string id="prs">Рекорды</string>
     <string id="quick_start">Быстрый старт</string>
@@ -43,10 +43,11 @@
     <string id="time">Время</string>
     <string id="today">Сегодня</string>
     <string id="volume">Объём</string>
-    <string id="waiting_phone">Ждём телефон. Если долго, откройте там openGym.</string>
+    <string id="waiting_phone">Ждём телефон. Если долго, откройте там NizuGym.</string>
     <string id="warmup">Разминка</string>
     <string id="week_streak">Серия недель</string>
     <string id="weight">Вес</string>
     <string id="workout">Тренировка</string>
     <string id="workout_saved">Тренировка сохранена</string>
 </strings>
+

@@ -56,3 +56,4 @@ describe('canRenderFmt', () => {
     expect(canRenderFmt('something-else')).toBe(false)
   })
 })
+

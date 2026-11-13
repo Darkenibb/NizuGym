@@ -15,3 +15,4 @@ describe('the plate-load hint is a weight, not a rep count', () => {
     expect(pack['{0} per side']).not.toMatch(reps)
   })
 })
+

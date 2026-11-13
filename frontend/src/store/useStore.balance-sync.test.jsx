@@ -106,3 +106,4 @@ describe('a role chosen before a forced sign-out', () => {
     }
   })
 })
+

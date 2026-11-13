@@ -16,3 +16,4 @@ it('goes at once with reduced motion or no timing to read', () => {
   expect(bootWait(300, true)).toBe(0)
   expect(bootWait(NaN, false)).toBe(0)
 })
+

@@ -112,3 +112,4 @@ describe('fmtDaysAgo', () => {
     expect(fmtDaysAgo(back(14), day)).toBe('vor 2 Wochen')
   })
 })
+

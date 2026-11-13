@@ -59,3 +59,4 @@ export function dayNoteLine(note, tr = s => s) {
   const label = note.tag ? tr(DAY_NOTE_LABEL[note.tag]) : ''
   return label && note.text ? `${label} · ${note.text}` : label || note.text
 }
+

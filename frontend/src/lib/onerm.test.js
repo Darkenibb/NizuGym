@@ -372,3 +372,4 @@ describe('the formula a profile picked (Settings, Discord request)', () => {
     expect(best1RM({ ...S, oneRmFormula: 'brzycki' }, 'x').est).toBeLessThan(best1RM(S, 'x').est)
   })
 })
+

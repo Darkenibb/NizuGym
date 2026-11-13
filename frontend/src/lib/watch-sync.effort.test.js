@@ -64,3 +64,4 @@ describe('the rating on a watch event', () => {
     expect(s.active.entries[0].sets[0].sides.R.rir).toBeUndefined()
   })
 })
+

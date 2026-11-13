@@ -473,3 +473,4 @@ describe('a workout\'s photos and videos', () => {
     } finally { stop() }
   })
 })
+

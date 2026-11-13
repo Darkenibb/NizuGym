@@ -24,3 +24,4 @@ describe('fmtMB', () => {
     expect(fmtMB(0.5)).toMatch(/^0.5$/)   // Latin digits, as everywhere in the app
   })
 })
+

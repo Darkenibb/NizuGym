@@ -79,3 +79,4 @@ describe('probeVideo — the poster', () => {
     expect(out).toMatchObject({ width: 1280, height: 720, duration: 6 })
   })
 })
+

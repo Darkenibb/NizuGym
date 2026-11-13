@@ -71,3 +71,4 @@ describe('auto-backup and a workout\'s photos and videos', () => {
     expect(backups()).toHaveLength(0)
   })
 })
+

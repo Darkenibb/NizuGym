@@ -77,3 +77,4 @@ describe('the local rest-over alert follows the Push switch', () => {
     expect(showNotification).not.toHaveBeenCalled()
   })
 })
+

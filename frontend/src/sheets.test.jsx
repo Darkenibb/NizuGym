@@ -101,3 +101,4 @@ describe('menu sheet title', () => {
     expect(titleOf({ title: 'barbell curl', titleClass: 'capitalize' }).className).toBe('capitalize')
   })
 })
+

@@ -49,3 +49,4 @@ describe('Home body-weight card points', () => {
     expect(chart.points.map(p => p.d)).toEqual(imported.map(b => b.d))
   })
 })
+

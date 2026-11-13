@@ -222,3 +222,4 @@ export default function SwipeCards({ children, renderPreview, onNavigate, index,
     <div ref={card} className="workout-swipe-card">{children}</div>
   </div>
 }
+

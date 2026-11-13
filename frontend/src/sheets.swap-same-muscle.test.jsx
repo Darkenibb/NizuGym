@@ -199,3 +199,4 @@ describe('gym selection in a swap', () => {
     expect(rows(host).some(s => s.startsWith('Biceps'))).toBe(true)
   })
 })
+

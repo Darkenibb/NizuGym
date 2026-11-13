@@ -40,3 +40,4 @@ export function workoutsLeft(S, today = todayISO()) {
   if (!(tally?.planned > 0)) return null
   return { left: Math.max(0, tally.planned - tally.done), of: tally.planned, done: tally.done }
 }
+

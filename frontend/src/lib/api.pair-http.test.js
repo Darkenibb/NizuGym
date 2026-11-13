@@ -69,3 +69,4 @@ describe('looksLocal', () => {
     for (const a of ['8.8.8.8', '172.32.0.1', '100.128.0.1', 'gym.example.com', 'localhost.example.org', '2001:db8::1', '']) expect(looksLocal(a), a).toBe(false)
   })
 })
+

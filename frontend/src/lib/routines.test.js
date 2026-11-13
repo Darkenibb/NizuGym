@@ -119,3 +119,4 @@ describe('deleteRoutine', () => {
     expect(s.week[1]).toEqual(['r2'])
   })
 })
+

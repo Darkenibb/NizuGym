@@ -47,3 +47,4 @@ export default function CardHead({ icon, tint, glyph, eyebrow, title, sub, actio
     {action}
   </div>
 }
+

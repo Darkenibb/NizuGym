@@ -295,3 +295,4 @@ async function cancelDelivered() {
   const p = await restPlugin()
   if (p) await p.RestAlert.cancel({ id: REST_ALERT_ID })
 }
+

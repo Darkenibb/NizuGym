@@ -14,3 +14,4 @@ describe('clubbell and macebell', () => {
     expect(isLoadedEq({ eq: 'kettlebell' })).toBe(true)
   })
 })
+

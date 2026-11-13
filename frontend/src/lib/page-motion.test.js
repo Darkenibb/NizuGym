@@ -36,3 +36,4 @@ it('a page that slid in keeps no background or shadow once the slide is over', a
     expect(frames, name).not.toMatch(/box-shadow|background/)
   }
 })
+

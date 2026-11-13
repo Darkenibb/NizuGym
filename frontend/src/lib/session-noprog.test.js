@@ -97,3 +97,4 @@ describe('a session kept out as a whole, saved', () => {
     expect(saved.entries.some(e => 'noProg' in e)).toBe(false)
   })
 })
+

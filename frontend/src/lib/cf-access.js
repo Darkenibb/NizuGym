@@ -67,3 +67,4 @@ export async function saveCfAccess({ clientId, clientSecret, server } = {}) {
 
 // Disconnecting from the server takes its token along: the next server is a fresh start.
 export const clearCfAccess = () => saveCfAccess({})
+

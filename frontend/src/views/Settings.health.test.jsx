@@ -123,7 +123,7 @@ describe('Settings — Health Connect', () => {
   })
 
   it('turning it off asks whether to keep or remove what was written', async () => {
-    mocks.health = { on: true, written: { 'opengym-w-w1': { k: 'session', h: 'x' } }, error: null }
+    mocks.health = { on: true, written: { 'NizuGym-w-w1': { k: 'session', h: 'x' } }, error: null }
     await mount()
     act(() => { writeSwitch().click() })
     expect(mocks.disableHealth).not.toHaveBeenCalled()
@@ -200,7 +200,7 @@ describe('Settings — reading back', () => {
     expect(sw('Weigh-ins from other apps').getAttribute('aria-checked')).toBe('false')
     expect(writeSwitch().getAttribute('aria-checked')).toBe('false')
     expect(mocks.enableHealth).not.toHaveBeenCalled()
-    expect(host.textContent).toContain('openGym reads only while it is open')
+    expect(host.textContent).toContain('NizuGym reads only while it is open')
     expect(row('Open Health Connect')).toBeTruthy()
   })
 
@@ -222,3 +222,4 @@ describe('Settings — reading back', () => {
     expect(mocks.menuSheet).not.toHaveBeenCalled()
   })
 })
+

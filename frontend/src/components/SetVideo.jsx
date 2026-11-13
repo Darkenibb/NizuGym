@@ -306,3 +306,4 @@ function CompareSide({ it, vref, rate, label }) {
     <figcaption><b>{fmtDate(it.d, true, true)}</b><span className="dim">{label}</span></figcaption>
   </figure>
 }
+

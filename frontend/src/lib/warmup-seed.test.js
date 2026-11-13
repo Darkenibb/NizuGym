@@ -37,3 +37,4 @@ describe('seeding the next session from one that had warm-ups', () => {
     expect(work.map(r => r.w)).toEqual([100, 100, 100])
   })
 })
+

@@ -38,3 +38,4 @@ describe('sha256', () => {
     expect(await sha256Hex(enc('abc'), { subtle })).toBe(VECTORS[1][1])
   })
 })
+

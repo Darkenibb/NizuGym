@@ -31,3 +31,4 @@ describe('Focus mode stays on the screen (#655)', () => {
     expect(rule('.focus-superset-inline strong')).toMatch(/overflow-wrap:anywhere/)
   })
 })
+

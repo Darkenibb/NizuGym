@@ -124,3 +124,4 @@ describe('a warm-up changed from the watch', () => {
     expect(s.active.entries[0].sets.map(x => x.edited)).toEqual([undefined, true, undefined])
   })
 })
+

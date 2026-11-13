@@ -168,7 +168,7 @@ export default function Modals() {
         // entry over (closeThenNav) or is pushed after it gets its index from it, and Settings'
         // back reads that index to tell whether there is a page to go back to.
         const idx = history.state?.idx
-        history.pushState(typeof idx === 'number' ? { openGymSheet: true, idx: idx + 1 } : { openGymSheet: true }, '')
+        history.pushState(typeof idx === 'number' ? { NizuGymSheet: true, idx: idx + 1 } : { NizuGymSheet: true }, '')
         pushedEntries.current++
       }
     } else if (sheets.length < prev) {
@@ -279,3 +279,4 @@ export default function Modals() {
     </div>
   )
 }
+

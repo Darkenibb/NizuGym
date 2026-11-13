@@ -380,3 +380,4 @@ describe('Thumb — a custom exercise', () => {
     expect(host.querySelector('img')).toBeNull()
   })
 })
+

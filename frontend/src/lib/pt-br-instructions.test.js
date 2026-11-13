@@ -54,3 +54,4 @@ describe('Brazilian Portuguese exercise instructions', () => {
     reverseWristCurlIds.forEach(id => expect(ptBR[id].join(' '), id).toMatch(/estend\p{L}*(?: lentamente)? (?:o |os )?punhos?/iu))
   })
 })
+

@@ -21,3 +21,4 @@ describe('a language switch while the details load', () => {
     expect(core.descFor(ex)).toBe('Un levé.')
   })
 })
+

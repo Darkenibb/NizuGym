@@ -88,3 +88,4 @@ describe('a freestyle exercise edited mid-session', () => {
     expect(work(rebuilt).map(s => [s.w, s.r])).toEqual([[60, 8], [60, 8]])
   })
 })
+

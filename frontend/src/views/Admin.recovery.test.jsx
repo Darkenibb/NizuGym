@@ -118,3 +118,4 @@ describe('Admin → Recovery code', () => {
     expect(button(await openMallory(), 'Recovery code')).toBeUndefined()
   })
 })
+

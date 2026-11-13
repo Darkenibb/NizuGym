@@ -6,3 +6,4 @@ import batch from './exercise-muscle-batch-2.json' with { type: 'json' }
  * compatible with imports and historical records.
  */
 export const MACHINE_BATCH_2 = Object.freeze(batch)
+

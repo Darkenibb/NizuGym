@@ -33,30 +33,30 @@ beforeEach(async () => {
 describe('the state file', () => {
   it('lands under its own name, with nothing left beside it', async () => {
     await M.nativeSave({ _ts: 1, workouts: ['a'] })
-    expect([...h.files.keys()]).toEqual(['opengym-state.json'])
+    expect([...h.files.keys()]).toEqual(['NizuGym-state.json'])
     expect(await M.nativeLoad()).toEqual({ _ts: 1, workouts: ['a'] })
   })
 
   it('a move cut short keeps both copies, and the later one is read', async () => {
     await M.nativeSave({ _ts: 1, workouts: ['a'] })
     h.failRename = true
-    h.failWrite.add('opengym-state.json')          // and the plain write after it fails too
+    h.failWrite.add('NizuGym-state.json')          // and the plain write after it fails too
     await M.nativeSave({ _ts: 2, workouts: ['a', 'b'] })
-    expect(JSON.parse(h.files.get('opengym-state.json'))._ts).toBe(1)
+    expect(JSON.parse(h.files.get('NizuGym-state.json'))._ts).toBe(1)
     expect(await M.nativeLoad()).toEqual({ _ts: 2, workouts: ['a', 'b'] })
   })
 
   it('a half-written main file is not the end: the other copy is read', async () => {
     await M.nativeSave({ _ts: 1, workouts: ['a'] })
-    h.files.set('opengym-state.next.json', JSON.stringify({ _ts: 1, workouts: ['a'] }))
-    h.files.set('opengym-state.json', '{"_ts":2,"workouts":["a",')
+    h.files.set('NizuGym-state.next.json', JSON.stringify({ _ts: 1, workouts: ['a'] }))
+    h.files.set('NizuGym-state.json', '{"_ts":2,"workouts":["a",')
     expect(await M.nativeLoad()).toEqual({ _ts: 1, workouts: ['a'] })
   })
 
   it('an older leftover never wins over the main file', async () => {
-    h.files.set('opengym-state.next.json', JSON.stringify({ _ts: 1 }))
+    h.files.set('NizuGym-state.next.json', JSON.stringify({ _ts: 1 }))
     await M.nativeSave({ _ts: 5 })
-    h.files.set('opengym-state.next.json', JSON.stringify({ _ts: 1 }))
+    h.files.set('NizuGym-state.next.json', JSON.stringify({ _ts: 1 }))
     expect((await M.nativeLoad())._ts).toBe(5)
   })
 
@@ -66,8 +66,9 @@ describe('the state file', () => {
     delete Filesystem.rename
     try {
       await M.nativeSave({ _ts: 3 })
-      expect([...h.files.keys()]).toEqual(['opengym-state.json'])
+      expect([...h.files.keys()]).toEqual(['NizuGym-state.json'])
       expect((await M.nativeLoad())._ts).toBe(3)
     } finally { Filesystem.rename = rename }
   })
 })
+

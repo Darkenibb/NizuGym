@@ -67,3 +67,4 @@ describe('Home follows the modules', () => {
     expect(heads()).toContain('Check in')
   })
 })
+

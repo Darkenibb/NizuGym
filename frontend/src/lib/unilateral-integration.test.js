@@ -100,3 +100,4 @@ describe('unilateral sets across session boundaries', () => {
     expect(workoutVolume({ entries: [entry(done(work))] })).toBe(20 * Math.ceil(totalReps / 2) + 30 * Math.floor(totalReps / 2))
   })
 })
+

@@ -114,3 +114,4 @@ export function nudgeFor(state, iso) {
 
 /** The day's line index: by date, so a day keeps its line and consecutive days rotate. */
 export const lineIndex = (iso, n) => Math.floor(Date.parse(iso + 'T00:00:00Z') / 86400000) % n
+

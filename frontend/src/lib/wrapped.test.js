@@ -278,3 +278,4 @@ describe('the phone’s December notification: once a year', () => {
     expect(notificationPlan({ ...st, wrappedNotify: false }, nov, { granted: true }).action).toBe('cancel')
   })
 })
+

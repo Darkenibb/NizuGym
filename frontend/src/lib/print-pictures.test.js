@@ -142,3 +142,4 @@ describe('the "With pictures" switch', () => {
     expect(isPrintPicture('data:text/html,<b>')).toBe(false)
   })
 })
+

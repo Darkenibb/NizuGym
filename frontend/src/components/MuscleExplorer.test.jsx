@@ -150,3 +150,4 @@ describe('MuscleExplorer Favourites chip', () => {
     expect(muscleChip(host, 'Favourites')).toBeUndefined()
   })
 })
+

@@ -131,3 +131,4 @@ describe('Settings: daily value', () => {
     expect(readingsOf(dayOf(D)).map(r => r.t)).toEqual([10, 30])
   })
 })
+

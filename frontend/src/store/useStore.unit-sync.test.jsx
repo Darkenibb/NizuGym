@@ -115,3 +115,4 @@ describe('converting the unit while another device logs in the old one', () => {
     expect(useStore.getState().S.active.entries[0].sets[0].w).toBe(100)
   })
 })
+

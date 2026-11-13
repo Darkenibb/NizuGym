@@ -130,3 +130,4 @@ describe('the first sync after the update from v1.3.9', () => {
     expect(srv.log.find(x => x.method === 'PUT').body.stamped).toBe(true)
   })
 })
+

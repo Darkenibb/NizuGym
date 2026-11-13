@@ -236,3 +236,4 @@ describe('on the demo profile', () => {
     expect(host.textContent).not.toContain('undefined')
   })
 })
+

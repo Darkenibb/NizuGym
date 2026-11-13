@@ -84,3 +84,4 @@ export default function Heatmap({ S, onDay, metric: selectedMetric, onMetricChan
     <div className="hm-legend">{t(metric === 'vol' ? 'Less volume' : 'Less time')} <div className="hm-c l0" /><div className="hm-c l1" /><div className="hm-c l2" /><div className="hm-c l3" /><div className="hm-c l4" /> {t(metric === 'vol' ? 'More volume' : 'More time')}</div>
   </>
 }
+

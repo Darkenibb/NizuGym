@@ -136,3 +136,4 @@ describe('the store heals it', () => {
     expect(S().customEx[0]).toEqual(healed[0])
   })
 })
+

@@ -76,3 +76,4 @@ describe('routine progression wording (#294)', () => {
     expect(useStore.getState().S.routines[0].excludeFromProgression).toBeUndefined()
   })
 })
+

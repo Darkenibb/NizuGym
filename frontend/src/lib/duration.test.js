@@ -49,3 +49,4 @@ describe('durations for the rest wheels', () => {
     expect(durationText(0, { off: 'Off' })).toBe('Off')
   })
 })
+

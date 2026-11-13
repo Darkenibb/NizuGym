@@ -399,3 +399,4 @@ describe('input fields show clean numbers', () => {
     expect(cleanNum(null)).toBe(null)
   })
 })
+

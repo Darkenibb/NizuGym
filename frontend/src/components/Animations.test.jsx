@@ -158,3 +158,4 @@ describe('sizes and details', () => {
     expect(host.textContent).toContain('Check the packs')
   })
 })
+

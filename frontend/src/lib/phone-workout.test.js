@@ -344,3 +344,4 @@ describe('the session with the workout', () => {
     stop()
   })
 })
+

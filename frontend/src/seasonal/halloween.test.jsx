@@ -198,3 +198,4 @@ describe('the spots', () => {
     expect(host.querySelectorAll('button')).toHaveLength(0)
   })
 })
+

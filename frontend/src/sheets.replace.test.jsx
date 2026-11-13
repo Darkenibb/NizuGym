@@ -76,3 +76,4 @@ describe('Replace exercise', () => {
     expect(addIcon?.getAttribute('data-icon')).toBe('plus')
   })
 })
+

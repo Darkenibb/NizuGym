@@ -62,3 +62,4 @@ describe('the server and a writer that does not stamp', () => {
     expect(ids(old)).toBe('c,z,b,a')   // its new one next to the routine it followed there
   })
 })
+

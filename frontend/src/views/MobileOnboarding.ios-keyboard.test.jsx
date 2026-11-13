@@ -88,3 +88,4 @@ describe('the connect sheet and the iOS keyboard', () => {
     expect(css).toMatch(/\.sheet:has\(\.picker-search\),\.sheet:has\(\.kb-lift\)\{\s*bottom:max\(var\(--picker-keyboard-bottom,0px\),var\(--native-kb,0px\)\);/)
   })
 })
+

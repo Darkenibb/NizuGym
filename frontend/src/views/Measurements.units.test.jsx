@@ -133,3 +133,4 @@ describe('custom measurement units in the app (#699)', () => {
     expect(useStore.getState().S.measurements[0].other[0].value).toBe(38.1)
   })
 })
+

@@ -114,3 +114,4 @@ export default function MuscleExplorer({ onPick, onDetail, onPlan, pickIcon = 'p
     </>}
   </>
 }
+

@@ -93,3 +93,4 @@ describe('labels and the switch', () => {
     expect(setTrendOn({ setTrend: false })).toBe(false)
   })
 })
+

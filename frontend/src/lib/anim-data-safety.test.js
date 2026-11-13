@@ -120,3 +120,4 @@ describe('switching quality and figure never touches the profile', () => {
     expect(JSON.stringify(FIXTURE)).not.toMatch(/gym_anim|quality|anim-\d+/)
   })
 })
+

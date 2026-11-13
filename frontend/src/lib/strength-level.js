@@ -124,3 +124,4 @@ export function strengthLevels(S) {
   }
   return out.sort((a, b) => b.level - a.level || b.ratio - a.ratio || Object.keys(STANDARDS).indexOf(a.lift) - Object.keys(STANDARDS).indexOf(b.lift))
 }
+

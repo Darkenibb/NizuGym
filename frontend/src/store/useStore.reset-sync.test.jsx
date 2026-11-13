@@ -103,3 +103,4 @@ describe('a backup restored after a reset', () => {
     expect(ids(puts().at(-1).state.workouts).sort()).toEqual(['gym-today', 'w1', 'w2'])
   })
 })
+

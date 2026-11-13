@@ -43,3 +43,4 @@ describe('Thumb', () => {
     expect(host.querySelector('.thumb-x')).toBeTruthy()
   })
 })
+

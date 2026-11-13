@@ -222,3 +222,4 @@ describe('triple progression in the plan around it', () => {
     expect(ex).toMatchObject({ prog: 'triple', sets: 3, setsMax: 5, reps: 12, repsMin: 8 })
   })
 })
+

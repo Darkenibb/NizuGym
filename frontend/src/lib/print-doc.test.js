@@ -42,3 +42,4 @@ describe('print-doc', () => {
     expect(probeMarks(true).s('a b')).toBe('<i class="probe">~s:a_b~</i>')
   })
 })
+

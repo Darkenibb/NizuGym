@@ -500,7 +500,7 @@ describe('created plans', () => {
   })
 
   const bundle = {
-    opengym_plan: 1, name: 'Coach plan', summary: 'three days',
+    NizuGym_plan: 1, name: 'Coach plan', summary: 'three days',
     week: { 1: 'x1', 3: 'x2' },
     routines: [
       { id: 'x1', name: 'A', emoji: '💪', why: 'why A', ex: [{ id: '0001', sets: 3, reps: 10, mode: 'reps', why: 'why ex' }] },
@@ -587,7 +587,7 @@ describe('created plans', () => {
 // week never showed up until the rotation was edited by hand.
 describe('created plans in rotation mode', () => {
   const bundle = {
-    opengym_plan: 1, name: 'Coach plan', summary: 'three days',
+    NizuGym_plan: 1, name: 'Coach plan', summary: 'three days',
     week: { 1: 'x1', 3: 'x2', 5: 'x3' },
     routines: [
       { id: 'x1', name: 'A', ex: [{ id: '0001', sets: 3, reps: 10, mode: 'reps' }] },
@@ -736,7 +736,7 @@ describe('removing a routine takes its per-date reschedules with it', () => {
 
 describe('what the log keeps, so a decision never makes a proposal vanish', () => {
   const plan = {
-    opengym_plan: 1, name: 'Coach plan', summary: 'p', week: { 1: 'x1' },
+    NizuGym_plan: 1, name: 'Coach plan', summary: 'p', week: { 1: 'x1' },
     routines: [{ id: 'x1', name: 'A', emoji: '💪', why: 'w', ex: [{ id: '0001', sets: 3, reps: 10, mode: 'reps', why: 'y'.repeat(300), secret: 1 }] }],
     customEx: []
   }
@@ -809,3 +809,4 @@ describe('defaultTrainingDays (the intake pre-selection, #620)', () => {
     expect(defaultTrainingDays(3)).toEqual([1, 3, 5])
   })
 })
+

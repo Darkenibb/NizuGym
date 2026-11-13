@@ -203,3 +203,4 @@ describe('changes kept aside by a forced sign-out', () => {
     expect(localStorage.getItem('gym_stash')).toBeNull()
   })
 })
+

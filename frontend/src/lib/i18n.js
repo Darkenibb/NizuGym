@@ -87,3 +87,4 @@ export function onLangChange(fn) { subs.add(fn); return () => subs.delete(fn) }
 export function useLang() {
   return useSyncExternalStore(fn => { subs.add(fn); return () => subs.delete(fn) }, getVersion)
 }
+

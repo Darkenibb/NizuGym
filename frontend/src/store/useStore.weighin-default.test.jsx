@@ -70,3 +70,4 @@ describe('starting over', () => {
     expect(S.lang).toBe('de')
   })
 })
+

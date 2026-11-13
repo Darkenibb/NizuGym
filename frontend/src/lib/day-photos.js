@@ -100,3 +100,4 @@ export function fileProgressPhoto(state, d, ref, { canDay = true, now = Date.now
   return r === 'added' ? 'day' : r
 }
 
+

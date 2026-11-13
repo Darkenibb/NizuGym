@@ -265,3 +265,4 @@ export const workoutGymName = w => (isMap(w?.gym) && String(w.gym.name || '').tr
  * done at, so its plate lines say what was on the bar there; a live session reads the active gym.
  */
 export const sessionGymView = S => (S?.active?.editingWorkoutId && isMap(S.active.gym) ? gymView(S, S.active.gym.id) : S)
+

@@ -204,3 +204,4 @@ export function adaptLogEntry(p, acceptedIds, { dismissed = false } = {}) {
     })),
   }
 }
+

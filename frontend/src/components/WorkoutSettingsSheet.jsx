@@ -86,3 +86,4 @@ export function WorkoutSettings({ close }) {
 export function workoutSettingsSheet() {
   return useUI.getState().openSheet(close => <WorkoutSettings close={close} />)
 }
+

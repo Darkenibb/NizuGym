@@ -50,3 +50,4 @@ describe('a failed load of the English steps', () => {
     expect(i18n.instrFor(ex)).toEqual(['Stand tall.', 'Lift.'])
   })
 })
+

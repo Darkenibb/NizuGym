@@ -97,8 +97,8 @@ function localPhone() {
   h.files.clear()
   localStorage.clear()
   const S = { ...clone(DEF), _ts: 5000, workouts: [workout('phone-1', '2026-09-20')] }
-  h.files.set('DATA/opengym-remote.json', JSON.stringify({ mode: 'local' }))
-  h.files.set('DATA/opengym-state.json', JSON.stringify(S))
+  h.files.set('DATA/NizuGym-remote.json', JSON.stringify({ mode: 'local' }))
+  h.files.set('DATA/NizuGym-state.json', JSON.stringify(S))
   localStorage.setItem('gym_state_v1', JSON.stringify(S))
   localStorage.setItem('gym_guest', '1')
 }
@@ -223,3 +223,4 @@ describe('pairing a phone: nothing syncs while the question is open', () => {
     expect(ids(useStore.getState().S.workouts)).toEqual(ids(TWELVE))
   })
 })
+

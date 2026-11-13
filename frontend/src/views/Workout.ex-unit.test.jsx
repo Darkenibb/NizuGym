@@ -129,3 +129,4 @@ describe('a pinned exercise in a running session', () => {
 })
 
 function storedOf(lb) { return Math.round(lb * 0.45359237 * 1e4) / 1e4 }
+

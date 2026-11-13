@@ -17,3 +17,4 @@ export default function WorkoutThumb({ ex, onExpand }) {
     <span className="wthumb-x" aria-hidden="true"><Icon name="expand" /></span>
   </button>
 }
+

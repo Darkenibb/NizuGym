@@ -129,3 +129,4 @@ describe('rating a superset set closes a sheet and moves the marker in one tap',
     expect(scrolls).toEqual([host.querySelectorAll('.setrow')[2]])
   })
 })
+

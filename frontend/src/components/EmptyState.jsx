@@ -12,3 +12,4 @@ export default function EmptyState({ icon, title, text, children, className = ''
     {children && <div className="empty-acts">{children}</div>}
   </div>
 }
+

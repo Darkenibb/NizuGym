@@ -150,3 +150,4 @@ describe('“this week” ranges follow the setting', () => {
     expect(sun[0].sets).toBe(4)
   })
 })
+

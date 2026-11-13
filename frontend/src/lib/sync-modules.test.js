@@ -41,3 +41,4 @@ describe('modules sync per module', () => {
     expect(after.edited['modules.coach']).toBe(10)
   })
 })
+

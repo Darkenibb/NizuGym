@@ -123,3 +123,4 @@ export function garminSnapshot (snap, { max = GARMIN_MAX_BYTES } = {}) {
   }
   return out
 }
+

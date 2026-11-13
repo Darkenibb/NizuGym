@@ -96,3 +96,4 @@ describe('a date-only workout against a window edge', () => {
     if (-new Date(iso).getTimezoneOffset() < 6 * 60) expect(new Date(iso).getTime()).toBeLessThan(opened)
   })
 })
+

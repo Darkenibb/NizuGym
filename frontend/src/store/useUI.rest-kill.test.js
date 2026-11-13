@@ -58,3 +58,4 @@ describe('the rest timer after the app process was killed', () => {
     expect(armRestAlert).not.toHaveBeenCalled()
   })
 })
+

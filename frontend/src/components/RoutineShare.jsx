@@ -43,7 +43,7 @@ async function shareLink(url, text, title) {
 async function shareAsPlanFile(st, routine) {
   const bundle = buildPlanBundle({ ...st, routines: [routine], week: {}, programmes: {} }, routine.name || '')
   const json = JSON.stringify(bundle, null, 2)
-  const name = 'opengym-routine-' + todayISO() + '.json'
+  const name = 'NizuGym-routine-' + todayISO() + '.json'
   if (MOBILE) { try { await shareExport(json, name) } catch (e) { /* dismissed */ } return }
   const blob = new Blob([json], { type: 'application/json' })
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click(); URL.revokeObjectURL(a.href)
@@ -67,7 +67,7 @@ function ShareRoutine({ routine, close }) {
         await shareAsPlanFile(st, routine)
         return
       }
-      await shareLink(link.url, t('Here’s my {0} on openGym 💪', name), name)
+      await shareLink(link.url, t('Here’s my {0} on NizuGym 💪', name), name)
     } catch {
       setBusy(false)
       toast(t('Couldn’t make a link for this one.'))
@@ -76,7 +76,7 @@ function ShareRoutine({ routine, close }) {
   return <>
     <h3>{t('Share with a friend')}</h3>
     <div className="dim small" style={{ marginBottom: 14, lineHeight: 1.4 }}>
-      {t('A link to “{0}”. Your friend taps it and adds it to their own openGym. The routine rides inside the link, no server in between.', name)}
+      {t('A link to “{0}”. Your friend taps it and adds it to their own NizuGym. The routine rides inside the link, no server in between.', name)}
     </div>
     <div className="row between" style={{ padding: '10px 2px', borderTop: '1px solid var(--sep)', gap: 12 }}>
       <div><div className="tt" style={{ fontSize: 'var(--fs-subhead)' }}>{t('Include my weights')}</div><div className="small dim">{t('Off: just sets, reps and rest. They pick their own weights.')}</div></div>
@@ -140,8 +140,8 @@ function RoutinePreview({ parsed, close }) {
 }
 
 const LINK_ERRORS = {
-  'too-new': () => t('This link is from a newer openGym. Update the app to open it.'),
-  'no-inflate': () => t('This browser can’t open this link. Try it in the openGym app.'),
+  'too-new': () => t('This link is from a newer NizuGym. Update the app to open it.'),
+  'no-inflate': () => t('This browser can’t open this link. Try it in the NizuGym app.'),
   empty: () => t('Nothing in this routine works here, sorry.'),
 }
 
@@ -176,7 +176,7 @@ const BOOT = (() => {
 
 /**
  * Listens for routine links for the whole app: the one the web app opened with, a later
- * #/r/... in the address bar, and in the phone apps opengym://r#... and https://opengym.ch/r#...
+ * #/r/... in the address bar, and in the phone apps NizuGym://r#... and https://NizuGym.ch/r#...
  * One that arrives before the app is set up waits until it is.
  */
 export function useRoutineLinks(ready) {
@@ -219,3 +219,4 @@ export function useRoutineLinks(ready) {
 }
 
 export function _resetRoutineLinksForTests() { lastOpened = { payload: null, at: 0 } }
+

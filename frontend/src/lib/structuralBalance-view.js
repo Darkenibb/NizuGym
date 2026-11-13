@@ -14,3 +14,4 @@ export function balanceStatusView(status, needsAnchor = false) {
     default: return { label: 'No data', severity: 3 }
   }
 }
+

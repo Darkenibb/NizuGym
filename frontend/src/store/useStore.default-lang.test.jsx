@@ -91,3 +91,4 @@ describe('instance default language', () => {
     expect(shown()).toBe('en')
   })
 })
+

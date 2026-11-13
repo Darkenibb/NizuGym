@@ -49,3 +49,4 @@ describe('exercise time', () => {
     expect(exerciseTimeRows([])).toEqual([])
   })
 })
+

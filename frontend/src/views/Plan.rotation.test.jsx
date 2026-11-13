@@ -396,3 +396,4 @@ describe('Plan — rest days and repeats in the loop (#536)', () => {
     expect(host.textContent).toContain('Rest day. The loop goes on ' + fmtDate(tomorrow, true) + '.')
   })
 })
+

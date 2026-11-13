@@ -120,3 +120,4 @@ describe('the Cloudflare Access token on the phone', () => {
     expect(fetch.mock.calls[0][1].headers['CF-Access-Client-Id']).toBeUndefined()
   })
 })
+

@@ -282,3 +282,4 @@ export function _setLangState(newLang, newDict, newInstr, newExerciseNames, show
   version++
   return version
 }
+

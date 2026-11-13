@@ -34,3 +34,4 @@ describe('guestAllowed', () => {
     expect(guestAllowed({ allow_guest: 'false' })).toBe(true)
   })
 })
+

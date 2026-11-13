@@ -95,3 +95,4 @@ describe('sessionInsights', () => {
   })
   it('returns null for nothing', () => { expect(sessionInsights(S(), null)).toBeNull() })
 })
+

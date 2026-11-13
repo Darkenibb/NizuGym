@@ -107,3 +107,4 @@ describe('volume with the switch', () => {
     expect(exerciseHistory(S, PULLUP).best).toBe(exerciseHistory(profile(false, [pullups]), PULLUP).best)
   })
 })
+

@@ -78,3 +78,4 @@ describe('WorkoutDetail — repeat today', () => {
     expect(button(host, 'Repeat today').disabled).toBe(true)
   })
 })
+

@@ -141,3 +141,4 @@ export function ChallengesStatsCard({ S, now = new Date() }) {
     </div>}
   </div>
 }
+

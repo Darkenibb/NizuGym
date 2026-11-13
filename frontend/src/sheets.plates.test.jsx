@@ -273,3 +273,4 @@ describe('your bars', () => {
     expect(barWeightFor({ ...S(), barWeights: {} }, OLY)).toBe(20)
   })
 })
+

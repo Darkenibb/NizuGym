@@ -1,7 +1,7 @@
 // The phone app's Home Screen and Lock Screen widgets, the page's side. Native: on the iPhone
 // ios/App/App/WidgetBridgePlugin.swift writes what this builds to the App Group, and the widget
-// extension in ios/App/OpenGymWidgets reads it; on Android WidgetBridgePlugin.java keeps it in
-// SharedPreferences and redraws the widgets (OpenGymWidgetProvider.java).
+// extension in ios/App/NizuGymWidgets reads it; on Android WidgetBridgePlugin.java keeps it in
+// SharedPreferences and redraws the widgets (NizuGymWidgetProvider.java).
 //
 // A widget runs without the app, so the page hands it a small snapshot whenever something it shows
 // changes: the plan for today and the coming week (so the widget can turn the page at midnight on
@@ -263,7 +263,7 @@ export function buildWidgetSnapshot (S, { today = todayISO() } = {}) {
       nothingPlanned: t('Nothing planned'),
       noWeighIn: t('No weigh-ins yet'),
       startNow: t('Start'),
-      // Android's "What to show" screen, in the app's language (OpenGymWidgetConfigure.java).
+      // Android's "What to show" screen, in the app's language (NizuGymWidgetConfigure.java).
       whatToShow: t('What to show'),
       secondThing: t('And beside it'),
       kinds: { streak: t('Week streak'), weight: t('Weight goal'), week: t('This week'), next: t('Next workout'), records: t('Records'), volume: t('Volume'), challenges: t('Challenges') },
@@ -314,3 +314,4 @@ export async function startWidgetSync ({ useStore }) {
 // Test seams.
 export function _setWidgetPluginForTest (plugin) { pluginP = Promise.resolve(plugin ? { WidgetBridge: plugin } : null) }
 export function _resetWidgets () { pluginP = null }
+

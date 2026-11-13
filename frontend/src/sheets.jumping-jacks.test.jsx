@@ -48,3 +48,4 @@ describe('jumping-jack exercise settings', () => {
     expect(onSave.mock.calls[0][0]).not.toHaveProperty('reps')
   })
 })
+

@@ -29,3 +29,4 @@ export function ensureWebStorage(g = globalThis) {
 }
 
 ensureWebStorage()
+

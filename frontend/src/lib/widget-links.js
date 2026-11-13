@@ -1,16 +1,16 @@
 // A tap on a Home Screen or Lock Screen widget opens the app with a link of its own:
 //
-//   opengym://home          Home
-//   opengym://stats         Stats (the streak, the records, the volume)
-//   opengym://weigh-in      Home with the weigh-in sheet open
-//   opengym://start?r=a,b   starts the next planned workout (those routines), or goes back to
+//   NizuGym://home          Home
+//   NizuGym://stats         Stats (the streak, the records, the volume)
+//   NizuGym://weigh-in      Home with the weigh-in sheet open
+//   NizuGym://start?r=a,b   starts the next planned workout (those routines), or goes back to
 //                           the one already running
-//   opengym://weigh-in?w=78.2[&u=kg]   the weigh-in sheet with that weight in (Assistant, lib/voice.js)
-//   opengym://start?today=1 today's plan as the app has it (Siri, Assistant, the long-press shortcut)
+//   NizuGym://weigh-in?w=78.2[&u=kg]   the weigh-in sheet with that weight in (Assistant, lib/voice.js)
+//   NizuGym://start?today=1 today's plan as the app has it (Siri, Assistant, the long-press shortcut)
 //
 // iOS: the widget's widgetURL / Link (ios/App/App/WidgetViews.swift), the scheme registered in
 // Info.plist. Android: the widget's PendingIntent, an explicit intent to MainActivity carrying the
-// same link as its data (OpenGymWidgetProvider.java). Capacitor's App plugin hands it to the page
+// same link as its data (NizuGymWidgetProvider.java). Capacitor's App plugin hands it to the page
 // as appUrlOpen, or as the launch URL when the tap started the app.
 //
 // Any app could open such a link too. None of them does more than a tap in the app would: a
@@ -19,12 +19,12 @@
 import { MOBILE } from './mobile.js'
 import { parseSpokenWeight, convertWeight, weightInRange } from './voice.js'
 
-export const WIDGET_SCHEME = 'opengym'
+export const WIDGET_SCHEME = 'NizuGym'
 
 /** What a link asks for, or null for anything that is not one of ours. */
 export function parseWidgetLink (url) {
   if (typeof url !== 'string') return null
-  const m = /^opengym:\/\/([a-z-]+)\/?(?:\?(.*))?$/i.exec(url.trim())
+  const m = /^NizuGym:\/\/([a-z-]+)\/?(?:\?(.*))?$/i.exec(url.trim())
   if (!m) return null
   const what = m[1].toLowerCase()
   const q = new URLSearchParams(m[2] || '')
@@ -84,3 +84,4 @@ export async function startWidgetLinks (deps) {
   try { const launch = await App.getLaunchUrl(); if (launch?.url) run(launch.url) } catch { /* no launch URL */ }
   return () => { try { h?.remove() } catch { /* gone already */ } }
 }
+

@@ -31,3 +31,4 @@ describe('a rated cardio row in the fatigue model', () => {
     expect(fatigueOf(walk({}), NOW)[slug]).toBeCloseTo(fatigueOf(run, NOW)[slug], 12)
   })
 })
+

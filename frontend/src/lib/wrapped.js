@@ -1,4 +1,4 @@
-// "Your year in openGym" (v1.4.5): a look back at one calendar year, story by story.
+// "Your year in NizuGym" (v1.4.5): a look back at one calendar year, story by story.
 //
 // This file is the engine and the calendar, nothing more: what the year holds (yearStats), which
 // years can be looked back on (wrappedYears), when the season is on (Dec 1 to Jan 31), whether
@@ -385,3 +385,4 @@ export function personalityOf(st) {
   if (st.shares.upper >= 0.6) return 'upper'
   return 'steady'
 }
+

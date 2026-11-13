@@ -220,3 +220,4 @@ describe('exercise settings: rest for warm-ups and between sides', () => {
     expect('sideRestOff' in reps.mock.calls[0][0]).toBe(false)
   })
 })
+

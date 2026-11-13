@@ -42,3 +42,4 @@ describe('useClipInMemory', () => {
     expect(out.value).toBe('exercise-media/clip/0003.mp4')
   })
 })
+

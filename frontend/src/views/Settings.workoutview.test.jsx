@@ -87,3 +87,4 @@ describe('Settings — workout view', () => {
     expect(segButton('Focus').getAttribute('aria-pressed')).toBe('false')
   })
 })
+

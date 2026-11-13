@@ -130,3 +130,4 @@ describe('guest footers', () => {
     expect(footers().filter(f => f.includes('Guest mode'))).toHaveLength(1)
   })
 })
+

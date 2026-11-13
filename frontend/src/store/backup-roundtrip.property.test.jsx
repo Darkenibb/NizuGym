@@ -75,7 +75,7 @@ describe('a backup brings back everything it was made from', () => {
     await fc.assert(fc.asyncProperty(profile, async P => {
       useStore.setState({ S: otherDevice() })
       const json = JSON.stringify(P, null, 2)   // Settings.jsx doExport
-      const S = await restore(new File([json], 'opengym-backup.json', { type: 'application/json' }))
+      const S = await restore(new File([json], 'NizuGym-backup.json', { type: 'application/json' }))
       expect(view(S)).toEqual(view(P))
       expect(view(saved())).toEqual(view(P))
     }), RUNS)
@@ -85,7 +85,7 @@ describe('a backup brings back everything it was made from', () => {
     await fc.assert(fc.asyncProperty(profile, async P => {
       useStore.setState({ S: otherDevice() })
       const { blob } = await exportBackupZip(P, { media: memoryMedia(), now: new Date(1.79e12) })
-      const S = await restore(new File([blob], 'opengym-backup.zip'))
+      const S = await restore(new File([blob], 'NizuGym-backup.zip'))
       expect(view(S)).toEqual(view(P))
     }), RUNS)
   })
@@ -99,3 +99,4 @@ describe('a backup brings back everything it was made from', () => {
     }), RUNS)
   })
 })
+

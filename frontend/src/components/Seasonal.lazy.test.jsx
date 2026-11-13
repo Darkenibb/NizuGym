@@ -162,3 +162,4 @@ describe('fetched only while a theme shows', () => {
     expect(await openSeasonal('nope', 'advent')).toBe(false)
   })
 })
+

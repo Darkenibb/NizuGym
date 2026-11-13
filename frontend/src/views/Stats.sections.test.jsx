@@ -72,3 +72,4 @@ describe('Stats sections (P5)', () => {
     expect(index().at(-1).getAttribute('aria-pressed')).toBe('true')
   })
 })
+

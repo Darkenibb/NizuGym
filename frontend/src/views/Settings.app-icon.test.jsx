@@ -120,3 +120,4 @@ describe('Seasonal themes: the Halloween icon shortcut', () => {
     expect(shortcut()).toBeFalsy()
   })
 })
+

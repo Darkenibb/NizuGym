@@ -100,3 +100,4 @@ export function installViewportGuard(win = window) {
     timers.forEach(t => win.clearTimeout(t))
   }
 }
+

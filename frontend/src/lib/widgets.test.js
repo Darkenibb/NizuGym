@@ -2,7 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 // The iPhone widgets' snapshot (lib/widgets.js): what the page hands the widget extension through
-// the App Group. The shape is what ios/App/OpenGymWidgets/WidgetSnapshot.swift decodes, so a field
+// the App Group. The shape is what ios/App/NizuGymWidgets/WidgetSnapshot.swift decodes, so a field
 // renamed here is a widget gone blank there. Text only, nothing from the exercise media.
 const h = vi.hoisted(() => { vi.stubEnv('VITE_MOBILE', '1'); return { platform: 'ios' } })
 vi.mock('./mobile.js', () => ({ MOBILE: true, nativePlatform: async () => h.platform }))
@@ -197,3 +197,4 @@ describe('startWidgetSync', () => {
     stop()
   })
 })
+

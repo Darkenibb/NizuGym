@@ -204,3 +204,4 @@ export function toggleCompare(selected, key, items) {
   return order(sel, items)
 }
 const order = (sel, items) => list(items).map(x => x.key).filter(k => sel.includes(k))
+

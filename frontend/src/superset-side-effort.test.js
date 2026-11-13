@@ -63,3 +63,4 @@ describe('a superset L/R row keeps its RIR +/- stepper', () => {
     expect(weight, 'the weight column should shrink to pay for the effort stepper').toBeTruthy()
   })
 })
+

@@ -1,4 +1,4 @@
-// openGym control set.
+// NizuGym control set.
 //
 // Every input in the app is built here rather than styled on top of a native
 // widget. Native controls are the single loudest "unfinished" tell: a checkbox
@@ -532,3 +532,4 @@ export function Button({ variant = 'plain', size, icon, trailingIcon, children, 
     </button>
   )
 }
+

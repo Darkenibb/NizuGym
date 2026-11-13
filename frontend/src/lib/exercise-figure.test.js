@@ -41,3 +41,4 @@ describe('exercise drawings: male or female', () => {
     for (const id of Object.keys(EXALIAS)) expect(EXDB.some(e => e.id === id), id).toBe(false)
   })
 })
+

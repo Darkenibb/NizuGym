@@ -198,7 +198,7 @@ describe('the alarm buzz in the Android app', () => {
 
 // The native half cannot run here; what it must do with the flag is read off its source.
 describe('the Android side of Vibrate off', () => {
-  const src = name => readFileSync(new URL(`../../android/app/src/main/java/ch/duartesantos/opengym/${name}.java`, import.meta.url), 'utf8')
+  const src = name => readFileSync(new URL(`../../android/app/src/main/java/ch/duartesantos/NizuGym/${name}.java`, import.meta.url), 'utf8')
   const alert = src('RestAlert')
 
   it('reads the flag from the page, defaulting to on for an older page', () => {
@@ -222,7 +222,7 @@ describe('the Android side of Vibrate off', () => {
 })
 
 describe('the Android side of the alarm buzz (#375)', () => {
-  const src = name => readFileSync(new URL(`../../android/app/src/main/java/ch/duartesantos/opengym/${name}.java`, import.meta.url), 'utf8')
+  const src = name => readFileSync(new URL(`../../android/app/src/main/java/ch/duartesantos/NizuGym/${name}.java`, import.meta.url), 'utf8')
   const alert = src('RestAlert')
   const plugin = src('RestAlertPlugin')
 
@@ -389,7 +389,7 @@ describe('spoken cues through the phone', () => {
   })
 
   it('Android ducks for a line and lets go when nothing is left to say', () => {
-    const java = readFileSync(new URL('../../android/app/src/main/java/ch/duartesantos/opengym/SpeechCue.java', import.meta.url), 'utf8')
+    const java = readFileSync(new URL('../../android/app/src/main/java/ch/duartesantos/NizuGym/SpeechCue.java', import.meta.url), 'utf8')
     expect(java).toMatch(/AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK|RestAlert\.duck\(/)
     expect(java).toMatch(/RestAlert\.unduck\(/)
     expect(java).not.toMatch(/AUDIOFOCUS_GAIN\b(?!_TRANSIENT)/)
@@ -404,3 +404,4 @@ describe('spoken cues through the phone', () => {
     expect(swift).toMatch(/AVSpeechSynthesizer/)
   })
 })
+

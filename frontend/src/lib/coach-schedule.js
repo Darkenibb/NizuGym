@@ -60,3 +60,4 @@ export function initCoachSchedule(getStore) {
     App.addListener('appStateChange', ({ isActive }) => { if (isActive) look(true) })
   ).catch(() => {})
 }
+

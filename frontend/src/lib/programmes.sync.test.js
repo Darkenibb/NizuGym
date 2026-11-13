@@ -56,3 +56,4 @@ describe('an older app that does not know them', () => {
     expect(out.programmes).toEqual(cur.programmes)
   })
 })
+

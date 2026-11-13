@@ -50,3 +50,4 @@ describe('signing out while a sign-in is held', () => {
     expect(S.restSec).toBe(70)   // the account's settings
   })
 })
+

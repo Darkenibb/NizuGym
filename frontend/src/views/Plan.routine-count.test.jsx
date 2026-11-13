@@ -59,3 +59,4 @@ describe('Plan — the day header counts its routines', () => {
     expect(countOn('Tuesday')).toBe('2 routines')
   })
 })
+

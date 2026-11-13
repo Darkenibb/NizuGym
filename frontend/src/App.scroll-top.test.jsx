@@ -100,3 +100,4 @@ it('never shows inside a workout', async () => {
   expect(document.querySelector('#totop')).toBeNull()
   expect(document.body.classList.contains('totop-on')).toBe(false)
 })
+

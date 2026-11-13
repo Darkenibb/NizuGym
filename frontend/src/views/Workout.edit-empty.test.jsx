@@ -133,3 +133,4 @@ describe('saving an edit that leaves no set', () => {
     expect(useUI.getState().toastMsg).toBe('Workout updated')
   })
 })
+

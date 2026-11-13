@@ -28,3 +28,4 @@ describe('policy-labelled progression guidance', () => {
     expect(progressionGuidance(null)).toBeNull()
   })
 })
+

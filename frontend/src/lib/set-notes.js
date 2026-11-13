@@ -15,3 +15,4 @@ export function withSetNote(row, text) {
   const { note: _old, ...rest } = row || {}
   return note ? { ...rest, note } : rest
 }
+

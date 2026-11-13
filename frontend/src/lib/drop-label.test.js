@@ -26,3 +26,4 @@ describe('the drop-set sub-row label', () => {
     expect(changeTitle({ type: 'remove-exercise', target: { exId: 'bench' } }, {})).toMatch(/^Remove /)
   })
 })
+

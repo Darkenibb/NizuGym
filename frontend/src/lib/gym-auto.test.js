@@ -100,3 +100,4 @@ describe('switching on arrival', () => {
     expect(toast).not.toHaveBeenCalled()
   })
 })
+

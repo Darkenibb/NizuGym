@@ -210,3 +210,4 @@ describe('starter programmes (#159)', () => {
     for (const w of programme.weeks) for (const k of Object.keys(w.t || {})) expect(ids.has(k)).toBe(true)
   })
 })
+

@@ -57,3 +57,4 @@ describe('Calendar canonical workout days', () => {
     expect(sessions.textContent).toContain('Legacy B')
   })
 })
+

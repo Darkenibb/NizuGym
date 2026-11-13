@@ -318,3 +318,4 @@ describe('settings', () => {
     expect(new Set(CHALLENGE_IDS).size).toBe(CHALLENGE_IDS.length)
   })
 })
+

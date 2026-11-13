@@ -510,3 +510,4 @@ describe('rest days and repeats (#536)', () => {
     expect(s.queue).toBeNull()
   })
 })
+

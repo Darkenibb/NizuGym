@@ -83,3 +83,4 @@ describe('Merge into… (#656)', () => {
     expect(merge.classList.contains('danger')).toBe(false)
   })
 })
+

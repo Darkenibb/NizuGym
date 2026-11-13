@@ -131,3 +131,4 @@ it('leaves no blank strip when a tile at the page end folds while scrolled to th
   expect(tileTop('2')).toBe(500)
   expect(tileTop('2') + 100).toBeLessThanOrEqual(window.innerHeight)
 })
+

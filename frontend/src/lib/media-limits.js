@@ -46,3 +46,4 @@ export function limitsFrom(config) {
  *  that lists sizes. */
 export const fmtMB = (mb, { fixed = false } = {}) =>
   (Math.round(mb * 10) / 10).toLocaleString(dateLocale(), { minimumFractionDigits: fixed ? 1 : 0, maximumFractionDigits: 1 })
+

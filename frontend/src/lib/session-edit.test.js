@@ -357,3 +357,4 @@ describe('editChangesNothing', () => {
     expect(editChangesNothing({ active: null, workouts: [] })).toBe(false)
   })
 })
+

@@ -41,3 +41,4 @@ export async function shareImage(blob, name, title, toast) {
   toast?.(t('Image saved'))
   return true
 }
+

@@ -56,3 +56,4 @@ describe('moveGymCard', () => {
     expect(ids(before)).toEqual(snapshot)
   })
 })
+

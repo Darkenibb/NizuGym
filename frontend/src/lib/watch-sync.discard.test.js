@@ -125,7 +125,7 @@ describe('a discard the watch hears about, whenever it can', () => {
     const last = JSON.parse(b.sendSnapshot.mock.calls.at(-1)[0].json)
     expect(last.active).toBe(null)
     expect(last.discarded).toEqual(['w-1'])
-    expect(last.healthGone).toContain('opengym-w-w-1')
+    expect(last.healthGone).toContain('NizuGym-w-w-1')
     stop()
   }))
 
@@ -158,7 +158,8 @@ describe('a discard the watch hears about, whenever it can', () => {
     const last = JSON.parse(b.sendSnapshot.mock.calls.at(-1)[0].json)
     expect(last.active).toBe(null)
     expect(last.discarded).toBeUndefined()
-    expect(last.healthGone || []).not.toContain('opengym-w-w-1')
+    expect(last.healthGone || []).not.toContain('NizuGym-w-w-1')
     stop()
   }))
 })
+

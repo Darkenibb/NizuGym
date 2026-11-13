@@ -48,3 +48,4 @@ describe('the progression step on bodyweight work (#583)', () => {
     expect(hasStep(render(useUI.getState().sheets.at(-1)))).toBe(true)
   })
 })
+

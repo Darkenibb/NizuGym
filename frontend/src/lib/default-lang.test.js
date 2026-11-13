@@ -42,3 +42,4 @@ describe('autoLang', () => {
     expect(autoLang(fresh, { default_lang: 'xx' }, ['fr-FR'])).toBe('fr')
   })
 })
+

@@ -48,3 +48,4 @@ describe('Your week on Home', () => {
     expect(render(<RecapHomeCard S={useStore.getState().S} />).textContent).toBe('')
   })
 })
+

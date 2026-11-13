@@ -127,3 +127,4 @@ export function setWorkoutDuration(workouts, ref, minutes, now = Date.now()) {
   const edited = stampWorkout({ ...current, end: current.start + min * 60000 }, now)
   return list.map(w => (w === current ? edited : w))
 }
+

@@ -64,3 +64,4 @@ export function openSeasonal(id, what) {
   if (!LOADERS[id]) return Promise.resolve(false)
   return LOADERS[id]().then(m => (m.open ? m.open(what) : false))
 }
+

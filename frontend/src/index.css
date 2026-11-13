@@ -1,5 +1,5 @@
 /* ============================================================================
-   openGym — design system
+   NizuGym — design system
    ----------------------------------------------------------------------------
    Rebuilt around four rules, each aimed at a specific "generated" tell in the
    previous sheet:
@@ -2505,7 +2505,7 @@ body.totop-on.resting #app{padding-bottom:calc(232px + var(--sab))}
 .cal-d i.noted{background:var(--indigo)}
 .cal-legend{display:flex;gap:14px;justify-content:center;margin-top:12px;font-size:var(--fs-caption);color:var(--label-3)}
 .cal-legend i{display:inline-block;width:6px;height:6px;border-radius:50%;margin-inline-end:5px}
-/* --- openGym date field + picker (#809, components/DateField.jsx) ---
+/* --- NizuGym date field + picker (#809, components/DateField.jsx) ---
    The field is a button dressed as the field or row value it replaces; the picker reuses the
    calendar's cells above. Cells are at least 44px tall: at 320px seven columns cannot also be
    44px wide, so the grid gives up gap before it gives up height. */
@@ -3082,7 +3082,7 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
 .youtube-actions{display:flex;justify-content:space-between;gap:8px;margin-top:8px}
 .youtube-actions .btn{min-height:44px}
 
-/* Your year in openGym: Home's December card (components/WrappedEntry.jsx). The stories' own
+/* Your year in NizuGym: Home's December card (components/WrappedEntry.jsx). The stories' own
    styles load with them (components/Wrapped.css). */
 .wr-home{position:relative;overflow:hidden;background:var(--surface);background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 24%,var(--surface)),var(--surface) 72%)}
 .wr-home>.btn{margin-top:12px}
@@ -3272,3 +3272,4 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
   .kpis .tile{padding:10px 11px}
   .kpis .tile .v{font-size:var(--fs-title3)}
 }
+

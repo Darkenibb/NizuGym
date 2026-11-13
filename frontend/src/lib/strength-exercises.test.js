@@ -232,3 +232,4 @@ describe('primaryMuscleOf', () => {
     expect(primaryMuscleOf({ muscleWeights: { chest: 1, biceps: 0 } })).toEqual({ slug: 'chest', weight: 1 })
   })
 })
+

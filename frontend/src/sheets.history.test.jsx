@@ -145,3 +145,4 @@ describe('exercise history sheet', () => {
     expect(top.querySelectorAll('.list .item')).toHaveLength(1)
   })
 })
+

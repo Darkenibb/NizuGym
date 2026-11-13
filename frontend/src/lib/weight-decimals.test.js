@@ -32,3 +32,4 @@ describe('weight decimals', () => {
     setWeightDecimals(2); expect(weightDecimals()).toBe(2)
   })
 })
+

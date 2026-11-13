@@ -79,3 +79,4 @@ export function bodyweightFor(w, S) {
   const prev = pts[lo - 1]
   return prev && at - prev.t <= pts[lo].t - at ? prev.w : pts[lo].w
 }
+

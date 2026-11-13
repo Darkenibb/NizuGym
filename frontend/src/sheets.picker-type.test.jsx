@@ -76,3 +76,4 @@ describe('exercise picker type filter', () => {
     expect(isOn(chipByText(host, 'yoga'))).toBe(true)
   })
 })
+

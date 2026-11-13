@@ -19,3 +19,4 @@ export const WC_DEFAULT = Object.freeze({
 export function workoutControls(S) {
   return { ...WC_DEFAULT, ...((S && S.wc) || {}) }
 }
+

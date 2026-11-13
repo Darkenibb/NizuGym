@@ -78,3 +78,4 @@ describe('target corridor', () => {
     expect(convertStateUnit(pct, 'lb').rateGoal).toEqual(pct.rateGoal)
   })
 })
+

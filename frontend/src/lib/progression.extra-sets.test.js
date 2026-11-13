@@ -75,3 +75,4 @@ describe('a session with no plan of its own is read whole', () => {
     expect(p.weight).toBe(82.5)
   })
 })
+

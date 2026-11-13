@@ -613,3 +613,4 @@ describe('CoachIntake — the editor behind ?edit=1', () => {
     expect(mocks.S.coach.chat.map(m => m.kind)).toEqual(['text', 'intake'])
   })
 })
+

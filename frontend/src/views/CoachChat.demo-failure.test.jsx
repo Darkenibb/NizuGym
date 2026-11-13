@@ -125,3 +125,4 @@ describe('the demo Coach failing inside its timer', () => {
     await elapse(DELAY); await elapse(POLL_MS)                       // drain it, so nothing is left running
   })
 })
+

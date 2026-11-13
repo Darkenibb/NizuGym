@@ -44,3 +44,4 @@ describe('exifDateOf', () => {
     expect(await exifDateOfFile(null)).toBeNull()
   })
 })
+

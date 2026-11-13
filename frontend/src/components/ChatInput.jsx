@@ -60,3 +60,4 @@ export default function ChatInput({ value, onChange, onSend, placeholder, disabl
       onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey && !expanded) { e.preventDefault(); onSend() } }} />
   </>
 }
+

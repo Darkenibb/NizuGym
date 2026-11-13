@@ -24,3 +24,4 @@ describe("Home's Today row on a narrow phone", () => {
     expect(rule).toMatch(/text-overflow:ellipsis/)
   })
 })
+

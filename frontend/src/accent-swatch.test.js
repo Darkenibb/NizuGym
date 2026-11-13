@@ -12,3 +12,4 @@ describe('the own colour swatch takes the tap', () => {
     expect(rule).toMatch(/pointer-events:none/)
   })
 })
+

@@ -30,7 +30,7 @@ const CONCURRENCY = 4
 
 // The attribution the media licence asks for, word for word as Settings shows it (agreement §8c),
 // so it is not translated.
-export const MEDIA_CREDIT = 'Exercise media © Aliaksandr Makatserchyk, Gym visual, gymvisual.com. Media licensed for use in openGym only.'
+export const MEDIA_CREDIT = 'Exercise media © Aliaksandr Makatserchyk, Gym visual, gymvisual.com. Media licensed for use in NizuGym only.'
 
 // A grey square: the stand-in the layout check (scripts/pdf/render-samples.mjs) and the tests
 // print in place of every picture, so a page can be looked at without the licensed files.
@@ -172,3 +172,4 @@ export function readPrintPictures(storage = globalThis.localStorage) {
 export function writePrintPictures(on, storage = globalThis.localStorage) {
   try { storage?.setItem(PRINT_PICTURES_KEY, on ? '1' : '0') } catch { /* private mode: this run only */ }
 }
+

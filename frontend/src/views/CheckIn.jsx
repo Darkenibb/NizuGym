@@ -272,3 +272,4 @@ function scanErrorMessage(e) {
   if (m === 'unsupported') return t('Scanning is not available on this device.')
   return t('Could not start the scanner')
 }
+

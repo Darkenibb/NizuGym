@@ -159,7 +159,7 @@ describe('the round trip: our export through our own importer', () => {
   })
 
   it('is recognised as ours', () => {
-    expect(parsed.source).toBe('openGym')
+    expect(parsed.source).toBe('NizuGym')
     expect(parsed.skipped).toBe(0)
   })
 
@@ -238,3 +238,4 @@ describe('a note on one set (v1.4.5)', () => {
     expect(rows.map(r => [r[col('note')], r[col('set_note')]])).toEqual([['all good', ''], ['', 'grip slipped']])
   })
 })
+

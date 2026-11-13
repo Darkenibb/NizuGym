@@ -176,3 +176,4 @@ export default function WorkoutCoachSheet({ entryIdx, close }) {
 export function workoutCoachSheet(entryIdx) {
   useUI.getState().openSheet(close => <WorkoutCoachSheet entryIdx={entryIdx} close={close} />)
 }
+

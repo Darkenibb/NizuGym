@@ -135,3 +135,4 @@ it('puts the exercise named as typed first, typo or plural included', () => {
   expect(first('push ups')).toBe('push-up')
   expect(first('burpee')).toBe('burpee')
 })
+

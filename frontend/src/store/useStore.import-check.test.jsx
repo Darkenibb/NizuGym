@@ -158,3 +158,4 @@ describe('importing a backup with no account (local mode, a guest)', () => {
     expect(ids(useStore.getState().S.workouts)).toEqual(['w1', 'w2'])
   })
 })
+

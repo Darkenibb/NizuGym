@@ -1,7 +1,7 @@
-<!-- openGym on Garmin, ara. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
+<!-- NizuGym on Garmin, ara. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
 <strings>
     <string id="all_sets_done">اكتملت كل المجموعات</string>
-    <string id="app_name">openGym</string>
+    <string id="app_name">NizuGym</string>
     <string id="bodyweight">وزن الجسم</string>
     <string id="continue_workout">متابعة التمرين</string>
     <string id="discard_q">تجاهل التمرين؟</string>
@@ -21,7 +21,7 @@
     <string id="next_set">التالي: $1$، المجموعة $2$</string>
     <string id="no_workout">لا يوجد تمرين جارٍ</string>
     <string id="not_synced">لم تتم المزامنة بعد</string>
-    <string id="open_phone_once">افتح openGym على هاتفك مرة واحدة وستظهر تمارينك الروتينية هنا.</string>
+    <string id="open_phone_once">افتح NizuGym على هاتفك مرة واحدة وستظهر تمارينك الروتينية هنا.</string>
     <string id="phone_away">الهاتف خارج النطاق. مجموعاتك تنتظر هنا.</string>
     <string id="prs">الأرقام القياسية</string>
     <string id="quick_start">بدء سريع</string>
@@ -43,10 +43,11 @@
     <string id="time">الوقت</string>
     <string id="today">اليوم</string>
     <string id="volume">حجم التدريب</string>
-    <string id="waiting_phone">بانتظار هاتفك. افتح openGym عليه إذا تأخر.</string>
+    <string id="waiting_phone">بانتظار هاتفك. افتح NizuGym عليه إذا تأخر.</string>
     <string id="warmup">إحماء</string>
     <string id="week_streak">أسابيع متتالية</string>
     <string id="weight">الوزن</string>
     <string id="workout">التمرين</string>
     <string id="workout_saved">تم حفظ التمرين</string>
 </strings>
+

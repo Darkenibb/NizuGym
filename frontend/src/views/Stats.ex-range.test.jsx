@@ -92,3 +92,4 @@ describe('Stats: exercise progress date range', () => {
     expect([...bwCard.querySelectorAll('.seg button.on')].map(b => b.textContent)).toEqual(['3M'])
   })
 })
+

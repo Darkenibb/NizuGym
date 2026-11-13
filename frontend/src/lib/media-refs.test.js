@@ -164,3 +164,4 @@ describe('small helpers', () => {
     expect(HASH_RE.test(A.toUpperCase())).toBe(false)
   })
 })
+

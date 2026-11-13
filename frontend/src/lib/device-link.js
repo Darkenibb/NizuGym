@@ -39,3 +39,4 @@ export function deviceLabel(ua = typeof navigator === 'undefined' ? '' : navigat
     : /Chrome\/|CriOS/.test(s) ? 'Chrome' : /Safari\//.test(s) ? 'Safari' : ''
   return [browser, os].filter(Boolean).join(' · ')
 }
+

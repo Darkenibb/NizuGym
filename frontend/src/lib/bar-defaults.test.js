@@ -149,3 +149,4 @@ describe('sync', () => {
     expect(mergeStates(cur, next).barDefaults).toEqual({ kg: { barbell: 15 } })
   })
 })
+

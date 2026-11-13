@@ -244,3 +244,4 @@ export function applyTintFallback(el, acc, lacks = lacksColorMix()) {
   const n = parseInt(hex.slice(1), 16)
   for (const [k, a] of TINTS) el.style.setProperty(k, `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`)
 }
+

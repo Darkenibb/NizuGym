@@ -279,7 +279,7 @@ describe('parseHevyRoutines', () => {
     ],
   }
 
-  it('builds openGym routine configs from Hevy sets', () => {
+  it('builds NizuGym routine configs from Hevy sets', () => {
     const parsed = parseHevyRoutines([ROUTINE], TEMPLATES, { unit: 'kg' })
     expect(parsed.routines).toHaveLength(1)
     expect(parsed.routines[0].name).toBe('Oberkörper 2')
@@ -355,3 +355,4 @@ describe('hevySummaryCounts', () => {
     expect(hevySummaryCounts(w, r, { workouts: false, routines: false })).toEqual({ matched: 0, created: 0 })
   })
 })
+

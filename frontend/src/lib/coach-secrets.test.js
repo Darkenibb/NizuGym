@@ -46,3 +46,4 @@ describe('coach-secrets against a Capacitor-style plugin proxy', () => {
     expect(calls).toEqual(['set'])
   })
 })
+

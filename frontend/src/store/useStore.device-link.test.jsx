@@ -41,3 +41,4 @@ describe('boot with a device-link code', () => {
     expect(window.location.search).toBe('?utm=x')
   })
 })
+

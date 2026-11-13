@@ -52,3 +52,4 @@ describe('picking a photo with the ingest not loaded', () => {
     expect(out).toEqual({ kind: 'image', hash: 'h' })
   })
 })
+

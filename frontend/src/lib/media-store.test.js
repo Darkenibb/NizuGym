@@ -141,3 +141,4 @@ describe('media store (memory backend)', () => {
     expect(await s.has(H1)).toBe(true)
   })
 })
+

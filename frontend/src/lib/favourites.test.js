@@ -44,3 +44,4 @@ describe('sortYoursFirst', () => {
     expect(usageOf({ routines: [{ ex: [{ id: 'a' }] }], workouts: [{ entries: [{ id: 'a' }, { id: 'b' }] }] })).toEqual({ a: 2, b: 1 })
   })
 })
+

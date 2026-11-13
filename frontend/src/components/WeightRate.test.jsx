@@ -92,3 +92,4 @@ describe('weekly rate on the body-weight card', () => {
     expect(useStore.getState().S.rateGoal).toEqual({ dir: 'hold', by: '%', lo: 0, hi: 0.25 })
   })
 })
+

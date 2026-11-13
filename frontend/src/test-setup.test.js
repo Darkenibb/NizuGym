@@ -31,3 +31,4 @@ describe('ensureWebStorage', () => {
     localStorage.removeItem('x')
   })
 })
+

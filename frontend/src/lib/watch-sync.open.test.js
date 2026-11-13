@@ -192,3 +192,4 @@ describe('startWatchSync', () => {
     } finally { vi.useRealTimers() }
   })
 })
+

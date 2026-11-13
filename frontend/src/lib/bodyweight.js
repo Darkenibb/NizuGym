@@ -114,3 +114,4 @@ export function rateStatus(rate, goal) {
   if (c.dir === 'lose') return r < c.min ? 'fast' : 'slow'
   return r > c.max ? 'fast' : 'slow'
 }
+

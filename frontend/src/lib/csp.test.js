@@ -37,3 +37,4 @@ describe('web Content-Security-Policy', () => {
     expect(csp).toBe(sets)
   })
 })
+

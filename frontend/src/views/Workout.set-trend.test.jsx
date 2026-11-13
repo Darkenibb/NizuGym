@@ -50,3 +50,4 @@ describe('set vs last time in the workout (#907)', () => {
     expect(container.querySelectorAll('.settrend')).toHaveLength(0)
   })
 })
+

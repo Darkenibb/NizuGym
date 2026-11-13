@@ -145,3 +145,4 @@ describe('a request the server refuses', () => {
     expect(host.querySelector('.composer textarea').value).toBe('look at my squats')
   })
 })
+

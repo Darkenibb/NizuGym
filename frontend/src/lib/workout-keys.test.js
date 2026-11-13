@@ -108,3 +108,4 @@ describe('nextOpenSet', () => {
     expect(nextOpenSet([ex([true]), ex([false])], 9)).toEqual({ idx: 1, i: 0, current: true })
   })
 })
+

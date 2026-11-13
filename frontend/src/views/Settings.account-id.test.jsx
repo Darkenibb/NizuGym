@@ -123,3 +123,4 @@ describe('Settings → Account ID', () => {
     expect(idRow(page)).toBeUndefined()
   })
 })
+

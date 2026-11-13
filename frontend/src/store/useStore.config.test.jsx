@@ -82,3 +82,4 @@ describe('server config', () => {
     expect(useStore.getState().config.coach.enabled).toBe(true)
   })
 })
+

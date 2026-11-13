@@ -67,3 +67,4 @@ export default function CameraScan({ onFound, onCancel }) {
     <Button variant="tinted" onClick={onCancel}>{t('Cancel')}</Button>
   </>
 }
+

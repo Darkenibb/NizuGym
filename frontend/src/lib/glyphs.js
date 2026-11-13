@@ -53,3 +53,4 @@ export function glyphOf(v) {
   const base = [...v].filter(c => c !== '️' && c !== '‍')[0]
   return LEGACY[base] || DEFAULT_GLYPH
 }
+

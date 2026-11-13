@@ -24,3 +24,4 @@ export default function Toast() {
     </button>}
   </div>
 }
+

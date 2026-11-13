@@ -56,3 +56,4 @@ describe('exercise configuration progression row', () => {
     expect(range.classList.contains('cfgrow-4')).toBe(false)
   })
 })
+

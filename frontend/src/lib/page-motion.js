@@ -11,3 +11,4 @@ export function pageMotion(from, to, navType) {
   if (upper && navType === 'POP') return 'pop'
   return 'fade'
 }
+

@@ -57,3 +57,4 @@ describe('Stats — time per exercise', () => {
     expect(rows()[0]).toContain('12 min')
   })
 })
+

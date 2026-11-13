@@ -120,3 +120,4 @@ describe('rename workout', () => {
     expect(active.routineIds).toContain('r2')
   })
 })
+

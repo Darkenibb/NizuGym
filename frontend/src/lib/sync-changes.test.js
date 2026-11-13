@@ -41,3 +41,4 @@ describe('counting what the server has not seen', () => {
     expect(countChanges(state(), null)).toBeNull()
   })
 })
+

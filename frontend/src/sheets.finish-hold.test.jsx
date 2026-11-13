@@ -130,3 +130,4 @@ describe('the Finish sheet', () => {
     expect(host.textContent).toContain('You haven’t checked off any sets.')
   })
 })
+

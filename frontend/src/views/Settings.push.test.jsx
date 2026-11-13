@@ -117,3 +117,4 @@ describe('Settings — what the Notifications switch shows when it opens', () =>
     expect(mocks.toast).toHaveBeenCalledWith('this subscription belongs to another account')
   })
 })
+

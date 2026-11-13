@@ -173,3 +173,4 @@ describe('where a noted day shows', () => {
     expect(useUI.getState().sheets).toHaveLength(1)
   })
 })
+

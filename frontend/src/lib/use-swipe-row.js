@@ -376,3 +376,4 @@ export function useSwipeRow({ canDelete = true, canCopy = true, canSwipe, onComm
     },
   }
 }
+

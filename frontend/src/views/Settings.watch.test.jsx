@@ -116,3 +116,4 @@ describe('Settings → Apple Watch', () => {
     expect([...host.querySelectorAll('.lrow')].some(r => r.textContent.includes('Apple Watch'))).toBe(true)
   })
 })
+

@@ -110,3 +110,4 @@ export function plateSplit(total, bar) {
   if (!(total > 0) || !(bar >= 0) || bar === null || bar === undefined || total <= bar) return null
   return Math.round(((total - bar) / 2) * 100) / 100
 }
+

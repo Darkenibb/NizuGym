@@ -122,3 +122,4 @@ describe('sets of every kind from the watch', () => {
     expect(useStore.getState().S.active.entries[0].sets[0]).toMatchObject({ sec: 52, done: true })
   })
 })
+

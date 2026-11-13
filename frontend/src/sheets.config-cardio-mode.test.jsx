@@ -78,3 +78,4 @@ describe('a cardio exercise logged as sets x reps (#678)', () => {
     expect(v.modes()).toEqual(['Reps', 'Time'])
   })
 })
+

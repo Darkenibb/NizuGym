@@ -71,3 +71,4 @@ describe('session note', () => {
     expect(useStore.getState().S.workouts[0].note).toBeUndefined()
   })
 })
+

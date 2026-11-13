@@ -54,3 +54,4 @@ describe('decodeImageData', () => {
     expect(await decodeImageData({ data: null, width: 1, height: 1 })).toBeNull()
   })
 })
+

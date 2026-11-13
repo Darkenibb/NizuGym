@@ -112,3 +112,4 @@ describe('a restored backup brings back what it holds, and it stays', () => {
     await vi.waitFor(() => expect(toast).toHaveBeenCalled())
   })
 })
+

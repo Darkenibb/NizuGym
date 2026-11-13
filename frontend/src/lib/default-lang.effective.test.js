@@ -44,3 +44,4 @@ describe('browserLangs', () => {
     expect(langs.every(Boolean)).toBe(true)
   })
 })
+

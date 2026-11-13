@@ -20,7 +20,7 @@ export const keyBefore = path => { const e = idxNow() > 0 ? pathAt.get(idxNow() 
 // page at once left that entry behind: back from the new page landed on it, the same page with
 // no sheet, and the next back seemed to do nothing. The new page takes the sheet's entry instead.
 export const onSheetEntry = () => {
-  try { return !!globalThis.history?.state?.openGymSheet } catch { return false }
+  try { return !!globalThis.history?.state?.NizuGymSheet } catch { return false }
 }
 
 export function closeThenNav(close, to) {
@@ -35,3 +35,4 @@ export function navToWorkout() {
   const here = String(globalThis.location?.hash || '').startsWith('#/workout')
   nav('/workout', here || onSheetEntry() ? { replace: true } : undefined)
 }
+

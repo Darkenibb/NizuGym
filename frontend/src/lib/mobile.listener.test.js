@@ -62,3 +62,4 @@ describe('onAppActive — the App plugin rejecting must not go unhandled', () =>
     expect(unhandled).toEqual([])
   })
 })
+

@@ -340,3 +340,4 @@ describe('sessionEnd: a workout finished long after its last set', () => {
     expect(sessionEnd(active, T0 + FORGOTTEN_GAP_MS + 1)).toBe(T0)
   })
 })
+

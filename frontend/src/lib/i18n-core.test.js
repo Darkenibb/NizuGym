@@ -218,3 +218,4 @@ describe('English-name switches with every exercise-name pack', () => {
     _setLangState('en', {}, null, null)
   })
 })
+

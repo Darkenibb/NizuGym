@@ -337,3 +337,4 @@ export function refillIfComplete(s, today = todayISO(), now = Date.now()) {
     .sort((x, y) => (x.d === y.d ? (x.start || 0) - (y.start || 0) : x.d < y.d ? -1 : 1)).at(-1)
   return last ? refillAfter(s, last, today, now) : false
 }
+

@@ -105,3 +105,4 @@ describe('the page underneath an edge swipe back', () => {
     expect(under()).toBeNull()
   })
 })
+

@@ -87,3 +87,4 @@ describe('dumbbell inventory sheet', () => {
     expect(S().dumbbells.lb.weights.slice(0, 3)).toEqual([5, 10, 15])
   })
 })
+

@@ -158,3 +158,4 @@ describe('Settings: last time means (#770)', () => {
     expect(mocks.S.lastFrom).toBe('routine')
   })
 })
+

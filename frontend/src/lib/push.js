@@ -39,8 +39,8 @@ export function deviceId() {
 // the device id here instead, in a cache of its own that its activate sweep leaves alone. Left
 // every time this browser holds a subscription the server should have, so a browser subscribed
 // before the worker looked for it has it by its next boot.
-const DEVICE_CACHE = 'opengym-device'
-const DEVICE_URL = '/opengym-device-id'
+const DEVICE_CACHE = 'NizuGym-device'
+const DEVICE_URL = '/NizuGym-device-id'
 async function shareDeviceId() {
   const id = deviceId()
   if (!id) return
@@ -138,3 +138,4 @@ export async function syncPushSubscription() {
 }
 
 export const sendTestPush = () => api('/api/push/test', { method: 'POST', body: '{}' })
+

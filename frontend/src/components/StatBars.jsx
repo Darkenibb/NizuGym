@@ -64,3 +64,4 @@ export function ChartLegend({ items, className = '' }) {
     </li>)}
   </ul>
 }
+

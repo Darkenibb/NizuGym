@@ -94,3 +94,4 @@ export function relativeSeries(S, exId, { basis = 'e1rm', formula = formulaOf(S)
   }
   return out
 }
+

@@ -161,3 +161,4 @@ describe('checkIn switch', () => {
     expect(S.gymCards).toHaveLength(1)
   })
 })
+

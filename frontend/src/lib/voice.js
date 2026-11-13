@@ -1,13 +1,13 @@
 // Siri, the Shortcuts app and Google Assistant (v1.4.4). What the voice side hands the app, and
 // what the app does with it:
 //
-//   iPhone (ios/App/App/VoiceIntents.swift): "Log my weight in openGym" runs without opening the
+//   iPhone (ios/App/App/VoiceIntents.swift): "Log my weight in NizuGym" runs without opening the
 //     app. The intent leaves a pending weigh-in in the App Group ({ id, w, unit, at, d }), and the
 //     page brings those in when it starts or comes back (importPendingWeighIns, startVoice).
-//     "Start my workout" opens opengym://start?today=1. "What's my workout today?" and "How's my
+//     "Start my workout" opens NizuGym://start?today=1. "What's my workout today?" and "How's my
 //     streak?" answer from the widget snapshot (lib/widgets.js) and never open the app.
 //   Android (res/xml/shortcuts.xml): long-press shortcuts and Assistant's App Actions open
-//     opengym://start?today=1, opengym://stats and opengym://weigh-in?w=78.2, the last one the
+//     NizuGym://start?today=1, NizuGym://stats and NizuGym://weigh-in?w=78.2, the last one the
 //     weigh-in sheet with the number already in (lib/widget-links.js).
 //
 // A pending weigh-in comes in once: by its id, and a day whose weigh-in is as new or newer keeps
@@ -180,3 +180,4 @@ export async function startVoice ({ useStore, toast }) {
 // Test seams.
 export function _setVoicePluginForTest (plugin) { pluginP = Promise.resolve(plugin ? { VoiceBridge: plugin } : null) }
 export function _resetVoice () { pluginP = null }
+

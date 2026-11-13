@@ -145,3 +145,4 @@ describe('routine order', () => {
     expect(nav).toHaveBeenCalledWith('/plan/r/' + created.id)
   })
 })
+

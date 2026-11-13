@@ -291,3 +291,4 @@ export function computeBalance(S, template) {
   )
   return template.roles.map(role => evaluateRole(template, role, currentByRoleId, bodyweightKg, S))
 }
+

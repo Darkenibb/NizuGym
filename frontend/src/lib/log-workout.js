@@ -314,3 +314,4 @@ export function appendLoggedWorkout(S, built, { now = Date.now(), allowDuplicate
   S._ts = Math.max(now, (Number(S._ts) || 0) + 1)
   return { added: true, workout: S.workouts.find(x => x.id === w.id) || w }
 }
+

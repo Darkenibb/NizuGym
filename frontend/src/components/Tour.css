@@ -65,3 +65,4 @@
 /* A short screen (320 x 568): the closing card's tutorials go to one line each, so its buttons
    stay in sight without scrolling the card. */
 @media (max-height:680px){.tour-tut-s{display:none}.tour-tut{padding:9px 12px}.tour-list{gap:5px}}
+

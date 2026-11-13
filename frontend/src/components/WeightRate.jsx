@@ -87,3 +87,4 @@ function RateGoalSheet({ close }) {
 }
 
 export const rateGoalSheet = () => useUI.getState().openSheet(close => <RateGoalSheet close={close} />)
+

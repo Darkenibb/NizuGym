@@ -67,3 +67,4 @@ describe('the service worker and the API', () => {
     expect(offline.res.status).toBe(200)
   })
 })
+

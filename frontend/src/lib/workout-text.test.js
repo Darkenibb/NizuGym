@@ -117,3 +117,4 @@ describe('workoutText exercise names per language', () => {
     expect(nameLine()).toBe('Barbell Bench Press')
   })
 })
+

@@ -304,3 +304,4 @@ describe('changing the duration of a saved workout', () => {
     expect(saved.end - saved.start).toBe(60 * 60000)
   })
 })
+

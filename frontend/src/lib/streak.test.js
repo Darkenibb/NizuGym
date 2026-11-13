@@ -137,3 +137,4 @@ describe('streakCelebration', () => {
     expect(streakCelebration({ streakSeen: { badge: 0 } }, info(3, false), { done: 0, planned: 3 })).toBeNull()
   })
 })
+

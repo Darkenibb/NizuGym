@@ -47,3 +47,4 @@ describe('ConnectSheet', () => {
     expect(connectToServer).toHaveBeenLastCalledWith('gym.example.com', 'ABCD2345', expect.any(Function))
   })
 })
+

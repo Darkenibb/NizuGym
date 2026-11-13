@@ -370,13 +370,13 @@ describe('telling files apart', () => {
     expect(parseImportFile(strong).source).toBe('Strong')
   })
 
-  it('never imports a JSON it does not know, and points openGym’s own files to their importers', () => {
+  it('never imports a JSON it does not know, and points NizuGym’s own files to their importers', () => {
     expect(parseImportFile('{"hello":1}')).toEqual({ error: 'unrecognised' })
     expect(parseImportFile('[{"a":1}]')).toEqual({ error: 'unrecognised' })
     expect(parseImportFile('{ not json')).toEqual({ error: 'unrecognised' })
     expect(parseImportFile('[]')).toEqual({ error: 'empty' })
-    expect(parseImportFile(JSON.stringify({ workouts: [], routines: [], bodyweight: [] }))).toEqual({ error: 'opengym' })
-    expect(parseImportFile(JSON.stringify({ opengym_plan: 1, routines: [] }))).toEqual({ error: 'opengym' })
+    expect(parseImportFile(JSON.stringify({ workouts: [], routines: [], bodyweight: [] }))).toEqual({ error: 'NizuGym' })
+    expect(parseImportFile(JSON.stringify({ NizuGym_plan: 1, routines: [] }))).toEqual({ error: 'NizuGym' })
   })
 
   it('points every alias at an exercise that exists', () => {
@@ -387,3 +387,4 @@ describe('telling files apart', () => {
     }
   })
 })
+

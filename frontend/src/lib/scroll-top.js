@@ -30,3 +30,4 @@ export function retapTab(path) {
   if (window.scrollY > AT_TOP) { scrollToTop(); return }
   if (path === '/library') document.querySelector('#app > .page:not(.under) .search input')?.focus()
 }
+

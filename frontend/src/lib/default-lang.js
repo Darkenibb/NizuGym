@@ -74,3 +74,4 @@ export function browserLangs() {
     return list.filter(Boolean)
   } catch { return [] }
 }
+

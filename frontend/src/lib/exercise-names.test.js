@@ -337,3 +337,4 @@ test('de-CH derives the Swiss spelling from the German pack', () => {
     expect(swiss[id], id).not.toContain('ß')
   }
 })
+

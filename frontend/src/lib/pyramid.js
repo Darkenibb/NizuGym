@@ -133,3 +133,4 @@ export function maxRepsSeries(workouts, exId) {
   }
   return [...byWorkout.values()]
 }
+

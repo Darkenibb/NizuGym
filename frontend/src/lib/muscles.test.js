@@ -334,3 +334,4 @@ describe('remembered catalogue muscles', () => {
     expect(Object.keys(musclesOf(own))).toEqual(['biceps'])
   })
 })
+

@@ -33,3 +33,4 @@ describe('the profile’s default progression rule', () => {
     expect(nextPrescription(clean('off'), cfg, { prog: 'linear' })).toMatchObject({ kind: 'up', weight: 62.5 })
   })
 })
+

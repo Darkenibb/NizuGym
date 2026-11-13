@@ -69,3 +69,4 @@ export default function ShareCardSheet({ title, render, deps = [], name, shareTi
     <Button variant="primary" icon="share" disabled={!img?.blob || busy} onClick={share}>{t('Share')}</Button>
   </>
 }
+

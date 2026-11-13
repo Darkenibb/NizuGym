@@ -21,3 +21,4 @@ describe('the zoom for a radius', () => {
     expect(zoomFor(5e6, 0, 100)).toBe(3)
   })
 })
+

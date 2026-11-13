@@ -146,3 +146,4 @@ describe('layoutWrappedCard', () => {
     expect(summary.items.filter(i => i.kind === 'tile')).toHaveLength(7)
   })
 })
+

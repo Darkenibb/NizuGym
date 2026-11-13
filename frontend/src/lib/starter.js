@@ -167,3 +167,4 @@ export const buildStarterProgramme = (id, name, now = Date.now()) => {
   for (const { day, routineId } of plan.schedule) (days[day] = days[day] || []).push(routineId)
   return { routines: plan.routines, programme: { id: uid(), name, at: now, src: id, days, weeks: JSON.parse(JSON.stringify(def.weeks)) } }
 }
+

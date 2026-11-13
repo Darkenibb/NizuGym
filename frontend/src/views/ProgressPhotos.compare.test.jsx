@@ -31,3 +31,4 @@ describe('before/after compare in a right-to-left language', () => {
     expect(stage.getAttribute('dir')).toBe('ltr')
   })
 })
+

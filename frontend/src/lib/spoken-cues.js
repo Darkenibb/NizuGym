@@ -130,3 +130,4 @@ export const cues = {
 
 /** The line the Settings row says when tried: what a rest would announce. */
 export const sampleCue = (unit = 'kg') => [t('Set {0}', 3), weightWords(unit === 'lb' ? 185 : 80, unit), tn('{0} rep', '{0} reps', 8)].join(', ')
+

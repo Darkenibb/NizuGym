@@ -68,3 +68,4 @@ describe('BodyMap interaction semantics', () => {
     expect(container.querySelector('.hm-legend').getAttribute('aria-label')).toBe('Less More')
   })
 })
+

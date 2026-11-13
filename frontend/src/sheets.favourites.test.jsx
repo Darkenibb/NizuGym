@@ -94,3 +94,4 @@ describe('exercise picker', () => {
     expect(names(host)).toEqual([EXDB[5].n, EXDB[9].n])
   })
 })
+

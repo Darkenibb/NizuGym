@@ -63,3 +63,4 @@ export async function secureRemove(key) {
 export const getApiKey = () => secureGet(KEY)
 export const setApiKey = value => secureSet(KEY, value)
 export const clearApiKey = () => secureRemove(KEY)
+

@@ -261,3 +261,4 @@ describe('a workout\'s photos and videos', () => {
     expect(row.querySelector('.wrow-media').getAttribute('aria-label')).toBe('2 photos or videos')
   })
 })
+

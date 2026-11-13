@@ -104,3 +104,4 @@ describe('vibrate on silent', () => {
     expect(DEF.vibrateOnSilent).toBe(false)
   })
 })
+

@@ -1,6 +1,6 @@
-// v1.4.3 (#544, #127): what openGym takes back from Health Connect / Apple Health. Heart rate only
+// v1.4.3 (#544, #127): what NizuGym takes back from Health Connect / Apple Health. Heart rate only
 // fills what is missing (the Apple Watch's own reading is never replaced), weigh-ins typed into
-// openGym always win, openGym's own records are never read back, nothing imported is written back.
+// NizuGym always win, NizuGym's own records are never read back, nothing imported is written back.
 import { describe, expect, it } from 'vitest'
 import { isOwnRecord, mergeHeartRate, mergeWeighIns, lacksHeartRate, hubReadingId } from './health-read.js'
 import { removeWeighIn } from './weigh-ins.js'
@@ -16,11 +16,11 @@ const at = (d, h) => new Date(2026, 9, d, h).getTime()
 const rec = (d, h, kg, extra = {}) => ({ t: at(d, h), kg, id: `r${d}${h}`, origin: 'com.withings.wiscale2', clientId: null, ...extra })
 
 describe('isOwnRecord', () => {
-  it('knows openGym by client id and by origin', () => {
-    expect(isOwnRecord({ clientId: 'opengym-bw-2026-10-15', origin: 'x' })).toBe(true)
-    expect(isOwnRecord({ origin: 'ch.duartesantos.opengym' })).toBe(true)
-    expect(isOwnRecord({ origin: 'ch.duartesantos.opengym.test' })).toBe(true)
-    expect(isOwnRecord({ origin: 'ch.duartesantos.opengymx' })).toBe(false)
+  it('knows NizuGym by client id and by origin', () => {
+    expect(isOwnRecord({ clientId: 'NizuGym-bw-2026-10-15', origin: 'x' })).toBe(true)
+    expect(isOwnRecord({ origin: 'ch.duartesantos.NizuGym' })).toBe(true)
+    expect(isOwnRecord({ origin: 'ch.duartesantos.NizuGym.test' })).toBe(true)
+    expect(isOwnRecord({ origin: 'ch.duartesantos.NizuGymx' })).toBe(false)
     expect(isOwnRecord({ origin: 'com.garmin.android.apps.connectmobile', clientId: 'abc' })).toBe(false)
   })
 })
@@ -91,13 +91,13 @@ describe('mergeWeighIns', () => {
     expect(S.bodyweight[0].ins.map(r => r.id)).toEqual([hubReadingId({ id: 'r147' }), hubReadingId({ id: 'r149' })])
   })
 
-  it('skips openGym’s own records and implausible weights', () => {
+  it('skips NizuGym’s own records and implausible weights', () => {
     const S = { unit: 'kg', bodyweight: [] }
-    mergeWeighIns(S, [rec(14, 7, 80, { clientId: 'opengym-bw-2026-10-14' }), rec(15, 7, 80, { origin: 'ch.duartesantos.opengym' }), rec(16, 7, 5), rec(17, 7, 900)], { src: 'hc' })
+    mergeWeighIns(S, [rec(14, 7, 80, { clientId: 'NizuGym-bw-2026-10-14' }), rec(15, 7, 80, { origin: 'ch.duartesantos.NizuGym' }), rec(16, 7, 5), rec(17, 7, 900)], { src: 'hc' })
     expect(S.bodyweight).toEqual([])
   })
 
-  it('keeps a weigh-in typed into openGym that day, the scale\'s joining it at its own time', () => {
+  it('keeps a weigh-in typed into NizuGym that day, the scale\'s joining it at its own time', () => {
     const S = { unit: 'kg', bodyweight: [{ d: '2026-10-15', w: 82, t: at(15, 6) }] }
     expect(mergeWeighIns(S, [rec(15, 8, 80)], { src: 'hc' })).toEqual(['2026-10-15'])
     expect(S.bodyweight[0].ins.map(r => [r.id, r.at, r.w, r.src || null])).toEqual([['0', '06:00', 82, null], [hubReadingId({ id: 'r158' }), '08:00', 80, 'hc']])
@@ -111,7 +111,7 @@ describe('mergeWeighIns', () => {
     expect(S.bodyweight).toEqual([{ d: '2026-10-15', w: 82, t: at(15, 8) }])
   })
 
-  it('does not bring back one weigh-in removed in openGym from a day that keeps others', () => {
+  it('does not bring back one weigh-in removed in NizuGym from a day that keeps others', () => {
     const S = { unit: 'kg', bodyweight: [] }
     mergeWeighIns(S, [rec(15, 7, 80), rec(15, 21, 81)], { src: 'hc' })
     const id = hubReadingId({ id: 'r1521' })
@@ -137,7 +137,7 @@ describe('mergeWeighIns', () => {
     expect(S.bodyweight[0].w).toBe(80)
   })
 
-  it('does not bring back a weigh-in deleted in openGym after it was taken', () => {
+  it('does not bring back a weigh-in deleted in NizuGym after it was taken', () => {
     const S = { unit: 'kg', bodyweight: [], deleted: { bodyweight: { '2026-10-15': at(15, 10) } } }
     expect(mergeWeighIns(S, [rec(15, 7, 80)], { src: 'hc' })).toEqual([])
     expect(mergeWeighIns(S, [rec(15, 11, 80)], { src: 'hc' })).toEqual(['2026-10-15'])
@@ -147,8 +147,8 @@ describe('mergeWeighIns', () => {
     const S = { unit: 'kg', workouts: [], bodyweight: [{ d: '2026-10-14', w: 81, t: at(14, 7) }] }
     mergeWeighIns(S, [rec(15, 7, 80)], { src: 'hc' })
     const recs = healthRecords(S, { nameOf: e => e.id })
-    expect(recs.weights.map(w => w.id)).toEqual(['opengym-bw-2026-10-14'])
-    expect(planSync(recs, {}).weights.map(w => w.id)).toEqual(['opengym-bw-2026-10-14'])
+    expect(recs.weights.map(w => w.id)).toEqual(['NizuGym-bw-2026-10-14'])
+    expect(planSync(recs, {}).weights.map(w => w.id)).toEqual(['NizuGym-bw-2026-10-14'])
   })
 })
 
@@ -175,3 +175,4 @@ describe('a typed weigh-in beats an imported one in a sync merge', () => {
     expect(S.bodyweight[0].ins.map(r => [r.at, r.w, r.src || null])).toEqual([['07:00', 80, 'hc'], ['07:00', 81, null]])
   })
 })
+

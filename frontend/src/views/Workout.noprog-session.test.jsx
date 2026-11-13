@@ -234,3 +234,4 @@ describe('the whole-workout switch in the saved-workout editor', () => {
     expect(lastEntryFor(useStore.getState().S, BENCH, 'main').d).toBe('2026-09-20')
   })
 })
+

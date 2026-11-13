@@ -140,3 +140,4 @@ describe('custom exercise target (QA C10)', () => {
     expect(c.tg).toBe('gluteal')
   })
 })
+

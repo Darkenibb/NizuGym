@@ -23,7 +23,7 @@ const mocks = vi.hoisted(() => {
     replaceState: vi.fn(), setUser: vi.fn(), pullState: vi.fn(), pushState: vi.fn(),
     signOut: vi.fn(), signOutAll: vi.fn(), resetDemo: vi.fn(), disconnectServer: vi.fn(),
   })
-  state.checkForUpdate = vi.fn(() => Promise.resolve({ hasUpdate: true, latestVersion: '9.9.9', apkUrl: 'https://x/opengym.apk', hashUrl: null }))
+  state.checkForUpdate = vi.fn(() => Promise.resolve({ hasUpdate: true, latestVersion: '9.9.9', apkUrl: 'https://x/NizuGym.apk', hashUrl: null }))
   state.confirmSheet = vi.fn()
   state.forget = vi.fn()
   return state
@@ -91,7 +91,7 @@ const mount = async () => {
   await act(async () => { root.render(<Settings page="about" />) })
   await act(async () => { for (let i = 0; i < 4; i++) await Promise.resolve() })
 }
-const updateRow = () => [...host.querySelectorAll('.lrow')].find(r => r.textContent.includes('Update to openGym v9.9.9'))
+const updateRow = () => [...host.querySelectorAll('.lrow')].find(r => r.textContent.includes('Update to NizuGym v9.9.9'))
 const checkRow = () => [...host.querySelectorAll('.lrow')].find(r => r.textContent.includes('Check for updates'))
 const webRow = () => [...host.querySelectorAll('.lrow')].find(r => r.textContent.includes('Get the Android app'))
 
@@ -205,7 +205,7 @@ describe('Settings: support links', () => {
     expect(row('Buy me a coffee')).toBeTruthy()
     expect(row('Ko-fi')).toBeTruthy()
     expect(row('GitHub Sponsors')).toBeTruthy()
-    expect(row('Rate openGym on Google Play')).toBeUndefined()
+    expect(row('Rate NizuGym on Google Play')).toBeUndefined()
   })
   it('the Google Play build shows only the rating row', async () => {
     mocks.MOBILE = true
@@ -215,12 +215,13 @@ describe('Settings: support links', () => {
     expect(row('Buy me a coffee')).toBeUndefined()
     expect(row('Ko-fi')).toBeUndefined()
     expect(row('GitHub Sponsors')).toBeUndefined()
-    expect(row('Rate openGym on Google Play')).toBeTruthy()
+    expect(row('Rate NizuGym on Google Play')).toBeTruthy()
     expect(host.textContent).not.toContain('A coffee keeps it that way')
   })
   it('the web keeps the donation links', async () => {
     await mount()
     expect(row('Buy me a coffee')).toBeTruthy()
-    expect(row('Rate openGym on Google Play')).toBeUndefined()
+    expect(row('Rate NizuGym on Google Play')).toBeUndefined()
   })
 })
+

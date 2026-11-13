@@ -147,3 +147,4 @@ describe('updateRoutineFromEntry with an exercise on "No timer"', () => {
     expect(routineChangesFromEntry(routine, [entry(BENCH, work(3), { restOff: true })], 0)).toBeNull()
   })
 })
+

@@ -348,3 +348,4 @@ export function defaultTimeFor(S, d, today, now = Date.now()) {
   const first = day ? readingsOf(day)[0] : null
   return first?.at || DEFAULT_TIME
 }
+

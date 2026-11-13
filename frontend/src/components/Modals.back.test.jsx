@@ -55,3 +55,4 @@ describe('a page that takes over a sheet\'s history entry', () => {
     expect(history.state.idx).toBe(workout + 2)
   })
 })
+

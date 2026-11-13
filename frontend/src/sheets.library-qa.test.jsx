@@ -103,3 +103,4 @@ describe('the exercise detail sheet', () => {
     expect(renderTop().querySelector('h3').classList.contains('exdetail-name')).toBe(true)
   })
 })
+

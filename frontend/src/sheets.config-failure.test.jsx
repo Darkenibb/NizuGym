@@ -75,3 +75,4 @@ describe('exercise settings: last set to failure', () => {
     expect(setsLine([{ w: 60, r: 5 }, { w: 65, r: 4, f: true }], 'kg')).toBe('60×5 · 65×4 F')
   })
 })
+

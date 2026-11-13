@@ -389,3 +389,4 @@ describe('markWarmupEdited', () => {
     expect(setSideField(side, 'L', 'r', 6).edited).toBe(true)
   })
 })
+

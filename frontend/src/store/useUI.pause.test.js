@@ -116,3 +116,4 @@ describe('pausing the rest timer', () => {
     expect(done).toHaveBeenCalledExactlyOnceWith(30, expect.objectContaining({ chimed: true }))
   })
 })
+

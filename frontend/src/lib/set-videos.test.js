@@ -255,3 +255,4 @@ describe('privacy: no share card, Wrapped, PDF or CSV reads a set video', () => 
     expect(leaks(JSON.stringify(yearStats(S(), 2026)))).toEqual([])
   })
 })
+

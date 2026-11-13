@@ -192,3 +192,4 @@ describe('loadStarterPlan', () => {
     expect(useUI.getState().toastMsg).toBe('')
   })
 })
+

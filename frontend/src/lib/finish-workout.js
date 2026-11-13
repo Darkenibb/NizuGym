@@ -131,3 +131,4 @@ export function buildCompletedWorkout(active, { end = Date.now(), prs = [], snap
     ...(active.gym && typeof active.gym === 'object' && active.gym.id != null ? { gym: { id: active.gym.id, name: String(active.gym.name || '') } } : {}),
   }
 }
+

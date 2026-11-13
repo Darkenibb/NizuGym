@@ -60,3 +60,4 @@ describe('ReportSheet', () => {
     expect(summary()).toContain('3 workouts')
   })
 })
+

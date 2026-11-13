@@ -137,3 +137,4 @@ describe('the tab a screen without its own lights', () => {
     expect(lit()).toEqual(['Stats'])
   })
 })
+

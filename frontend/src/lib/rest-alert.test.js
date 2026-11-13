@@ -76,3 +76,4 @@ describe('rest alert outside the mobile build', () => {
     disarmRestAlert()
   })
 })
+

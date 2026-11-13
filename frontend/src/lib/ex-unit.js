@@ -200,3 +200,4 @@ export function inEntryUnit(s, idx, fn) {
 
 /** " (lb)" after a line of sets of an exercise shown in a unit other than the profile's, else "". */
 export const exUnitTag = (S, exId) => (exConverted(S, exId) ? ` (${exUnitOf(S, exId)})` : '')
+

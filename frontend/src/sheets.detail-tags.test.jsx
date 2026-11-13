@@ -24,3 +24,4 @@ describe('the exercise detail tags', () => {
     }
   })
 })
+

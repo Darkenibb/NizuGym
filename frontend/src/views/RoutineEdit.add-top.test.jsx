@@ -67,3 +67,4 @@ describe('RoutineEdit — Add exercise at the top', () => {
     expect(stored()[1]).toMatchObject({ id: '0025', sets: 4, reps: 6 })
   })
 })
+

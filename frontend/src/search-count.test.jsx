@@ -117,3 +117,4 @@ describe('exercise search result count', () => {
     })
   }
 })
+

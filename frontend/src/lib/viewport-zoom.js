@@ -36,3 +36,4 @@ export function guardFocusZoom(doc = globalThis.document, nav = globalThis.navig
   meta.setAttribute('content', c + ',maximum-scale=1')
   return true
 }
+

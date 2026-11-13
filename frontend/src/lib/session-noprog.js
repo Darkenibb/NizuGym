@@ -51,3 +51,4 @@ export function setEntryNoProg(active, index, on) {
 
 /** An entry joining the session (added, or brought in with a routine): out too while the whole session is. */
 export const joinSessionNoProg = (active, entry) => (sessionNoProg(active) ? { ...entry, noProg: true } : entry)
+

@@ -28,3 +28,4 @@ describe('the same import on two devices', () => {
     expect(new Set(p.workouts.map(w => w.id)).size).toBe(2)
   })
 })
+

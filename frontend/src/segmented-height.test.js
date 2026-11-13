@@ -15,3 +15,4 @@ describe('segmented control height', () => {
     expect(css.match(/\.seg-inline button\{([^}]*)\}/)?.[1]).toMatch(/min-height:28px/)
   })
 })
+

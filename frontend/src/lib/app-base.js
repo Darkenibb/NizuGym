@@ -1,7 +1,7 @@
 /* Where this copy of the app is served from, e.g. "/" or "/myGym/" (issue #238).
  *
  * The app routes behind the hash and its assets are relative (vite `base: './'`), so the only
- * thing that assumed the site root was the API call. A reverse proxy that puts openGym under a
+ * thing that assumed the site root was the API call. A reverse proxy that puts NizuGym under a
  * subpath — and strips that prefix before the container sees it, which is what Caddy's
  * `handle_path` and its equivalents do — got `/api/...` at the proxy's own root, where there is
  * nothing to answer it.
@@ -30,3 +30,4 @@ export function appBase(loc = typeof location !== 'undefined' ? location : null)
   if (new URL(base, PROBE).origin !== PROBE) throw new Error('Refusing an API base that points at another site: ' + JSON.stringify(base))
   return base
 }
+

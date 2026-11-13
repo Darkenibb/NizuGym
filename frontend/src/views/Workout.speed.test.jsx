@@ -98,3 +98,4 @@ describe('the reference line in mph', () => {
     expect(refText()).toContain('20 min @ 10 mph')
   })
 })
+

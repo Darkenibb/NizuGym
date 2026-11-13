@@ -326,3 +326,4 @@ export function onGymReminderOpen(cb) {
 }
 
 export function _resetGymReminder() { pluginP = null; lastStatus = ''; lastServer = null; memory = null }
+

@@ -67,3 +67,4 @@ it('does not classify clean-grip squats as Olympic clean movements or duplicate 
   expect(OLYMPIC_LIFT_METADATA['0786']).toBeUndefined()
   expect(EXIDX['0786'].primaries).toContain('deltoids')
 })
+

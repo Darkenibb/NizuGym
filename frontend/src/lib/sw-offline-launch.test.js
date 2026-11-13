@@ -211,3 +211,4 @@ describe('service worker offline cold-launch (issue #274)', () => {
     expect(await cache.match('https://gym.example/assets/sheets-ficOiT8i.js')).toBeUndefined()
   })
 })
+

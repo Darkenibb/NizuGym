@@ -19,3 +19,4 @@ describe('plainHttp', () => {
     for (const a of ['https://gym.example.com', '192.168.1.20:8080', 'http://localhost:3000', 'http://127.0.0.1', 'http://[::1]:8080', 'http://', '', null]) expect(plainHttp(a), String(a)).toBe(false)
   })
 })
+

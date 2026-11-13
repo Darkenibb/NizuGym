@@ -43,3 +43,4 @@ describe('strength level per lift', () => {
     expect(strengthLevels(S).map(l => [l.lift, l.name])).toEqual([['squat', 'advanced'], ['bench', 'intermediate']])
   })
 })
+

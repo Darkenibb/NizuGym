@@ -194,3 +194,4 @@ export function StreakParty ({ S, info, tally }) {
     <SeasonDeco spot="streak-party" />
   </PartyBanner>
 }
+

@@ -15,7 +15,7 @@
 import { MOBILE, readJsonFile, writeJsonFile } from './mobile.js'
 
 const KEY = 'gym_coach_ai_consent'
-const FILE = 'opengym-coach-consent.json'
+const FILE = 'NizuGym-coach-consent.json'
 
 // The name a person knows the company by. A compatible endpoint is whatever it was pointed at,
 // so it is named by its host; the runtime providers on a server talk to the same companies.
@@ -104,3 +104,4 @@ export function onAiConsentChange(fn) {
 
 // Test seam.
 export function _resetAiConsent() { cache = null; listeners.clear() }
+

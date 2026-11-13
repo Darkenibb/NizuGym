@@ -148,3 +148,4 @@ describe('drawBarsToCanvas', () => {
     expect(drawBarsToCanvas(fakeCanvas(), '123', 'ean13', 600)).toBe(0)
   })
 })
+

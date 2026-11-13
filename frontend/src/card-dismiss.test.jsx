@@ -171,3 +171,4 @@ describe('exercise rows with a trailing button', () => {
     expect(nestedInteractive(host)).toEqual([])
   })
 })
+

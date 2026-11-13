@@ -41,3 +41,4 @@ describe('catalogue body parts and equipment', () => {
     }
   })
 })
+

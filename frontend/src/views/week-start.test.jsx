@@ -146,3 +146,4 @@ describe('Plan — a combined day (combine routines)', () => {
     expect(tue.querySelectorAll('button').length).toBe(0)
   })
 })
+

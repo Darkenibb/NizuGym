@@ -154,3 +154,4 @@ describe('the effort picker for cardio', () => {
     expect(p.host.textContent).toContain('Two more reps')
   })
 })
+

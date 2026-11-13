@@ -137,3 +137,4 @@ export function trendLabel(tr, unit = 'kg') {
   if (tr.by === 'speed') return t(up ? 'Faster than last time' : 'Slower than last time')
   return ''
 }
+

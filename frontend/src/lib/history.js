@@ -1347,3 +1347,4 @@ export function bestWeightForEntry(entry = {}) {
     && (best <= 0 || (assisted ? topWeight > 0 && topWeight < best : topWeight > best))) best = topWeight
   return best
 }
+

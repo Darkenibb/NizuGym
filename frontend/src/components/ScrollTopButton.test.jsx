@@ -101,3 +101,4 @@ it('has a name and takes focus only while it shows', async () => {
   expect(button().tabIndex).toBe(0)
   expect(button().hasAttribute('aria-hidden')).toBe(false)
 })
+

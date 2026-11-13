@@ -116,3 +116,4 @@ describe('viewport guard', () => {
     expect(typeof installViewportGuard({ visualViewport: null, document: {} })).toBe('function')
   })
 })
+

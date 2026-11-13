@@ -109,3 +109,4 @@ describe('WorkoutDetail — per-routine grouping', () => {
     expect(host.querySelectorAll('.row.between').length).toBe(0)
   })
 })
+

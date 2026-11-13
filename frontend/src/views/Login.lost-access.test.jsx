@@ -96,3 +96,4 @@ describe('LostAccessSheet', () => {
     expect(button(host, 'I have a code')).toBeUndefined()
   })
 })
+

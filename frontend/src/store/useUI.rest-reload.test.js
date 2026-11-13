@@ -94,3 +94,4 @@ describe('the rest timer across a reload', () => {
     expect(useUI.getState().timer).toBeNull()
   })
 })
+

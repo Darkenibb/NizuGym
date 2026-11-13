@@ -21,3 +21,4 @@ describe('the recap picture', () => {
     expect(ctx.texts).toEqual(expect.arrayContaining(['Your week', '19–25 Oct', '4', 'workouts', '12,300 kg', 'Volume', '2', '6', 'Most work: Chest, 14 sets', 'open', 'Gym']))
   })
 })
+

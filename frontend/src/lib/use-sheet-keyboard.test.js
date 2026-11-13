@@ -73,3 +73,4 @@ describe('revealChip', () => {
     expect(revealChip({ scrollLeft: 0, clientWidth: 0, getBoundingClientRect: () => ({ left: 0, width: 0 }) }, chip)).toBe(false)
   })
 })
+

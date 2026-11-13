@@ -90,8 +90,8 @@ describe('install channel', () => {
     expect(gradle).toMatch(/play \{[\s\S]*?buildConfigField "String", "CHANNEL", '"play"'/)
     const main = readFileSync(new URL('src/main/AndroidManifest.xml', app), 'utf8')
     expect(main).not.toContain('REQUEST_INSTALL_PACKAGES')
-    expect(existsSync(new URL('src/main/java/ch/duartesantos/opengym/InstallPlugin.java', app))).toBe(false)
-    const play = readFileSync(new URL('src/play/java/ch/duartesantos/opengym/FlavorPlugins.java', app), 'utf8')
+    expect(existsSync(new URL('src/main/java/ch/duartesantos/NizuGym/InstallPlugin.java', app))).toBe(false)
+    const play = readFileSync(new URL('src/play/java/ch/duartesantos/NizuGym/FlavorPlugins.java', app), 'utf8')
     expect(play).not.toContain('InstallPlugin')
   })
   it('the F-Droid flavour carries nothing from Google Play services', async () => {
@@ -106,10 +106,10 @@ describe('install channel', () => {
     expect(gradle).toContain("exclude module: 'capacitor-mlkit-barcode-scanning'")
     expect(gradle).not.toContain('google-services')
     // The Wear OS link imports Play services: kept out of src/main.
-    const main = new URL('src/main/java/ch/duartesantos/opengym/', app)
+    const main = new URL('src/main/java/ch/duartesantos/NizuGym/', app)
     expect(existsSync(new URL('WatchBridgePlugin.java', main))).toBe(false)
     expect(existsSync(new URL('WatchListenerService.java', main))).toBe(false)
-    const fd = new URL('src/fdroid/java/ch/duartesantos/opengym/', app)
+    const fd = new URL('src/fdroid/java/ch/duartesantos/NizuGym/', app)
     for (const f of ['FlavorPlugins.java', 'AnimationPacksPlugin.java', 'WatchBridgePlugin.java']) {
       const src = readFileSync(new URL(f, fd), 'utf8')
       expect(src).not.toMatch(/import com\.google|InstallPlugin/)
@@ -118,3 +118,4 @@ describe('install channel', () => {
     expect(manifest).toMatch(/WatchListenerService" tools:node="remove"/)
   })
 })
+

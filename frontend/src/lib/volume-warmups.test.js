@@ -91,3 +91,4 @@ describe('every reader follows it', () => {
     expect(workoutText(w, { unit: 'kg', nameOf: () => 'Bench', warmups: true })).toContain('1,000 kg')
   })
 })
+

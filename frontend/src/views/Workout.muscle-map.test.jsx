@@ -140,3 +140,4 @@ describe('Session muscles sheet (#670)', () => {
     expect(value(CHEST)).toBe('0/1')
   })
 })
+

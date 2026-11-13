@@ -57,3 +57,4 @@ export const fmtRest = sec => fmtDuration(sec, { off: t('Off') })
 /** Where a rest wheel opens (#735): on the rest of its own, else on the one that applies without
  *  it, so the dials show the break you'd actually get instead of sitting at 0:00. */
 export const restWheelValue = (own, applies) => (own > 0 ? Math.round(own) : applies > 0 ? Math.round(applies) : 0)
+

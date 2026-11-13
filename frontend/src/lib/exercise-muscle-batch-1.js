@@ -80,3 +80,4 @@ export function exerciseMuscleMetadataFor(id) {
     ...(USER_EXERCISE_MUSCLE_OVERRIDES[id] || {})
   }
 }
+

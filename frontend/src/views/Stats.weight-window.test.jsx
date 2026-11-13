@@ -98,3 +98,4 @@ describe('Stats: body weight reads the weigh-in\'s own date', () => {
     expect(bwChart().points).toHaveLength(5)
   })
 })
+

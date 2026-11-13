@@ -239,3 +239,4 @@ describe('the stat of the day', () => {
     expect(statOf({ ...S, workouts: [] }, 'best', 2026)).toBe(null)
   })
 })
+

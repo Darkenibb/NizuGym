@@ -56,3 +56,4 @@ export default function PrintPlanSheet({ routineId, name, close }) {
     <Button variant="ghost" className="dim" onClick={close}>{t('Cancel')}</Button>
   </>
 }
+

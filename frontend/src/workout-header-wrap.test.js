@@ -15,3 +15,4 @@ describe('the workout header subtitle', () => {
     expect(rule).toMatch(/line-clamp:2/)
   })
 })
+

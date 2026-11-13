@@ -51,3 +51,4 @@ it('preserves custom aliases in a shared plan', () => {
   mergePlan(target, parsePlan(JSON.stringify(bundle)))
   expect(target.customEx[0].aliases).toEqual(['Viking lift'])
 })
+

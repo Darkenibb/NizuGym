@@ -43,11 +43,11 @@ beforeEach(() => {
 })
 
 describe('downloadAndInstall (Android)', () => {
-  it('opens the installer only once openGym is back in front (lampi_: downloaded, never installed)', async () => {
+  it('opens the installer only once NizuGym is back in front (lampi_: downloaded, never installed)', async () => {
     // The person switched apps while the APK came down: Android would block the installer.
     m.downloadFile = vi.fn(async () => { m.calls.push('download'); m.cached = true; m.active = false })
     let done = false
-    const run = downloadAndInstall('https://x/openGym-9.9.9.apk', HASH).then(() => { done = true })
+    const run = downloadAndInstall('https://x/NizuGym-9.9.9.apk', HASH).then(() => { done = true })
     await vi.waitFor(() => expect(m.appListeners).toHaveLength(1))
     await tick(30)
     expect(m.calls).toEqual(['install', 'download'])   // the cache check, then the download
@@ -55,14 +55,14 @@ describe('downloadAndInstall (Android)', () => {
     comeBack()
     await run
     expect(m.calls).toEqual(['install', 'download', 'install'])
-    expect(m.installApk).toHaveBeenLastCalledWith({ fileName: 'opengym-update.apk', sha256: HASH })
+    expect(m.installApk).toHaveBeenLastCalledWith({ fileName: 'NizuGym-update.apk', sha256: HASH })
     expect(m.appListeners).toHaveLength(0)   // the listener is gone again
   })
 
   it('in front all along: downloads and opens the installer straight away', async () => {
     await downloadAndInstall('https://x/a.apk', HASH.toUpperCase())
     expect(m.calls).toEqual(['install', 'download', 'install'])
-    expect(m.installApk).toHaveBeenLastCalledWith({ fileName: 'opengym-update.apk', sha256: HASH })
+    expect(m.installApk).toHaveBeenLastCalledWith({ fileName: 'NizuGym-update.apk', sha256: HASH })
   })
 
   it('an APK already downloaded and matching is installed again without a second download', async () => {
@@ -113,8 +113,9 @@ describe('whenInForeground', () => {
 describe('forgetDownloadedUpdate', () => {
   it('deletes the update APK from the cache, and is quiet when there is none', async () => {
     await forgetDownloadedUpdate()
-    expect(m.deleteFile).toHaveBeenCalledWith({ path: 'opengym-update.apk', directory: 'CACHE' })
+    expect(m.deleteFile).toHaveBeenCalledWith({ path: 'NizuGym-update.apk', directory: 'CACHE' })
     m.deleteFile = vi.fn(async () => { throw new Error('File does not exist') })
     await expect(forgetDownloadedUpdate()).resolves.toBeUndefined()
   })
 })
+

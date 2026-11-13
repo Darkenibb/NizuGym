@@ -39,7 +39,7 @@ export const MODULES = [
   { id: 'health', group: 'body', icon: 'heart', tint: 'var(--red)', title: 'Health',
     desc: 'Apple Health or Health Connect, heart rate and recovery tips.' },
   { id: 'motivation', group: 'extras', icon: 'flame', tint: 'var(--orange)', title: 'Motivation',
-    desc: 'Streaks, challenges, badges, recaps and your year in openGym.' },
+    desc: 'Streaks, challenges, badges, recaps and your year in NizuGym.' },
   { id: 'coach', group: 'extras', icon: 'sparkles', tint: 'var(--green)', title: 'AI Coach',
     desc: 'Reviews your training and suggests changes. You still say yes or no.' },
   { id: 'integrations', group: 'extras', icon: 'webhook', tint: 'var(--indigo)', title: 'Integrations',
@@ -120,3 +120,4 @@ export function setModule(s, id, on) {
 export function turnedOff(S, next) {
   return MODULE_IDS.filter(id => isOn(S, id) && next[id] === false)
 }
+

@@ -73,3 +73,4 @@ describe('the Watch module with a Garmin', () => {
     expect(isOn(mocks.S, 'watch')).toBe(false)
   })
 })
+

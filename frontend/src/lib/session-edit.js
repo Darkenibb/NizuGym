@@ -235,3 +235,4 @@ export function deleteEditedWorkout(state) {
   lowerKeptWeights(state, [...new Set(list(current.entries).map(e => e?.id).filter(id => id != null))], current, null)
   return true
 }
+

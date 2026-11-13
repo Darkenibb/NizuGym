@@ -100,3 +100,4 @@ describe('what the watch hears', () => {
     expect(lastTickIn(A)).toBe(T + 7 * min)
   })
 })
+

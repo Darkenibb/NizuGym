@@ -162,3 +162,4 @@ describe('Settings — How you train (Plan & schedule)', () => {
     expect(buildRow()).toBeUndefined()
   })
 })
+

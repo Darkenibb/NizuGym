@@ -454,3 +454,4 @@ describe('the one-time hint', () => {
     expect(useUI.getState().swipeHint).toBeNull()
   })
 })
+

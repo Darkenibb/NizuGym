@@ -221,3 +221,4 @@ describe('custom exercise photo, GIF or video, and link', () => {
     expect(add.disabled).toBe(true)
   })
 })
+

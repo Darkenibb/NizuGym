@@ -79,3 +79,4 @@ export function moveActiveWorkoutEntry(active, index, direction) {
   active.entries.splice(0, active.entries.length, ...reorderedEntries)
   return { indices }
 }
+

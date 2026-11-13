@@ -28,3 +28,4 @@ describe('a superset\'s name and rest between rounds (#292)', () => {
     expect(restSecFor([{ target: { restSec: 120 } }, { target: {} }], [0, 1], 90)).toBe(120)
   })
 })
+

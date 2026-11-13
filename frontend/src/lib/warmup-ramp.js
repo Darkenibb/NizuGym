@@ -210,3 +210,4 @@ export const sameOwnRows = (a, b) => JSON.stringify((a || []).map(cleanOwnRow)) 
 
 /** A block as one short line: "Bar × 10 · 40% × 5 · 60% × 3". `bar` is the translated word. */
 export const ownRowsLine = (rows, bar = 'Bar') => (rows || []).map(r => (r.wb ? bar : r.wp === 0 ? '0' : r.wp + '%') + ' × ' + r.r).join(' · ')
+

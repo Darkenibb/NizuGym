@@ -1,4 +1,4 @@
-// The demo build is the only openGym most people ever see, so its seeded history has to
+// The demo build is the only NizuGym most people ever see, so its seeded history has to
 // exercise the stats it is there to show off — including the effort card, which renders as
 // dashes on a history that is rated too thinly or not at all.
 import { describe, it, expect, vi, beforeAll, afterAll } from 'vitest'
@@ -155,3 +155,4 @@ describe('demo seed — the training stream is a fixture', () => {
     expect(waist.at(0) - waist.at(-1)).toBeGreaterThan(3)
   })
 })
+

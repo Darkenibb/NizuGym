@@ -53,3 +53,4 @@ describe('Stats — cardio speed', () => {
     expect(host.textContent).toContain('16.1 km/h')
   })
 })
+

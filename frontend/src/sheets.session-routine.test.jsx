@@ -66,3 +66,4 @@ describe('WorkoutDetail — save as routine', () => {
     expect(navigated).toBe('/plan/r/' + routine.id)
   })
 })
+

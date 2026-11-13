@@ -96,3 +96,4 @@ describe('what you plan is what you train', () => {
     expect(rowsOf('A')).toEqual(['52.5x15', '52.5x15'])
   })
 })
+

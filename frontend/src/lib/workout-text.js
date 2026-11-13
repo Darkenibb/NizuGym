@@ -47,3 +47,4 @@ export function workoutText(w, { unit, nameOf, speedUnit, warmups = false, state
   if (w.note) blocks.push(w.note)
   return blocks.join('\n\n')
 }
+

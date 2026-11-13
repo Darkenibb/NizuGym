@@ -48,3 +48,4 @@ export default function ExerciseAliasesEditor({ ex }) {
     <Button onClick={save} disabled={JSON.stringify(aliases) === JSON.stringify(saved)} style={{ marginTop: 8 }}>{t('Save names')}</Button>
   </>
 }
+

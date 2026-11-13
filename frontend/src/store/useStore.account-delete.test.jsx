@@ -65,3 +65,4 @@ describe('deleteAccount', () => {
     expect(JSON.parse(localStorage.getItem('gym_stash'))).toEqual(stash())
   })
 })
+

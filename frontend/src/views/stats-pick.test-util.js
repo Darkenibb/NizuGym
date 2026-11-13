@@ -36,3 +36,4 @@ export const pickFrom = (scope, title, label) => withSheet(scope, title, host =>
   if (!opt) throw new Error('no option ' + label + ' in ' + title)
   act(() => opt.click())
 })
+

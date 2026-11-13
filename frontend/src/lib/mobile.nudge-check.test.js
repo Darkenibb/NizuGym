@@ -35,3 +35,4 @@ describe('syncReminder and the background check', () => {
     expect(mocks.schedule).not.toHaveBeenCalled()
   })
 })
+

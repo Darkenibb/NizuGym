@@ -51,3 +51,4 @@ it('a short swipe lifted where the last move was still only opens the row', asyn
   const r = await swipe([316, 291, 274, 256], 256)
   expect(r.deleted).toBe(0)
 })
+

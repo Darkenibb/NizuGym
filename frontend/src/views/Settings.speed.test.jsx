@@ -92,3 +92,4 @@ describe('Settings — speed unit', () => {
     expect(mocks.S.speedUnit).toBe('kmh')
   })
 })
+

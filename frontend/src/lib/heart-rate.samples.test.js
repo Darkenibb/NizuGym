@@ -81,3 +81,4 @@ describe('hrFromSamples', () => {
     expect(hrFromSamples(workout([set(100)]), [[s(100), 120]]).session).toBeNull()
   })
 })
+

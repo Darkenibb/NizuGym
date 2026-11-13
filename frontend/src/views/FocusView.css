@@ -69,3 +69,4 @@
   .focus-extra{grid-template-columns:1fr 1fr}
   .focus-extra>span:first-child{grid-column:1/-1}
 }
+

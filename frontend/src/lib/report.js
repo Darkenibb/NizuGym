@@ -239,3 +239,4 @@ export function reportData(S, { range = '4w', from, to, today = todayISO() } = {
     weekStart: ws,
   }
 }
+

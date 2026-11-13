@@ -502,3 +502,4 @@ export function printReport(S, opts) {
 export function printWorkout(S, w, opts) {
   return printDocument(workoutPrintHTML(S, w, opts), w.name || t('Workout'))
 }
+

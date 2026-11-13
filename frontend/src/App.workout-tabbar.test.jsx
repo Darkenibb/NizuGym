@@ -62,3 +62,4 @@ it.each([{ editingWorkoutId: 'saved' }, { backfill: true }])('past workouts have
   expect(host.querySelector('#tabbar')).toBeNull()
   expect(document.body.classList.contains('no-tabbar')).toBe(true)
 })
+

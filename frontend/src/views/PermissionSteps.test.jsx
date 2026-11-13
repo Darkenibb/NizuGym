@@ -143,3 +143,4 @@ describe('Apple Health, on the iPhone', () => {
     expect(host.textContent).not.toContain('Not now')
   })
 })
+

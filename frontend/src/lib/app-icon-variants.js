@@ -21,3 +21,4 @@ export const APP_ICON_VARIANTS = [
 ]
 
 export const APP_ICON_IDS = APP_ICON_VARIANTS.map(v => v.id)
+

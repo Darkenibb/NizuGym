@@ -800,3 +800,4 @@ describe('AdminCoach — readiness and the step count', () => {
     expect(btn('Add API key')).toBeTruthy()
   })
 })
+

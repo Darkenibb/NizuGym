@@ -73,3 +73,4 @@ describe('Login: a code from another device', () => {
     expect(buttons(mount(<Login />))).not.toContain('Use a code from your other device')
   })
 })
+

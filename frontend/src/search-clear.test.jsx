@@ -70,3 +70,4 @@ describe('exercise search clear button', () => {
     })
   }
 })
+

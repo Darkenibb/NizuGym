@@ -136,3 +136,4 @@ export function AnimationQualitySheet({ close }) {
     <Button variant="ghost" className="dim" onClick={close}>{t('Done')}</Button>
   </>
 }
+

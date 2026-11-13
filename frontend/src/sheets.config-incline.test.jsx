@@ -64,3 +64,4 @@ describe('incline in a treadmill\'s settings (Discord)', () => {
     expect(v.onSave.mock.calls[0][0]).not.toHaveProperty('incline')
   })
 })
+

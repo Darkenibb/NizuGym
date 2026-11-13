@@ -48,7 +48,7 @@ const USER = { id: 'u1', name: 'andi', admin: true }
 const clone = v => JSON.parse(JSON.stringify(v))
 const workout = (id, d) => ({ id, d, start: 1, entries: [] })
 const routine = (id, reps) => ({ id, name: id, ex: [{ id: 'bench', sets: 2, reps }] })
-const INDEX_HTML = '<!doctype html><html><head><title>openGym</title></head><body><div id="root"></div></body></html>'
+const INDEX_HTML = '<!doctype html><html><head><title>NizuGym</title></head><body><div id="root"></div></body></html>'
 const res = (status, body, type = 'application/json') => ({
   ok: status >= 200 && status < 300, status,
   headers: { get: k => (k.toLowerCase() === 'content-type' ? type : null) },
@@ -113,9 +113,9 @@ function pairedPhone({ localStorage: withLocal = true, mirror, synced = true } =
   localStorage.clear()
   const S = { ...clone(DEF), ...clone(SERVER_STATE) }
   delete S._rev
-  h.files.set('DATA/opengym-remote.json', JSON.stringify({ mode: 'remote', base: BASE, token: 'TOKEN-OLD', user: USER }))
-  h.files.set('DATA/opengym-state.json', JSON.stringify(mirror || S))
-  h.files.set('DATA/opengym-state-owner.json', JSON.stringify({ owner: USER.id, ts: (mirror || S)._ts }))
+  h.files.set('DATA/NizuGym-remote.json', JSON.stringify({ mode: 'remote', base: BASE, token: 'TOKEN-OLD', user: USER }))
+  h.files.set('DATA/NizuGym-state.json', JSON.stringify(mirror || S))
+  h.files.set('DATA/NizuGym-state-owner.json', JSON.stringify({ owner: USER.id, ts: (mirror || S)._ts }))
   if (withLocal) {
     localStorage.setItem('gym_state_v1', JSON.stringify(S))
     localStorage.setItem('gym_user', JSON.stringify(USER))
@@ -133,8 +133,8 @@ function zombiePhone(local) {
   localStorage.setItem('gym_owner', USER.id)
   localStorage.setItem('gym_guest', '1')
   localStorage.setItem('gym_state_v1', JSON.stringify(local))
-  h.files.set('DATA/opengym-remote.json', JSON.stringify({ mode: 'local' }))
-  h.files.set('DATA/opengym-state.json', JSON.stringify(local))
+  h.files.set('DATA/NizuGym-remote.json', JSON.stringify({ mode: 'local' }))
+  h.files.set('DATA/NizuGym-state.json', JSON.stringify(local))
 }
 
 // Every test boots its own store; the ones before it must not write into its files. Their
@@ -166,7 +166,7 @@ describe('boot when the server refuses the pairing token', () => {
     await useStore.getState().boot()
     const st = useStore.getState()
 
-    expect(readFile('opengym-remote.json')).toEqual({ mode: 'remote', base: BASE, token: 'TOKEN-OLD', user: USER })
+    expect(readFile('NizuGym-remote.json')).toEqual({ mode: 'remote', base: BASE, token: 'TOKEN-OLD', user: USER })
     expect(st.user).toEqual(USER)
     expect(st.isGuest()).toBe(false)
     expect(st.sync).toMatchObject({ status: 'auth', auth: true, lastError: { status: 401, code: 'auth' }, server: BASE })
@@ -226,7 +226,7 @@ describe('boot when the server refuses the pairing token', () => {
     expect(st.user).toEqual(USER)
     expect(localStorage.getItem('gym_user')).not.toBeNull()
     expect(st.sync).toMatchObject({ status: 'error', lastError: { status: 200, code: 'bad-response' } })
-    expect(readFile('opengym-remote.json')).toMatchObject({ mode: 'remote' })
+    expect(readFile('NizuGym-remote.json')).toMatchObject({ mode: 'remote' })
   })
 
   it('mid-session, a refused push and a refused pull say so instead of passing in silence', async () => {
@@ -282,7 +282,7 @@ describe('a phone an earlier version already unpaired', () => {
     expect(srv.puts.at(-1).baseRev).toBe(5)
     expect(ids(srv.doc.workouts)).toEqual(['w1', 'w-week'])
     expect(useStore.getState().sync).toMatchObject({ status: 'ok', server: BASE, auth: false })
-    expect(readFile('opengym-remote.json')).toMatchObject({ mode: 'remote', base: BASE, token: 'TOKEN-NEW' })
+    expect(readFile('NizuGym-remote.json')).toMatchObject({ mode: 'remote', base: BASE, token: 'TOKEN-NEW' })
   })
 
   it('Disconnect does not wipe the week the server never saw', async () => {
@@ -297,7 +297,7 @@ describe('a phone an earlier version already unpaired', () => {
     expect(ids(useStore.getState().S.workouts)).toEqual(['w1', 'w-week'])
     expect(localStorage.getItem('gym_state_v1')).toContain('w-week')
     await sleep(900)
-    expect(ids(readFile('opengym-state.json').workouts)).toEqual(['w1', 'w-week'])
+    expect(ids(readFile('NizuGym-state.json').workouts)).toEqual(['w1', 'w-week'])
     expect(useStore.getState().user).toEqual(USER)
     expect(h.calls).toHaveLength(0)
   })
@@ -317,9 +317,9 @@ describe('Disconnect anyway keeps the owed changes for the next pairing', () => 
     expect(r).toEqual({ owed: true, count: 1, stashed: true })
     expect(useStore.getState().user).toBeNull()
     expect(useStore.getState().S.workouts).toEqual([])
-    expect(readFile('opengym-remote.json')).toEqual({ mode: 'local' })
+    expect(readFile('NizuGym-remote.json')).toEqual({ mode: 'local' })
     expect(useStore.getState().sync).toMatchObject({ status: 'local', server: null })
-    const stash = readFile('opengym-stash.json')
+    const stash = readFile('NizuGym-stash.json')
     expect(Object.keys(stash)).toEqual([BASE + '|u1'])
     expect(ids(stash[BASE + '|u1'].state.workouts)).toEqual(['w1', 'w2'])
     expect(JSON.parse(localStorage.getItem('gym_stash'))[BASE + '|u1']).toBeTruthy()
@@ -331,7 +331,7 @@ describe('Disconnect anyway keeps the owed changes for the next pairing', () => 
 
     expect(ids(srv.doc.workouts).sort()).toEqual(['w-web', 'w1', 'w2'])
     expect(ids(useStore.getState().S.workouts).sort()).toEqual(['w-web', 'w1', 'w2'])
-    expect(readFile('opengym-stash.json')).toEqual({})
+    expect(readFile('NizuGym-stash.json')).toEqual({})
     expect(localStorage.getItem('gym_stash')).toBeNull()
     expect(localStorage.getItem('gym_dirty')).toBeNull()
     // Paired from Settings, not from the first-launch screen: no permission steps.
@@ -352,7 +352,7 @@ describe('Disconnect anyway keeps the owed changes for the next pairing', () => 
     await useStore.getState().boot()
     expect(useStore.getState().user).toBeNull()
     expect(useStore.getState().S.workouts).toEqual([])
-    expect(ids(readFile('opengym-stash.json')[BASE + '|u1'].state.workouts)).toEqual(['w1', 'w2'])
+    expect(ids(readFile('NizuGym-stash.json')[BASE + '|u1'].state.workouts)).toEqual(['w1', 'w2'])
   })
 
   it('a stash for another account stays where it is', async () => {
@@ -367,7 +367,7 @@ describe('Disconnect anyway keeps the owed changes for the next pairing', () => 
     h.server = (path, method, init) => (path === '/api/pair/redeem' ? json(200, { token: 'T2', user: { id: 'u2', name: 'bea' } }) : srv.handle(path, method, init))
     await useStore.getState().connectToServer('gym.example.com', 'ABCD2345', vi.fn(async () => false))
     expect(ids(useStore.getState().S.workouts)).toEqual(['w1'])
-    expect(Object.keys(readFile('opengym-stash.json'))).toEqual([BASE + '|u1'])
+    expect(Object.keys(readFile('NizuGym-stash.json'))).toEqual([BASE + '|u1'])
   })
 })
 
@@ -393,7 +393,7 @@ describe('another account paired on a phone that still owes the first', () => {
 
     expect(ids(useStore.getState().S.workouts)).toEqual(['w1'])          // bea's copy is her server's
     expect(ids(srv.doc.workouts)).toEqual(['w1'])                        // and nothing of andi's went there
-    const stash = readFile('opengym-stash.json')
+    const stash = readFile('NizuGym-stash.json')
     expect(Object.keys(stash)).toEqual([BASE + '|u1'])                   // keyed by andi's server, not bea's
     expect(ids(stash[BASE + '|u1'].state.workouts)).toEqual(['w1', 'w2'])
     expect(stash[BASE + '|u1'].name).toBe('andi')
@@ -403,7 +403,7 @@ describe('another account paired on a phone that still owes the first', () => {
     await useStore.getState().connectToServer('gym.example.com', 'ABCD2345', vi.fn(async () => false))
     expect(ids(useStore.getState().S.workouts)).toEqual(['w1', 'w2'])
     expect(ids(home.doc.workouts)).toEqual(['w1', 'w2'])
-    expect(readFile('opengym-stash.json')).toEqual({})
+    expect(readFile('NizuGym-stash.json')).toEqual({})
   })
 })
 
@@ -420,7 +420,7 @@ describe('remote-mode boot and the durable file mirror', () => {
     expect(ids(useStore.getState().S.workouts)).toEqual(['w1', 'w-web', 'w2'])
     expect(ids(srv.doc.workouts)).toEqual(['w1', 'w-web', 'w2'])
     expect(srv.puts.at(-1).baseRev).toBe(6)
-    expect(ids(readFile('opengym-state.json').workouts)).toEqual(['w1', 'w-web', 'w2'])
+    expect(ids(readFile('NizuGym-state.json').workouts)).toEqual(['w1', 'w-web', 'w2'])
   })
 
   it('an ordinary start, mirror and storage in step, pulls as before and pushes nothing', async () => {
@@ -468,7 +468,7 @@ describe('the file mirror never brings back a copy that is not this account\'s l
     useStore.getState().update(s => { s.workouts.push(workout('a-secret', '2026-09-21')) })
     await useStore.getState().pushState()
     await sleep(900)
-    expect(ids(readFile('opengym-state.json').workouts)).toEqual(['w1', 'a-secret'])
+    expect(ids(readFile('NizuGym-state.json').workouts)).toEqual(['w1', 'a-secret'])
     return useStore
   }
 
@@ -488,10 +488,10 @@ describe('the file mirror never brings back a copy that is not this account\'s l
   it('another account paired while the file cannot be written: his copy left in it is never taken for hers', async () => {
     let useStore = await andiLogged()
     const bea = beaServer()
-    h.refuse.add('opengym-state.json')
+    h.refuse.add('NizuGym-state.json')
     await useStore.getState().connectToServer('gym.example.com', 'ABCD2345', vi.fn(async () => false))
     await sleep(900)
-    expect(ids(readFile('opengym-state.json').workouts)).toEqual(['w1', 'a-secret'])
+    expect(ids(readFile('NizuGym-state.json').workouts)).toEqual(['w1', 'a-secret'])
 
     useStore = await freshStore()
     await useStore.getState().boot()
@@ -505,8 +505,8 @@ describe('the file mirror never brings back a copy that is not this account\'s l
     localStorage.clear()
     const local = { ...clone(DEF), _ts: Date.now(), workouts: [workout('mine', '2026-09-20')] }
     localStorage.setItem('gym_state_v1', JSON.stringify(local))
-    h.files.set('DATA/opengym-remote.json', JSON.stringify({ mode: 'local' }))
-    h.files.set('DATA/opengym-state.json', JSON.stringify(local))
+    h.files.set('DATA/NizuGym-remote.json', JSON.stringify({ mode: 'local' }))
+    h.files.set('DATA/NizuGym-state.json', JSON.stringify(local))
     let useStore = await freshStore()
     await useStore.getState().boot()
     const srv = serverWith(SERVER_STATE)
@@ -548,8 +548,8 @@ describe('the file mirror never brings back a copy that is not this account\'s l
 
   it('with the file not writable at all, the copy before the adopt is merged at most — never pushed over the other device\'s work', async () => {
     const srv = clockAhead()
-    h.refuse.add('opengym-state.json')
-    h.refuse.add('opengym-state-owner.json')
+    h.refuse.add('NizuGym-state.json')
+    h.refuse.add('NizuGym-state-owner.json')
     let useStore = await freshStore()
     await useStore.getState().boot()
 
@@ -568,7 +568,7 @@ describe('a token the server renews', () => {
     const useStore = await freshStore()
     await useStore.getState().boot()
 
-    expect(readFile('opengym-remote.json')).toEqual({ mode: 'remote', base: BASE, token: 'TOKEN-RENEWED', user: USER })
+    expect(readFile('NizuGym-remote.json')).toEqual({ mode: 'remote', base: BASE, token: 'TOKEN-RENEWED', user: USER })
     h.calls = []
     useStore.getState().update(s => { s.workouts.push(workout('w2', '2026-09-15')) })
     await useStore.getState().pushState()
@@ -580,7 +580,7 @@ describe('a token the server renews', () => {
     serverWith(SERVER_STATE)
     const useStore = await freshStore()
     await useStore.getState().boot()
-    expect(readFile('opengym-remote.json')).toMatchObject({ token: 'TOKEN-OLD' })
+    expect(readFile('NizuGym-remote.json')).toMatchObject({ token: 'TOKEN-OLD' })
     expect(serverCalls().every(c => c.auth === 'Bearer TOKEN-OLD')).toBe(true)
   })
 })
@@ -633,3 +633,4 @@ describe('the first-start permission steps (views/PermissionSteps.jsx)', () => {
     expect(useStore.getState().permSteps).toBe(true)
   })
 })
+

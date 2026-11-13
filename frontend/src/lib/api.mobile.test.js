@@ -43,3 +43,4 @@ describe('the "left" beacon on the phone build', () => {
     expect(sendBeacon).not.toHaveBeenCalled()
   })
 })
+

@@ -95,3 +95,4 @@ describe('importing our own body CSV', () => {
     expect(useUI.getState().toast).toHaveBeenCalledWith('2 measurement check-ins imported')
   })
 })
+

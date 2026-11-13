@@ -1612,3 +1612,4 @@ describe('timed per-side pairs come off as a pair', () => {
     expect(setSpanAt([{ sec: 30, side: 'L' }, { sec: 30 }], 0)).toEqual([0, 1])
   })
 })
+

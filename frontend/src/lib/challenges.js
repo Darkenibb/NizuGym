@@ -430,3 +430,4 @@ export function shelfOf(S) {
 export const challengesOn = S => S?.monthlyChallenges !== false && isOn(S, 'motivation')
 /** Whether the card is put away for `key` (its ×: until next month). */
 export const hiddenFor = (S, key) => S?.challengesHidden === key
+

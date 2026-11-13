@@ -554,3 +554,4 @@ describe('Settings → Sign-in e-mail', () => {
     expect(button(host, 'Remove e-mail')).toBeUndefined()
   })
 })
+

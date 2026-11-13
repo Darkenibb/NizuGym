@@ -145,3 +145,4 @@ describe('Settings follows the modules', () => {
     expect(searchSettings('modules', web)[0].page).toBe('modules')
   })
 })
+

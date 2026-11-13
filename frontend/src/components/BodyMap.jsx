@@ -82,3 +82,4 @@ export function BodyMapLegend() {
     <div className="hm-c l3" /><div className="hm-c l4" /> {t('More')}
   </div>
 }
+

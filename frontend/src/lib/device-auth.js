@@ -38,3 +38,4 @@ export async function confirmDeviceOwner(reason) {
     return e?.code === 'cancelled' ? 'cancelled' : 'failed'
   }
 }
+

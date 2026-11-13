@@ -212,3 +212,4 @@ export const effortColor = rir => {
   for (const b of EFFORT_BANDS) if (rir <= b.max) return b.color
   return EFFORT_BANDS[EFFORT_BANDS.length - 1].color
 }
+

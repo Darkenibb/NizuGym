@@ -1,7 +1,7 @@
-<!-- openGym on Garmin, tur. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
+<!-- NizuGym on Garmin, tur. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
 <strings>
     <string id="all_sets_done">Tüm setler tamam</string>
-    <string id="app_name">openGym</string>
+    <string id="app_name">NizuGym</string>
     <string id="bodyweight">Vücut ağırlığı</string>
     <string id="continue_workout">Antrenmana devam et</string>
     <string id="discard_q">Antrenman iptal edilsin mi?</string>
@@ -21,7 +21,7 @@
     <string id="next_set">Sıradaki: $1$, set $2$</string>
     <string id="no_workout">Devam eden antrenman yok</string>
     <string id="not_synced">Henüz eşitlenmedi</string>
-    <string id="open_phone_once">openGym’i telefonunda bir kez aç, rutinlerin burada görünür.</string>
+    <string id="open_phone_once">NizuGym’i telefonunda bir kez aç, rutinlerin burada görünür.</string>
     <string id="phone_away">Telefon menzil dışında. Setlerin burada bekliyor.</string>
     <string id="prs">Rekorlar</string>
     <string id="quick_start">Hızlı başlat</string>
@@ -43,10 +43,11 @@
     <string id="time">Süre</string>
     <string id="today">Bugün</string>
     <string id="volume">Hacim</string>
-    <string id="waiting_phone">Telefonun bekleniyor. Uzun sürerse orada openGym’i aç.</string>
+    <string id="waiting_phone">Telefonun bekleniyor. Uzun sürerse orada NizuGym’i aç.</string>
     <string id="warmup">Isınma</string>
     <string id="week_streak">Hafta serisi</string>
     <string id="weight">Ağırlık</string>
     <string id="workout">Antrenman</string>
     <string id="workout_saved">Antrenman kaydedildi</string>
 </strings>
+

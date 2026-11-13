@@ -1,7 +1,7 @@
-<!-- openGym on Garmin, zht. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
+<!-- NizuGym on Garmin, zht. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
 <strings>
     <string id="all_sets_done">所有組已完成</string>
-    <string id="app_name">openGym</string>
+    <string id="app_name">NizuGym</string>
     <string id="bodyweight">徒手動作</string>
     <string id="continue_workout">繼續訓練</string>
     <string id="discard_q">捨棄本次訓練？</string>
@@ -21,7 +21,7 @@
     <string id="next_set">下一個：$1$，第 $2$ 組</string>
     <string id="no_workout">沒有進行中的訓練</string>
     <string id="not_synced">尚未同步</string>
-    <string id="open_phone_once">在手機上打開一次 openGym，你的訓練計畫就會出現在這裡。</string>
+    <string id="open_phone_once">在手機上打開一次 NizuGym，你的訓練計畫就會出現在這裡。</string>
     <string id="phone_away">手機不在範圍內。你的組數先存在這裡。</string>
     <string id="prs">個人紀錄</string>
     <string id="quick_start">快速開始</string>
@@ -43,10 +43,11 @@
     <string id="time">時間</string>
     <string id="today">今天</string>
     <string id="volume">總訓練量</string>
-    <string id="waiting_phone">正在等手機。太久的話，在手機上打開 openGym。</string>
+    <string id="waiting_phone">正在等手機。太久的話，在手機上打開 NizuGym。</string>
     <string id="warmup">熱身組</string>
     <string id="week_streak">連續週數</string>
     <string id="weight">重量</string>
     <string id="workout">訓練</string>
     <string id="workout_saved">訓練已儲存</string>
 </strings>
+

@@ -655,3 +655,4 @@ describe('CheckIn — the sheet openers', () => {
     expect(sheetHost.querySelector('[data-qr]').getAttribute('data-qr')).toBe('Z-1')
   })
 })
+

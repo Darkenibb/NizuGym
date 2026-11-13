@@ -200,3 +200,4 @@ describe('Settings: passkeys and another device', () => {
     expect(asked('/api/account/password')).toBe(2)
   })
 })
+

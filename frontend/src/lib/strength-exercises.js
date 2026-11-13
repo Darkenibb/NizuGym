@@ -172,3 +172,4 @@ export function strengthExerciseRowsForMuscle(S, now, slug) {
   }
   return [...seen.values()].sort((a, b) => b.current - a.current || String(a.name).localeCompare(String(b.name)))
 }
+

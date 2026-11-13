@@ -159,3 +159,4 @@ describe('importing an incline', () => {
     expect(parseWorkoutCSV(csv, { unit: 'kg' }).workouts[0].entries[0].sets[0]).toEqual({ w: 11, r: 11, done: true })
   })
 })
+

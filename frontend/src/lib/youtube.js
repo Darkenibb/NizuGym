@@ -29,3 +29,4 @@ export function youtubeSearchUrl(ex) {
   if (!name) return null
   return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(name + ' form').replace(/%20/g, '+')
 }
+

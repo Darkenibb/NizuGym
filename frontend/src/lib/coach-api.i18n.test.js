@@ -127,3 +127,4 @@ describe('every refusal the server sends has a line here', () => {
     expect(EN.JOB_ERRORS.unprivileged).toBe(atEnqueue[0].toUpperCase() + atEnqueue.slice(1) + '.')
   })
 })
+

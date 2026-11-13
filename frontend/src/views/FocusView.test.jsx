@@ -197,3 +197,4 @@ describe('Focus view cardio speed', () => {
     expect(stored()).toBe(8.5)
   })
 })
+

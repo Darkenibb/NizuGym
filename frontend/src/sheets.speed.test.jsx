@@ -52,3 +52,4 @@ describe('cardio settings speed', () => {
     expect(onSave).toHaveBeenCalledWith(expect.objectContaining({ speed: 8.5 }))
   })
 })
+

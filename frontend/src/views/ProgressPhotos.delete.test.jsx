@@ -100,3 +100,4 @@ describe('adding photos for a day', () => {
   })
 })
 
+

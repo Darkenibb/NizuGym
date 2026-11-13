@@ -41,3 +41,4 @@ export function relatedSubstitutes(list, exercise) {
   const related = sameType.filter(candidate => [candidate.tg, candidate.mg, ...(candidate.sm || [])].some(muscle => muscle && muscles.has(muscle)))
   return (related.length ? related : candidates.filter(candidate => candidate.tg === exercise.tg)).slice(0, 3)
 }
+

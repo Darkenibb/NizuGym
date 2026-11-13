@@ -65,3 +65,4 @@ describe('strength level per lift', () => {
     expect(host.querySelector('#' + seg.getAttribute('aria-labelledby')).textContent).toBe('Sex')
   })
 })
+

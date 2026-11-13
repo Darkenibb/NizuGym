@@ -15,3 +15,4 @@ export function workoutOption(host, label) {
   act(() => createRoot(menu).render(sheet.render(() => useUI.getState().closeSheet(sheet.id))))
   return [...menu.querySelectorAll('.menu-item')].find(el => el.querySelector('.tt')?.textContent === label)
 }
+

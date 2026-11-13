@@ -117,3 +117,4 @@ describe('exercise settings: a timed bodyweight hold', () => {
     expect(labels(host)).not.toContain('Added (kg)')
   })
 })
+

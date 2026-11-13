@@ -36,3 +36,4 @@ describe('exercise chips (#323)', () => {
     expect(exerciseChips(null, 0)).toEqual([])
   })
 })
+

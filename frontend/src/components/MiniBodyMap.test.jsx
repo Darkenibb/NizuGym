@@ -28,3 +28,4 @@ describe('MiniBodyMap', () => {
     expect(host.innerHTML).toBe('')
   })
 })
+

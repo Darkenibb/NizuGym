@@ -45,7 +45,7 @@ describe('VoiceIntents.swift and its strings', () => {
 })
 
 describe('Settings → Siri & Shortcuts', () => {
-  const rows = { '“Start my workout in openGym”': 'Start my workout in {app}', '“Log my weight in openGym”': 'Log my weight in {app}', '“What’s my workout today in openGym”': "What's my workout today in {app}", '“How’s my streak in openGym”': "How's my streak in {app}" }
+  const rows = { '“Start my workout in NizuGym”': 'Start my workout in {app}', '“Log my weight in NizuGym”': 'Log my weight in {app}', '“What’s my workout today in NizuGym”': "What's my workout today in {app}", '“How’s my streak in NizuGym”': "How's my streak in {app}" }
   const bare = s => s.replace(/^[“„«「”]\s?|\s?[”“»」]$/g, '')
 
   it('shows the phrases Siri listens for, in the page’s language', async () => {
@@ -53,7 +53,7 @@ describe('Settings → Siri & Shortcuts', () => {
       const loc = PAGE_LOCALE[lang] || lang
       const { default: pack } = await import(`../locales/${loc}.js`)
       for (const [key, phrase] of Object.entries(rows)) {
-        expect(bare(pack[key]), `${loc} ${key}`).toBe(PHRASES[phrase][lang].replace('{app}', 'openGym'))
+        expect(bare(pack[key]), `${loc} ${key}`).toBe(PHRASES[phrase][lang].replace('{app}', 'NizuGym'))
       }
     }
   })
@@ -75,7 +75,7 @@ describe('the Android shortcuts', () => {
     const links = [...shortcuts.matchAll(/android:data="([^"]+)"/g)].map(m => m[1])
     expect(links).toHaveLength(3)
     for (const url of links) expect(parseWidgetLink(url), url).not.toBeNull()
-    expect(parseWidgetLink('opengym://weigh-in?w=78.2')).toMatchObject({ w: 78.2 })
+    expect(parseWidgetLink('NizuGym://weigh-in?w=78.2')).toMatchObject({ w: 78.2 })
   })
 
   it('is on every launcher icon (a new alias needs it too)', () => {
@@ -84,3 +84,4 @@ describe('the Android shortcuts', () => {
     for (const a of aliases) expect(a, /android:name="([^"]+)"/.exec(a)[1]).toContain('android:resource="@xml/shortcuts"')
   })
 })
+

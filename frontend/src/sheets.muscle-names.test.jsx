@@ -120,3 +120,4 @@ describe('muscle names in the rows and tags (QA C9)', () => {
     expect(rowFor(host, 'QA Custom Thrust').querySelector('.ss').textContent).toBe('Primary target · Glutes · barbell')
   })
 })
+

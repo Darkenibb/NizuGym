@@ -80,3 +80,4 @@ describe('normalizeWebhookUrl', () => {
     expect(normalizeWebhookUrl('')).toBe('')
   })
 })
+

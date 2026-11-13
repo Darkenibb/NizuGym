@@ -26,3 +26,4 @@ describe('catalogue/browse', () => {
     expect(row).toContain(`[picture](../media/still/${id[1]}.webp)`)
   })
 })
+

@@ -24,7 +24,7 @@ function renderTop() {
   return host
 }
 const buttonFor = (host, label) => [...host.querySelectorAll('button')].find(b => b.textContent === label)
-const bundleOf = routines => parsePlan({ opengym_plan: 1, unit: 'kg', week: {}, routines, customEx: [] }, 'kg')
+const bundleOf = routines => parsePlan({ NizuGym_plan: 1, unit: 'kg', week: {}, routines, customEx: [] }, 'kg')
 const routine = (id, name) => ({ id, name, emoji: null, ex: [{ id: ids[0], sets: 3, reps: 8, weight: 40 }] })
 
 beforeEach(() => {
@@ -54,3 +54,4 @@ describe('Plan import sheet — the toast counts what it added', () => {
     expect(useUI.getState().toastMsg).toBe('Added 2 routines to your plan')
   })
 })
+

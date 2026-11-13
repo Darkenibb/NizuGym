@@ -44,3 +44,4 @@ describe('exercise settings: what the warm-up line says about volume', () => {
     expect(text).toContain('They count in your volume (Settings), but stay out of records and progression')
   })
 })
+

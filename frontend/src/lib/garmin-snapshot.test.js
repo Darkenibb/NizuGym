@@ -108,3 +108,4 @@ describe('the Garmin snapshot', () => {
     expect(out.streak).toBeNull()
   })
 })
+

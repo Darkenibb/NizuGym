@@ -125,3 +125,4 @@ describe('Stats: Bodyweight view of exercise progress', () => {
     expect(lastChart().points).toHaveLength(2)
   })
 })
+

@@ -37,3 +37,4 @@ describe('addDeviceDataMessage', () => {
     expect(addDeviceSetupMessage(2)).toMatch(/^2 Routinen wurden/)
   })
 })
+

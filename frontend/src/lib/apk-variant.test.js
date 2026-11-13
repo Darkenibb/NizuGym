@@ -17,3 +17,4 @@ describe('apk-variant: which sideloaded APK this is', () => {
     expect(VARIANT_NAMES).toEqual({ standard: 'Standard', plus: 'Plus', hd: 'HD' })
   })
 })
+

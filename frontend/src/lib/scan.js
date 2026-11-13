@@ -120,3 +120,4 @@ function extOf(filename) {
   const m = /\.([a-z0-9]+)$/i.exec(filename || '')
   return m ? m[1].toLowerCase() : 'jpg'
 }
+

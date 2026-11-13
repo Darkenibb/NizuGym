@@ -57,3 +57,4 @@ describe('the Lock Screen', () => {
     expect(live.state.unitStarts[0].target).toBe('100×5')
   })
 })
+

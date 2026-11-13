@@ -5,3 +5,4 @@ export function menuItemsOf(menu) {
   const flat = list => (list || []).flatMap(g => g.more ? flat(g.more) : (g.items || []))
   return (menu.sections ? flat(menu.sections) : menu.items || []).filter(Boolean)
 }
+

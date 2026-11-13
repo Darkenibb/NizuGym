@@ -10,3 +10,4 @@ export default function MiniBodyMap({ routines, body, tour }) {
   if (!Object.values(load).some(v => v > 0)) return null
   return <span className="bm-mini-wrap" aria-hidden="true" data-tour={tour}><BodyMap className="bm-mini" load={load} body={body} /></span>
 }
+

@@ -134,3 +134,4 @@ describe('a programme', () => {
     expect(mocks.S.week).toEqual({ 1: ['r1'] })
   })
 })
+

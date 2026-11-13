@@ -152,3 +152,4 @@ describe('routine drag handle', () => {
     expect(rows()[0].classList.contains('is-dragging')).toBe(false)
   })
 })
+

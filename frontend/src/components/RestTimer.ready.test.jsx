@@ -113,3 +113,4 @@ describe('RestTimer switch-sides pause', () => {
     expect(host.querySelector('#timer')).toBeNull()
   })
 })
+

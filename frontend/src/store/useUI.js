@@ -829,3 +829,4 @@ bindNativeRest(ev => {
 
 // Spoken cues read the profile (on or off, the rate, the running workout) from the store.
 bindCueState(() => useStore.getState?.()?.S)
+

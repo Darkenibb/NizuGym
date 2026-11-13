@@ -105,3 +105,4 @@ export function sessionInsights(S, workout) {
   }).filter(Boolean)
   return { now, then, prevDate: prev?.d || null, lifts }
 }
+

@@ -348,3 +348,4 @@ export async function startPhoneWorkout ({ useStore, useUI, apply, watch }) {
 
 // Test seams.
 export function _setPhonePluginForTest (plugin) { pluginP = Promise.resolve(plugin ? { PW: plugin } : null); latest = null }
+

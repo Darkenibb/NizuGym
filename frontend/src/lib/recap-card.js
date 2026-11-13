@@ -61,3 +61,4 @@ export async function recapCardImage(words, { format = 'story', style = 'dark' }
   drawRecapCard(c.ctx, words, { width, height, colors: cardPalette(style, currentAccent()), rtl: isRtl() })
   return toPng(c.canvas)
 }
+

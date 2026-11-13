@@ -107,3 +107,4 @@ describe('tn() — plural forms from the pack', () => {
     expect(tn('{0} day a week', '{0} days a week', 5)).toBe('5 днів на тиждень')
   })
 })
+

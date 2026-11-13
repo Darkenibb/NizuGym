@@ -100,3 +100,4 @@ describe('hint words', () => {
     for (const h of all) for (const line of hintText(h, TODAY)) expect(line).not.toMatch(/—|–/)
   })
 })
+

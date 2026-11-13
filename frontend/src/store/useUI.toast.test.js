@@ -75,3 +75,4 @@ describe('toast with an action', () => {
     expect(useUI.getState().toastMsg).toBe('')
   })
 })
+

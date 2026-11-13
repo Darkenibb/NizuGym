@@ -91,3 +91,4 @@ describe('History grows as it is scrolled', () => {
     expect(rows(host)).toBe(150)
   })
 })
+

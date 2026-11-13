@@ -118,3 +118,4 @@ describe('Settings: Tutorials', () => {
     expect(searchSettings('tutorial', ctx).map(h => h.title)).toEqual(expect.arrayContaining(['Show the tour again', 'Build your first plan', 'Edit your data', 'Export & import']))
   })
 })
+

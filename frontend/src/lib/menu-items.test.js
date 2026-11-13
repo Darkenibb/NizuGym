@@ -14,3 +14,4 @@ describe('menuItemsOf', () => {
     expect(menuItemsOf({ items: [{ label: 'A' }, undefined, { label: 'B' }] }).map(it => it.label)).toEqual(['A', 'B'])
   })
 })
+

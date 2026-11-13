@@ -567,3 +567,4 @@ export function detrainedMuscles(workouts, now, opts = {}) {
     .filter(([, value]) => value < 1)
     .map(([slug]) => slug)
 }
+

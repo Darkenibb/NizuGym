@@ -335,3 +335,4 @@ describe('queueOf — the shared normalization', () => {
     expect(queueView(st, TODAY).items.map(i => i.id)).toEqual(['d1', 'd2'])
   })
 })
+

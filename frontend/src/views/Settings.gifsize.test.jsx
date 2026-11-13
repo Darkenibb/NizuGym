@@ -88,3 +88,4 @@ describe('Settings — exercise animations', () => {
     expect(segButton('Hidden').getAttribute('aria-pressed')).toBe('false')
   })
 })
+

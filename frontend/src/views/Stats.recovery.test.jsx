@@ -645,3 +645,4 @@ describe('Stats exercise progress picker', () => {
     expect(card.querySelector('.lrow-v').textContent).toContain('Barbell Full Squat')
   })
 })
+

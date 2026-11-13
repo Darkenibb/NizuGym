@@ -136,3 +136,4 @@ describe('Admin → sign-in e-mail', () => {
     expect(sheet.textContent).not.toContain('@')
   })
 })
+

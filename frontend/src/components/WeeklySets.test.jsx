@@ -51,3 +51,4 @@ describe('weekly sets per muscle', () => {
     expect(edit.querySelectorAll('.wsets-edit-r .stp')).toHaveLength(2)
   })
 })
+

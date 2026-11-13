@@ -130,3 +130,4 @@ describe('persistence — measurements survive the round trips', () => {
     expect(after.measurementEnabled).toEqual(DEFAULT_MEASUREMENT_KEYS)
   })
 })
+

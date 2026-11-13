@@ -92,3 +92,4 @@ describe('kept, synced and merged like every other photo', () => {
     expect('dayPhotos' in mergeStates(a, b)).toBe(false)
   })
 })
+

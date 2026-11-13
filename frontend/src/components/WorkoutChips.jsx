@@ -44,3 +44,4 @@ export default function WorkoutChips({ entries, cur, onPick }) {
     })}
   </nav>
 }
+

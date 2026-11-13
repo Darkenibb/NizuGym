@@ -68,3 +68,4 @@ export async function exifDateOfFile(file) {
     return exifDateOf(head)
   } catch { return null }
 }
+

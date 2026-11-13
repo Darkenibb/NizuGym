@@ -1,5 +1,5 @@
 {
-  "name": "opengym-frontend",
+  "name": "NizuGym-frontend",
   "private": true,
   "version": "1.4.4",
   "type": "module",
@@ -44,3 +44,4 @@
     "vitest": "^4.1.12"
   }
 }
+

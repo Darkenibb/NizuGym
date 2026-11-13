@@ -84,3 +84,4 @@ export function SessionMuscles({ close }) {
 export function sessionMusclesSheet() {
   return useUI.getState().openSheet(close => <SessionMuscles close={close} />)
 }
+

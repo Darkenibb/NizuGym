@@ -331,3 +331,4 @@ describe('the back-online toast belongs to the account that was offline', () => 
     expect(toast).not.toHaveBeenCalledWith('Back online and synced with the server.')
   })
 })
+

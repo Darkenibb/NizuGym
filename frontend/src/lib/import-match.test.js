@@ -219,3 +219,4 @@ describe('exerciseCandidates: what a name could mean, for a caller that must not
     expect(exerciseCandidates('  ')).toMatchObject({ id: null, candidates: [] })
   })
 })
+

@@ -94,3 +94,4 @@ it('History lights Stats, and a tap there goes to Stats rather than up History',
   expect(router.state.location.pathname).toBe('/stats')
   expect(window.scrollTo).not.toHaveBeenCalled()
 })
+

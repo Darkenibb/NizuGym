@@ -70,3 +70,4 @@ describe('set notes in a saved workout', () => {
     expect(host.querySelector('.setnote-hist').textContent).toBe('Set 2: grip slipped')
   })
 })
+

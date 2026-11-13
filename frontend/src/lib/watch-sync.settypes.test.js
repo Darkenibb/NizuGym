@@ -169,21 +169,22 @@ describe('the weigh-in from the watch', () => {
   })
 })
 
-describe('workouts deleted in openGym, for the watch\'s own copies in Apple Health', () => {
+describe('workouts deleted in NizuGym, for the watch\'s own copies in Apple Health', () => {
   it('names the deleted workouts newest first, leaves add-backs out, and caps the list', async () => {
     const { healthGoneFor } = await import('./watch-sync.js')
     const S = { deleted: { workouts: { a: 100, b: 300, c: -5, d: 200 }, bodyweight: { '2026-10-01': 50 } } }
-    expect(healthGoneFor(S)).toEqual(['opengym-w-b', 'opengym-w-d', 'opengym-w-a'])
-    expect(healthGoneFor(S, 2)).toEqual(['opengym-w-b', 'opengym-w-d'])
+    expect(healthGoneFor(S)).toEqual(['NizuGym-w-b', 'NizuGym-w-d', 'NizuGym-w-a'])
+    expect(healthGoneFor(S, 2)).toEqual(['NizuGym-w-b', 'NizuGym-w-d'])
     expect(healthGoneFor({})).toEqual([])
   })
 
   it('the watch saying it removed them makes the phone sync Health again, once', () => {
     const healthDeleted = vi.fn()
     bindWatchAppActions({ start: vi.fn(), patchSet: vi.fn(), healthDeleted })
-    const ev = { id: 'hd1', type: 'healthDeleted', ids: ['opengym-w-b', 7] }
+    const ev = { id: 'hd1', type: 'healthDeleted', ids: ['NizuGym-w-b', 7] }
     applyEvents([ev, ev], () => ({ S: { active: null } }))
     expect(healthDeleted).toHaveBeenCalledTimes(1)
-    expect(healthDeleted).toHaveBeenCalledWith(['opengym-w-b'])
+    expect(healthDeleted).toHaveBeenCalledWith(['NizuGym-w-b'])
   })
 })
+

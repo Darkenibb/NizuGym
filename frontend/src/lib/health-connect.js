@@ -4,7 +4,7 @@
 //
 // Write-only, and only on request: the user turns it on in Settings, on each phone. Every record
 // carries a client id of its own (a workout's id, a weigh-in's day), so writing it again replaces
-// it instead of adding a second one, and anything openGym wrote can be found and removed again.
+// it instead of adding a second one, and anything NizuGym wrote can be found and removed again.
 import { workoutText } from './workout-text.js'
 import { modeForEntry, hasCompletedWork } from './workout-model.js'
 import { isoOf } from './format.js'
@@ -108,7 +108,7 @@ export function sessionRecord(w, { unit, nameOf, speedUnit }) {
   const start = Number(w?.start), end = Number(w?.end)
   if (!w?.id || !(start > 0) || !(end > start)) return null
   return {
-    id: 'opengym-w-' + w.id,
+    id: 'NizuGym-w-' + w.id,
     start, end,
     type: sessionType(w),
     title: clip(String(w.name || '').trim()),
@@ -134,8 +134,8 @@ export function weightRecord(b, unit, r = null) {
   return { id: weightRecordId(b.d, r?.id), time, kg: Math.round(kg * 1000) / 1000 }
 }
 
-/** The hub's id of one weigh-in openGym wrote: its day, and its reading unless that is '0'. */
-export const weightRecordId = (d, rid) => 'opengym-bw-' + d + (rid != null && String(rid) !== '0' ? '-' + rid : '')
+/** The hub's id of one weigh-in NizuGym wrote: its day, and its reading unless that is '0'. */
+export const weightRecordId = (d, rid) => 'NizuGym-bw-' + d + (rid != null && String(rid) !== '0' ? '-' + rid : '')
 
 function localMorning(iso) {
   const [y, m, d] = String(iso).split('-').map(Number)
@@ -174,7 +174,7 @@ export function recordKey(rec) {
 }
 
 /**
- * The record ids openGym has on record as deleted: a workout or a weigh-in day removed on this
+ * The record ids NizuGym has on record as deleted: a workout or a weigh-in day removed on this
  * device or on another one whose removal synced in (S.deleted, lib/sync-merge.js stampDeletions;
  * a negative stamp is an add-back), and everything a "Reset everything" wiped (S.resetIds).
  * Only these are taken out of Health: a copy that merely lacks a workout (signed out, a guest
@@ -183,25 +183,25 @@ export function recordKey(rec) {
 export function goneIds(S) {
   const out = new Set()
   const del = S?.deleted && typeof S.deleted === 'object' ? S.deleted : {}
-  for (const [k, at] of Object.entries(del.workouts || {})) if (Number(at) > 0) out.add('opengym-w-' + k)
+  for (const [k, at] of Object.entries(del.workouts || {})) if (Number(at) > 0) out.add('NizuGym-w-' + k)
   // A removed day takes all its weigh-ins with it (planSync matches the `*`); one weigh-in
   // removed from a day that keeps others is on record in that day's `gone`.
-  for (const [k, at] of Object.entries(del.bodyweight || {})) if (Number(at) > 0) { out.add('opengym-bw-' + k); out.add('opengym-bw-' + k + '-*') }
+  for (const [k, at] of Object.entries(del.bodyweight || {})) if (Number(at) > 0) { out.add('NizuGym-bw-' + k); out.add('NizuGym-bw-' + k + '-*') }
   for (const b of S?.bodyweight || []) {
     if (!b?.d || !b.gone || typeof b.gone !== 'object') continue
     for (const [rid, at] of Object.entries(b.gone)) if (Number(at) > 0) out.add(weightRecordId(b.d, rid))
   }
   const reset = S?.resetIds && typeof S.resetIds === 'object' ? S.resetIds : {}
-  for (const k of Array.isArray(reset.workouts) ? reset.workouts : []) out.add('opengym-w-' + k)
+  for (const k of Array.isArray(reset.workouts) ? reset.workouts : []) out.add('NizuGym-w-' + k)
   // A weigh-in is named by its day and time there ("2026-09-17|1758…"); Health knows it by day.
-  for (const k of Array.isArray(reset.bodyweight) ? reset.bodyweight : []) { const d = String(k).split('|')[0]; out.add('opengym-bw-' + d); out.add('opengym-bw-' + d + '-*') }
+  for (const k of Array.isArray(reset.bodyweight) ? reset.bodyweight : []) { const d = String(k).split('|')[0]; out.add('NizuGym-bw-' + d); out.add('NizuGym-bw-' + d + '-*') }
   return out
 }
 
 /**
  * What a sync has to do, given the records now and `written`, what this phone wrote before
  * ({ [id]: { k: 'session' | 'weight', h: recordKey } }). New and changed records are written,
- * records that are gone from openGym (a deleted workout, a removed weigh-in) are removed.
+ * records that are gone from NizuGym (a deleted workout, a removed weigh-in) are removed.
  * With `gone` (goneIds), only a record on record as deleted is removed; one that is merely
  * missing stays written, and goes once its deletion arrives. Returns { sessions, weights,
  * remove: { sessions: [id], weights: [id] }, written } — `written` being what the phone has
@@ -231,10 +231,10 @@ export function planSync({ sessions, weights }, written = {}, gone = null) {
 }
 
 // Whether a written record is on record as deleted: by its own id, or as a weigh-in of a removed
-// day ('opengym-bw-<day>-<reading>' under that day's 'opengym-bw-<day>-*').
-const isGone = (gone, id) => gone.has(id) || (/^opengym-bw-\d{4}-\d{2}-\d{2}-/.test(id) && gone.has(id.slice(0, 21) + '-*'))
+// day ('NizuGym-bw-<day>-<reading>' under that day's 'NizuGym-bw-<day>-*').
+const isGone = (gone, id) => gone.has(id) || (/^NizuGym-bw-\d{4}-\d{2}-\d{2}-/.test(id) && gone.has(id.slice(0, 21) + '-*'))
 
-/** Every record this phone wrote, by type — what "remove what openGym wrote" takes away. */
+/** Every record this phone wrote, by type — what "remove what NizuGym wrote" takes away. */
 export function writtenIds(written = {}) {
   const out = { sessions: [], weights: [] }
   for (const [id, was] of Object.entries(written || {})) {
@@ -243,3 +243,4 @@ export function writtenIds(written = {}) {
   }
   return out
 }
+

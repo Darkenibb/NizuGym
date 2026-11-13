@@ -185,3 +185,4 @@ describe('a failed proof of ownership', () => {
       .toBe('Ana · removing a passkey · the passkey confirming the change was rejected')
   })
 })
+

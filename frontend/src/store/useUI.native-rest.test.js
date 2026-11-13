@@ -230,3 +230,4 @@ describe('the notification’s own buttons', () => {
     expect(useUI.getState().timer).toBe(null)
   })
 })
+

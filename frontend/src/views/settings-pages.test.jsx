@@ -544,3 +544,4 @@ describe('the equipment page with two gyms', () => {
     act(() => r.unmount()); h.remove()
   })
 })
+

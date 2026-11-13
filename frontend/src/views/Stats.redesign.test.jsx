@@ -287,3 +287,4 @@ describe('Stats: no control inside a control', () => {
     expect(nested).toEqual([])
   })
 })
+

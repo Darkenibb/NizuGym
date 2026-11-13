@@ -73,3 +73,4 @@ describe('ChartLegend', () => {
     expect(marks[2].style.getPropertyValue('--m')).toBe('var(--blue)')
   })
 })
+

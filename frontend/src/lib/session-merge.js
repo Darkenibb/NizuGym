@@ -42,3 +42,4 @@ export function deriveSessionName(names) {
   if (names.length <= 3) return names.join(' + ')
   return `${names[0]} + ${names[1]} + ${names.length - 2} more`
 }
+

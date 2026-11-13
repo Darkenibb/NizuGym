@@ -33,3 +33,4 @@ describe('a kept running workout and a unit switch elsewhere', () => {
     expect(after.active.entries[0].sets[0].w).toBeCloseTo(220.5, 0)
   })
 })
+

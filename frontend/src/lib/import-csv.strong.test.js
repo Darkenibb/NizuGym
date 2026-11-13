@@ -181,3 +181,4 @@ describe('Strong Note rows', () => {
     expect(parsed.skipped).toBe(0)
   })
 })
+

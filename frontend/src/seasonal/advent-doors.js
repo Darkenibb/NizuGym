@@ -59,3 +59,4 @@ export const STRETCH = [
 
 /** The English keys of everything behind the doors, for the locale check. */
 export const DOOR_STRINGS = DOOR_LIST.map(d => d.text).filter(Boolean)
+

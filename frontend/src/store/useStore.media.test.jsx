@@ -175,3 +175,4 @@ describe('owed photos and videos of a logged workout', () => {
     expect(useStore.getState().unsyncedChanges()).toEqual({ owed: false, count: 0 })
   })
 })
+

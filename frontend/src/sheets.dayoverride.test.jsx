@@ -149,3 +149,4 @@ describe('Day sheet list in a coach week', () => {
     expect(lists(host)).toEqual([['US W1 D1', 'US W1 D2', 'Core', 'Rest / skip this day']])
   })
 })
+

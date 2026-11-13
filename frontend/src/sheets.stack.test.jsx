@@ -66,3 +66,4 @@ describe('weight stack editor', () => {
     expect(mountTopSheet().textContent).not.toContain('Weight stack')
   })
 })
+

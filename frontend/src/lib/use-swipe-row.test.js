@@ -96,3 +96,4 @@ describe('a row with nothing on the end side', () => {
     expect(commitFor(-REVEAL, W, 0, false)).toBe('open-delete')
   })
 })
+

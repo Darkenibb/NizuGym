@@ -15,3 +15,4 @@ export const registerExerciseAliases = map => { overrides = map && typeof map ==
 export const aliasSnapshot = () => overrides
 export const exerciseAliases = (ex, map = overrides) => normalizeAliases(
   map && Object.hasOwn(map, ex?.id) ? map[ex.id] : ex?.aliases)
+

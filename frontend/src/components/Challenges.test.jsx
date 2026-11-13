@@ -181,3 +181,4 @@ describe('widgets', () => {
     expect(buildWidgetSnapshot({ ...S(), monthlyChallenges: false }, { today: `${KEY}-15` }).challenges).toBeNull()
   })
 })
+

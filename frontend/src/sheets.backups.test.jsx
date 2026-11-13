@@ -132,3 +132,4 @@ describe('one tap from the exercise menu (#649)', () => {
     expect(useUI.getState().sheets.length).toBe(1)
   })
 })
+

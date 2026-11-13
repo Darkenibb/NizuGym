@@ -294,3 +294,4 @@ function Consent({ onAgree, onDecline }) {
     </div>
   </>
 }
+

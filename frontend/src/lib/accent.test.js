@@ -274,3 +274,4 @@ describe('an own colour and a preset picked on two devices', () => {
     for (const out of [mergeStates(A, B), mergeStates(B, A)]) expect(out.accent).toBe('sky')
   })
 })
+

@@ -101,3 +101,4 @@ describe('the watch link per platform', () => {
     expect(await watchStatus()).toMatchObject({ installed: false })
   })
 })
+

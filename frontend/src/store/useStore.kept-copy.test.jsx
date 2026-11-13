@@ -62,3 +62,4 @@ describe('another account on a copy whose session ended', () => {
     expect(await useStore.getState().keptChanges()).toEqual([])
   })
 })
+

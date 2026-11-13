@@ -38,3 +38,4 @@ describe('workouts left this week (#753)', () => {
     expect(weekTargetOf({})).toBe(null)
   })
 })
+

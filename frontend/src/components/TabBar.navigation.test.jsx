@@ -81,3 +81,4 @@ describe('root tab history', () => {
     expect(onStart).not.toHaveBeenCalled()
   })
 })
+

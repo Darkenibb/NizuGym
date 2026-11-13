@@ -86,3 +86,4 @@ describe('closing the saved-workout editor', () => {
     expect(navigated).toEqual(['/history', '/history'])
   })
 })
+

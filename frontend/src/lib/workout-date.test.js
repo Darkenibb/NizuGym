@@ -271,3 +271,4 @@ describe('setWorkoutDuration', () => {
     expect(out[0].end).toBe(5000 + 20 * 60000)
   })
 })
+

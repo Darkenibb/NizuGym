@@ -34,3 +34,4 @@ it('reads the row width once per swipe, not once per move', async () => {
   expect(host.querySelector('.swfront').style.transform).toBe('translateX(-60px)')
   act(() => root.unmount()); host.remove()
 })
+

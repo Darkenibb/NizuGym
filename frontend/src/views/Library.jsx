@@ -159,3 +159,4 @@ function LibraryFilters({ close, cat, eq, filtersFor, onChange }) {
     {(catOn || eqOn) && <Button variant="ghost" className="dim" style={{ marginTop: 6 }} onClick={() => set('', '')}>{t('Clear filters')}</Button>}
   </div>
 }
+

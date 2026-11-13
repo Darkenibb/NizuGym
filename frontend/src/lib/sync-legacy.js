@@ -93,3 +93,4 @@ export function liftLegacy(local, server, fp, now = Date.now()) {
   stampEdits(base, state, now)
   return { state, resolved: true }
 }
+

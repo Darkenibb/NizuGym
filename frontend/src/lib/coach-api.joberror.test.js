@@ -42,3 +42,4 @@ describe('jobErrorText for a job refused at start for safety', () => {
     expect(JOB_ERRORS.unprivileged.toLowerCase()).toBe(atEnqueue.toLowerCase() + '.')
   })
 })
+

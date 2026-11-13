@@ -97,3 +97,4 @@ describe('speed in labels', () => {
     expect(planPrintHTML({ unit: 'kg', speedUnit: 'mph', week: {}, routines }, '', { routineId: 'c' })).toContain('25 min @ 10 mph')
   })
 })
+

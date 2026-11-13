@@ -124,3 +124,4 @@ describe('a phone paired with a server', () => {
     expect(await checkScheduledReview(() => paired, true)).toMatchObject({ id: 'p4' })
   })
 })
+

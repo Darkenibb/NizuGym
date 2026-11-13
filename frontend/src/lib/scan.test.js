@@ -19,3 +19,4 @@ describe('scan off mobile', () => {
     expect(await webScanner()).toBe(true)
   })
 })
+

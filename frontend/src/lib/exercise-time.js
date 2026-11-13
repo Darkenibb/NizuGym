@@ -64,3 +64,4 @@ export function exerciseTimeRows(workouts, since = 0) {
   return [...by.values()].map(r => ({ ...r, avg: r.total / r.sessions }))
     .sort((a, b) => b.avg - a.avg || String(a.id).localeCompare(String(b.id)))
 }
+

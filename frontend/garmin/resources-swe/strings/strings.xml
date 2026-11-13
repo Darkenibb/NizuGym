@@ -1,7 +1,7 @@
-<!-- openGym on Garmin, swe. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
+<!-- NizuGym on Garmin, swe. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
 <strings>
     <string id="all_sets_done">Alla set klara</string>
-    <string id="app_name">openGym</string>
+    <string id="app_name">NizuGym</string>
     <string id="bodyweight">Kroppsvikt</string>
     <string id="continue_workout">Fortsätt passet</string>
     <string id="discard_q">Släng passet?</string>
@@ -21,7 +21,7 @@
     <string id="next_set">Nästa: $1$, set $2$</string>
     <string id="no_workout">Inget pass pågår</string>
     <string id="not_synced">Inte synkat än</string>
-    <string id="open_phone_once">Öppna openGym på telefonen en gång så dyker dina rutiner upp här.</string>
+    <string id="open_phone_once">Öppna NizuGym på telefonen en gång så dyker dina rutiner upp här.</string>
     <string id="phone_away">Telefonen är utom räckhåll. Dina set väntar här.</string>
     <string id="prs">Personbästan</string>
     <string id="quick_start">Snabbstart</string>
@@ -43,10 +43,11 @@
     <string id="time">Tid</string>
     <string id="today">Idag</string>
     <string id="volume">Volym</string>
-    <string id="waiting_phone">Väntar på telefonen. Öppna openGym där om det dröjer.</string>
+    <string id="waiting_phone">Väntar på telefonen. Öppna NizuGym där om det dröjer.</string>
     <string id="warmup">Uppvärmning</string>
     <string id="week_streak">Veckor i rad</string>
     <string id="weight">Vikt</string>
     <string id="workout">Pass</string>
     <string id="workout_saved">Passet sparat</string>
 </strings>
+

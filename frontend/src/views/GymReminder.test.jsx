@@ -448,3 +448,4 @@ describe('one gym: confirm or change it', () => {
     expect(mocks.nav).toHaveBeenCalledWith('/settings/gym-find', { replace: true })
   })
 })
+

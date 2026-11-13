@@ -126,3 +126,4 @@ describe('weight read-out is a typable field', () => {
     expect(useUI.getState().sheets).toHaveLength(1)
   })
 })
+

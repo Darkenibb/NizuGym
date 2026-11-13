@@ -173,3 +173,4 @@ for (const view of ['list', 'compact']) {
     })
   })
 }
+

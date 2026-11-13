@@ -91,3 +91,4 @@ describe('fatigue recovery forecast', () => {
     expect(fmtRecoveryIn(30 * 3600000)).toMatch(/6|hour/)
   })
 })
+

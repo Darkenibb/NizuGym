@@ -64,3 +64,4 @@ describe('draftOf', () => {
     expect(JSON.parse(localStorage.getItem('gym_state_v1')).active.cur).toBe(1)
   })
 })
+

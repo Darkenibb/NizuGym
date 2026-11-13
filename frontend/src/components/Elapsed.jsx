@@ -16,3 +16,4 @@ export default function Elapsed({ start }) {
   }, [start])
   return <span>{t}</span>
 }
+

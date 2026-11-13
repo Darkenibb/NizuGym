@@ -25,3 +25,4 @@ it('asking for a stretch still gets stretches first', () => {
 it('a named lift is unchanged: "bench press" still starts with the barbell bench press', () => {
   expect(top('bench press', 1)[0].id).toBe('0025')
 })
+

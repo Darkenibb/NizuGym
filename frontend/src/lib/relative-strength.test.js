@@ -196,3 +196,4 @@ describe('relativeSeries: assisted machines', () => {
     expect(relativeSeries(state([workout(1000, [{ id: ASSISTED, sets: [done(90, 1)] }], 80)]), ASSISTED)).toEqual([])
   })
 })
+

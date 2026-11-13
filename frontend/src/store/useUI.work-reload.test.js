@@ -87,3 +87,4 @@ describe('a hold across a reload', () => {
     expect(restoreWork()).toBe(false)
   })
 })
+

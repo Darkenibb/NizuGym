@@ -324,3 +324,4 @@ describe('an exercise on "No timer"', () => {
     expect(warmupRestSecFor(e, 0, restSecFor([e], [0], 90), undefined)).toBe(0)
   })
 })
+

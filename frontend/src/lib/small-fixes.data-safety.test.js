@@ -102,3 +102,4 @@ describe('a profile with them', () => {
     expect(json.dayPhotos).toEqual(S.dayPhotos)
   })
 })
+

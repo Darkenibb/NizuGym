@@ -287,3 +287,4 @@ describe('change plates beyond the standard set', () => {
     expect(inventoryFor(S).map(p => p.w)).toEqual([25, 20, 15, 10, 5, 2.5, 2, 1.25])
   })
 })
+

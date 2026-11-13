@@ -93,3 +93,4 @@ export function eqAvailable(equipment, ex) {
 export function newProfile(name) {
   return { id: 'eq' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name, equipment: [], accV: ACC_V }
 }
+

@@ -88,3 +88,4 @@ describe('deleting a weigh-in can be undone (#756)', () => {
     expect(useStore.getState().S.bodyweight.filter(b => b.d === '2026-09-13').map(b => b.w)).toEqual([78.4])
   })
 })
+

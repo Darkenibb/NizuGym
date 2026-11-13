@@ -18,3 +18,4 @@ describe('balanceStatusView', () => {
     expect(balanceStatusView('no-data', false)).toEqual({ label: 'No data', severity: 3 })
   })
 })
+

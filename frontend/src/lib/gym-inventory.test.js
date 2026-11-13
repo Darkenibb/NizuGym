@@ -277,3 +277,4 @@ describe('through the store', () => {
     expect(loadKindFor(useStore.getState().S, BENCH)).toBe('pairs')
   })
 })
+

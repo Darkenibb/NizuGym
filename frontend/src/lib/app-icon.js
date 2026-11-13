@@ -41,3 +41,4 @@ export async function setAppIcon(name) {
 }
 
 export function _resetAppIconForTests() { pluginP = null }
+

@@ -16,3 +16,4 @@ export default function LiveHeartRate() {
   if (!hr) return null
   return <> · <span className="live-hr" aria-label={t('Heart rate') + ' ' + hr.bpm}>♥ {hr.bpm}</span></>
 }
+

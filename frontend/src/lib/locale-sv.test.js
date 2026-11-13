@@ -27,3 +27,4 @@ describe('every locale pack is wired up', () => {
     expect(dashed).toEqual([])
   })
 })
+

@@ -109,3 +109,4 @@ describe('exercise list or cards', () => {
     expect(rule[2]).toContain('display:grid')
   })
 })
+

@@ -160,3 +160,4 @@ describe('swap wording', () => {
     expect(icon?.getAttribute('data-icon')).toBe('swap')
   })
 })
+

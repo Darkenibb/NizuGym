@@ -42,3 +42,4 @@ if (!MOBILE && 'serviceWorker' in navigator && location.protocol === 'https:') {
   // It only fetches ahead while the page runs as the installed app; a tab keeps what it has shown.
   import('./lib/media-prefetch.js').then(m => m.startMediaPrefetch(useStore)).catch(() => {})
 }
+

@@ -51,3 +51,4 @@ describe('the native back listener', () => {
     await stop()
   })
 })
+

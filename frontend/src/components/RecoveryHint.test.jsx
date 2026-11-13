@@ -44,3 +44,4 @@ describe('RecoveryHint', () => {
     expect(render().querySelector('.recovery-hint')).toBeNull()
   })
 })
+

@@ -21,3 +21,4 @@ export function sameMuscleFirst(list, ex) {
     .filter(e => e && e.tg === tg && e.id !== ex.id)
     .sort((a, b) => Number(!!eq && b.eq === eq) - Number(!!eq && a.eq === eq))
 }
+

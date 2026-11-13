@@ -89,3 +89,4 @@ export async function importCodeFromImageWeb(file) {
   }
   try { return await decodeSource(bmp, PHOTO_MAX) } finally { if (bmp.close) bmp.close() }
 }
+

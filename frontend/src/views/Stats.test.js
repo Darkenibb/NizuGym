@@ -44,3 +44,4 @@ describe('Stats mixed-entry metric contract', () => {
     expect(cssSource).toContain('overflow:hidden;text-overflow:ellipsis;white-space:nowrap')
   })
 })
+

@@ -87,3 +87,4 @@ describe('a v1.3.9 copy owed at the update', () => {
     expect(m.workouts.map(w => w.id).sort()).toEqual(['w1', 'w2', 'w3x'])
   })
 })
+

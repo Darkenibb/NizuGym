@@ -16,3 +16,4 @@ describe('muscles in the map order', () => {
     expect(inMuscleOrder(undefined)).toEqual([])
   })
 })
+

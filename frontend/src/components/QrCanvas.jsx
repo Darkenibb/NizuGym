@@ -47,3 +47,4 @@ export default function QrCanvas({ value, fmt, size = 240, className = '' }) {
     />
   )
 }
+

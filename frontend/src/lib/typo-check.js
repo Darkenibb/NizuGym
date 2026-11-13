@@ -53,3 +53,4 @@ export function oddValues(row, best, { unit = 'kg', assisted = false, last = nul
   else if (lr > 0 && r < lr / 3 && lr - r >= 5) out.push({ f: 'r', typed: r, ref: lr, low: true })
   return out
 }
+

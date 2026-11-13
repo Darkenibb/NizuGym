@@ -67,3 +67,4 @@ describe('a note on one set', () => {
     expect('note' in useStore.getState().S.active.entries[0].sets[0]).toBe(false)
   })
 })
+

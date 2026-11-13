@@ -62,3 +62,4 @@ describe('exercise picker equipment filter', () => {
     expect(isOn(chipByText(host, 'Any equipment'))).toBe(false)
   })
 })
+

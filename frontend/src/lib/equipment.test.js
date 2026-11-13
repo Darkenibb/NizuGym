@@ -157,3 +157,4 @@ describe('massage ball and foam roller', () => {
     expect(profileEquipment({ equipment: ['dumbbell'], accV: 1 })).toEqual(['dumbbell'])
   })
 })
+

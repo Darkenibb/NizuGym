@@ -78,3 +78,4 @@ describe('Reduce Transparency (#708)', () => {
     for (const sel of blurred) expect(off, sel).toContain(sel)
   })
 })
+

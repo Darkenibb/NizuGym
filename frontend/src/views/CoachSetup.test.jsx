@@ -23,3 +23,4 @@ describe('CoachSetup keeps the core out until a mode is chosen', () => {
     expect(cat.length).toBeLessThan(1500)
   })
 })
+

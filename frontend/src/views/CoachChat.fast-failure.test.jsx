@@ -158,3 +158,4 @@ describe('a Coach run that fails before the first poll', () => {
     expect(replies()[0]).toMatchObject({ kind: 'error', text: FAILED })
   })
 })
+

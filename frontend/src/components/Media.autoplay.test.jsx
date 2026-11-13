@@ -40,3 +40,4 @@ describe('autoplayClip', () => {
     vi.unstubAllGlobals()
   })
 })
+

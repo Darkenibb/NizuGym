@@ -70,3 +70,4 @@ describe('exercise settings: weight per pyramid set (#445)', () => {
     expect(onSave.mock.calls[0][0]).not.toHaveProperty('pyramidWeight')
   })
 })
+

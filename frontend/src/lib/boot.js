@@ -38,3 +38,4 @@ export function handOverFromLaunchScreen() {
     registerPlugin('SplashScreen').hide({ fadeOutDuration: 180 }).catch(() => {})
   } catch { /* no plugin in this build: the launch screen goes on its own */ }
 }
+

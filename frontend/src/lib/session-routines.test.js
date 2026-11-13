@@ -216,3 +216,4 @@ describe('a routine saved from a planned session', () => {
     expect(routineFromSession(saved, 'Copy', []).ex[0]).not.toHaveProperty('prog')
   })
 })
+

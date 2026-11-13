@@ -182,3 +182,4 @@ describe('imports keep a failure set', () => {
     expect(sets.map(s => !!s.failure)).toEqual([false, true])
   })
 })
+

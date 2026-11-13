@@ -71,3 +71,4 @@ describe('modules', () => {
     expect(turnedOff({ modules: { body: false } }, { body: false, coach: false })).toEqual(['coach'])
   })
 })
+

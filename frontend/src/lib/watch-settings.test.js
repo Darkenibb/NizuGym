@@ -52,3 +52,4 @@ describe('what the watch shows', () => {
     expect(readWatchPrefs().show).toEqual({ ...SHOW_DEFAULTS })
   })
 })
+

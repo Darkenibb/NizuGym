@@ -11,3 +11,4 @@ describe('modules-copy', () => {
     expect(Object.keys(m)).toHaveLength(MODULES.length)
   })
 })
+

@@ -20,3 +20,4 @@ describe('the running session the Coach is given', () => {
     expect(todayForCoach({ active: { ...active, editingWorkoutId: 'w0' } })).toBeNull()
   })
 })
+

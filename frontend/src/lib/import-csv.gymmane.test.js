@@ -32,3 +32,4 @@ describe('a GymMane CSV', () => {
     expect(p.customEx.find(c => c.n === 'cable kickback thing').bp).toBe('upper legs')
   })
 })
+

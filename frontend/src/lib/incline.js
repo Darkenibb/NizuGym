@@ -49,3 +49,4 @@ export const hasIncline = s => Number(s?.incline) > 0
 
 /** What a new row takes over from the set it follows: its incline, when it had one. */
 export const inclineFrom = s => (hasIncline(s) ? { incline: Number(s.incline) } : {})
+

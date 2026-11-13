@@ -390,7 +390,7 @@ describe('a programme in a plan file (plan-share.js)', () => {
     const s = state()
     saveProgramme(s, block())
     const file = JSON.parse(JSON.stringify(buildProgrammeBundle(s, 'P')))
-    expect(file).toMatchObject({ opengym_plan: 1, programme_fmt: 1, name: 'Strength block', week: { 1: ['A'], 4: ['B'] } })
+    expect(file).toMatchObject({ NizuGym_plan: 1, programme_fmt: 1, name: 'Strength block', week: { 1: ['A'], 4: ['B'] } })
     expect(file.routines.map(r => r.id)).toEqual(['A', 'B'])
     const parsed = parsePlan(JSON.stringify(file), 'lb')
     const f = friend()
@@ -432,3 +432,4 @@ describe('a programme in a plan file (plan-share.js)', () => {
     expect(parsePlan({ ...file, programmes: Array(100).fill(file.programmes[0]) }).programmes).toHaveLength(IMPORT_MAX_PROGRAMMES)
   })
 })
+

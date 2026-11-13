@@ -20,3 +20,4 @@ export default function Muscles() {
     <MuscleExplorer key={initial || ''} initial={initial} onDetail={exerciseDetailSheet} onPlan={addToRoutineSheet} />
   </>
 }
+

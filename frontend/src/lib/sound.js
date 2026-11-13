@@ -202,3 +202,4 @@ export function alertBuzz(p) {
   try { asked = Promise.resolve(native(p)) } catch (e) { asked = Promise.resolve(false) }
   asked.then(ok => { if (!ok) vibrate(p) }, () => vibrate(p))
 }
+

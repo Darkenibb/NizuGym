@@ -49,3 +49,4 @@ describe.each([['Home', Home], ['Plan', Plan]])('%s empty state', (_name, View) 
     expect(starterButton()).toBeFalsy()
   })
 })
+

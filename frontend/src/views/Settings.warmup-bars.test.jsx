@@ -110,3 +110,4 @@ describe('Settings: your bars', () => {
     expect(row('Your bars').textContent).not.toContain('35')
   })
 })
+

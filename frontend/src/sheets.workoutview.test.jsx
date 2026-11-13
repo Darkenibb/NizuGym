@@ -64,3 +64,4 @@ describe('workout view is snapshot onto the active session', () => {
     expect(useStore.getState().S.active.workoutView).toBe('focus')
   })
 })
+

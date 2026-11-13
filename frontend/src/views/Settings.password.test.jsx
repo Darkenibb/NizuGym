@@ -141,3 +141,4 @@ describe('Settings with password sign-in', () => {
     expect(mocks.passkeyLogin).toHaveBeenCalledTimes(1)
   })
 })
+

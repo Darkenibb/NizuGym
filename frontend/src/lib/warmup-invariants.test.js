@@ -158,3 +158,4 @@ describe('a unilateral rest-pause warm-up is per side', () => {
     expect(out[1].type).toBe('restpause')
   })
 })
+

@@ -19,3 +19,4 @@ describe('the installed app fills the screen', () => {
     expect(body).not.toMatch(/100lvh/)
   })
 })
+

@@ -147,3 +147,4 @@ describe('LineChart x axis', () => {
     expect(new Set(edge).size).toBe(edge.length)
   })
 })
+

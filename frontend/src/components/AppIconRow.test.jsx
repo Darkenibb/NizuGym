@@ -123,3 +123,4 @@ describe('App icon row', () => {
     expect(searchSettings('app icon', { ...ctx, mobile: false, appIcons: false }, tr)).toEqual([])
   })
 })
+

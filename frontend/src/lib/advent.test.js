@@ -110,3 +110,4 @@ describe('two devices', () => {
     expect(mergeStates({ ...base, _ts: T + 30 }, phone).advent).toEqual(phone.advent)
   })
 })
+

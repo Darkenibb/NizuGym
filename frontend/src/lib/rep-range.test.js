@@ -36,3 +36,4 @@ describe('normalizeRepRange', () => {
     expect(normalizeRepRange(0, -2, 2)).toEqual({ reps: 10, repsMin: 8 })
   })
 })
+

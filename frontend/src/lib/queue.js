@@ -202,3 +202,4 @@ export function weekTally(S, today) {
   const other = thisWeek.filter(w => !credited.has(w) || routineIdsOf(w).some(unqueued)).length
   return { done: queueDone(S).length + other, planned: q.ids.length + ownDays }
 }
+

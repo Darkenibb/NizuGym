@@ -36,3 +36,4 @@ describe('Stats rows and the fatigue bar on a narrow phone', () => {
   })
 })
 
+

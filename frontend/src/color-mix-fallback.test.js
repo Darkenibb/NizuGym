@@ -104,3 +104,4 @@ describe('color-mix() has a fallback for Safari before 16.2', () => {
     expect(missingFallbacks('.a{fill:color-mix(in srgb,red 1%,blue)}.b{fill:color-mix(in srgb,red 1%,blue)}@supports not (color: color-mix(in srgb, red 50%, blue)){.a,.b{fill:red}}')).toEqual([])
   })
 })
+

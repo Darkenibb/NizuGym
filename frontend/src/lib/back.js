@@ -71,3 +71,4 @@ export async function initBackButton() {
     return () => {}   // no plugin (older install): leave back to the default behaviour
   }
 }
+

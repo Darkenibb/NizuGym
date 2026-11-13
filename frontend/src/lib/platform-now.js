@@ -8,3 +8,4 @@ export function platformNow () {
     return p === 'ios' || p === 'android' ? p : null
   } catch { return null }
 }
+

@@ -298,3 +298,4 @@ describe('impossible dates and numbers', () => {
     expect(parsed.bodyweight.map(b => b.d)).toEqual(['2026-01-01'])
   })
 })
+

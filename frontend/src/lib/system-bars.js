@@ -35,3 +35,4 @@ export async function setSystemBarsLight(light) {
     // An older APK without the plugin: the bars stay as they were.
   }
 }
+

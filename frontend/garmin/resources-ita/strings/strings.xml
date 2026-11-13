@@ -1,7 +1,7 @@
-<!-- openGym on Garmin, ita. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
+<!-- NizuGym on Garmin, ita. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
 <strings>
     <string id="all_sets_done">Tutte le serie fatte</string>
-    <string id="app_name">openGym</string>
+    <string id="app_name">NizuGym</string>
     <string id="bodyweight">Corpo libero</string>
     <string id="continue_workout">Continua allenamento</string>
     <string id="discard_q">Scartare allenamento?</string>
@@ -21,7 +21,7 @@
     <string id="next_set">Poi: $1$, serie $2$</string>
     <string id="no_workout">Nessun allenamento in corso</string>
     <string id="not_synced">Non ancora sincronizzato</string>
-    <string id="open_phone_once">Apri openGym una volta sul telefono e le tue routine compaiono qui.</string>
+    <string id="open_phone_once">Apri NizuGym una volta sul telefono e le tue routine compaiono qui.</string>
     <string id="phone_away">Telefono fuori portata. Le tue serie aspettano qui.</string>
     <string id="prs">Record</string>
     <string id="quick_start">Avvio rapido</string>
@@ -43,10 +43,11 @@
     <string id="time">Tempo</string>
     <string id="today">Oggi</string>
     <string id="volume">Volume</string>
-    <string id="waiting_phone">In attesa del telefono. Apri openGym lì se ci mette tanto.</string>
+    <string id="waiting_phone">In attesa del telefono. Apri NizuGym lì se ci mette tanto.</string>
     <string id="warmup">Riscaldamento</string>
     <string id="week_streak">Serie settimanale</string>
     <string id="weight">Peso</string>
     <string id="workout">Allenamento</string>
     <string id="workout_saved">Allenamento salvato</string>
 </strings>
+

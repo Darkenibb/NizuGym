@@ -263,3 +263,4 @@ export default function Measurements() {
     })}</div> : <div className="empty small">{t('No measurements yet')}</div>}
   </div>
 }
+

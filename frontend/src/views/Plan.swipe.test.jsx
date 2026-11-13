@@ -315,3 +315,4 @@ describe('restoreRoutine', () => {
     expect(s.routines.map(r => r.id)).toEqual(['c', 'b'])
   })
 })
+

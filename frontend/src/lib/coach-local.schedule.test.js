@@ -138,3 +138,4 @@ describe('automatic reviews on a phone with its own key', () => {
     expect(wire.calls).toHaveLength(1)
   })
 })
+

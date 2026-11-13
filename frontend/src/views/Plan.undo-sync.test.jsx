@@ -94,3 +94,4 @@ describe('the accent colour syncs per field like any other setting', () => {
     expect(m.accent).toBe('custom')   // drawn as the default without a usable colour (accentKey)
   })
 })
+

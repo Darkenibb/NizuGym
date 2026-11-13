@@ -104,3 +104,4 @@ describe('Ask the Coach mid-workout', () => {
     expect(host.textContent).not.toContain('Looks fine')
   })
 })
+

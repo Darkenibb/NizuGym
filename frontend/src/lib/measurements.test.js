@@ -167,3 +167,4 @@ describe('custom measurement units (#699)', () => {
     expect(s.measurements[0].other[0]).toEqual({ id: 'mass', name: 'Mass', value: 60, unit: 'kg' })
   })
 })
+

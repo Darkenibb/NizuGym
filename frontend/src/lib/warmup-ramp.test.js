@@ -189,3 +189,4 @@ describe('saving today’s warm-ups as your own', () => {
     expect(warmupBlock(state(), cfg(BENCH, { weight: 0, warmup: 'own', warmupRows: [{ wp: 50, r: 5 }] }), [{ w: 0, r: 5 }], { grid: 2.5 })).toEqual([])
   })
 })
+

@@ -72,3 +72,4 @@ describe('finish summary: keep an added exercise in the routine', () => {
     expect(host.querySelector('[data-keep-in-routine]')).toBeNull()
   })
 })
+

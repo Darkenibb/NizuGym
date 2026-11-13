@@ -199,7 +199,7 @@ function parseLiftosaurJson(o, opts) {
 
 /* ------------------------------------------------------ Liftoscript plans -- */
 // A Liftosaur program is Liftoscript text per day (llms/liftoscript.md in the Liftosaur repo):
-// "Name / 3x8 / 60kg / progress: lp(5lb)", one exercise a line. openGym reads the plain part
+// "Name / 3x8 / 60kg / progress: lp(5lb)", one exercise a line. NizuGym reads the plain part
 // (sets, reps, a weight, a set timer, warm-ups, supersets) and keeps the progression as a note
 // on the exercise. It never runs the script.
 
@@ -291,7 +291,7 @@ export function liftoscriptDay(text, { unit = 'kg', resolve, templates = new Map
       if (new Set(reps).size > 1 && reps.length <= 10) cfg.pyramid = reps
     }
     if (merged.warmup != null) cfg.warmupSets = Math.min(5, merged.warmup)
-    // What openGym cannot run comes along as the exercise's note: the progression, and a scheme
+    // What NizuGym cannot run comes along as the exercise's note: the progression, and a scheme
     // the plain numbers above leave something out of (a range, an AMRAP set, a weight in % or RPE).
     const exact = !merged.pct && sets.every(s => !s.pct && !s.hi && !s.amrap)
     const note = [exact ? '' : merged.scheme, ...merged.script].filter(Boolean).join(' / ')
@@ -591,7 +591,7 @@ function parseJefit(text, opts) {
 /**
  * Read any supported file: the apps above, else what lib/import-csv.js reads (Strong, Hevy,
  * FitNotes, Gravl, GymMane, our own CSV, Apple Health). Errors: 'empty', 'unrecognised',
- * 'opengym' (our own backup or plan file, which have imports of their own) and
+ * 'NizuGym' (our own backup or plan file, which have imports of their own) and
  * { error: 'format', app } for a file that looks like an app's export but does not read as one.
  * A workouts result may carry `routines` (lib/import-apps.js mergeImportedRoutines).
  */
@@ -627,7 +627,7 @@ function parseJson(s, opts) {
     const presets = [...o.presetsWithoutFolder, ...o.folders.flatMap(f => (Array.isArray(f?.presets) ? f.presets : []))].filter(isLiftoffPreset)
     return routinesOnly(parseLiftoffRoutines(presets, opts))
   }
-  if (isObj(o) && (o.opengym_plan || (Array.isArray(o.workouts) && Array.isArray(o.routines)))) return { error: 'opengym' }
+  if (isObj(o) && (o.NizuGym_plan || (Array.isArray(o.workouts) && Array.isArray(o.routines)))) return { error: 'NizuGym' }
   return { error: 'unrecognised' }
 }
 
@@ -667,3 +667,4 @@ export function mergeImportedRoutines(S, parsed) {
 
 /** How many of the file's routines are not in state yet (the summary's "new"). */
 export const freshRoutines = (S, parsed) => (parsed?.routines || []).filter(r => !(S.routines || []).some(x => x?.importKey === r.importKey)).length
+

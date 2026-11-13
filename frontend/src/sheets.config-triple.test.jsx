@@ -84,3 +84,4 @@ describe('exercise settings: triple progression', () => {
     expect('setsMax' in onSave.mock.calls[0][0]).toBe(false)
   })
 })
+

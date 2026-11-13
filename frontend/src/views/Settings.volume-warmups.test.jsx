@@ -111,3 +111,4 @@ describe('Settings: count body weight in bodyweight lifts', () => {
     expect(mocks.S.volumeBodyweight).toBe(false)
   })
 })
+

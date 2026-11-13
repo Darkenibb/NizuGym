@@ -12,3 +12,4 @@ export default function ExerciseViewToggle() {
   return <button className={'iconbtn ex-view-btn' + (cards ? ' on' : '')} aria-label={t('Cards')} aria-pressed={cards}
     onClick={() => update(s => { s.exerciseView = cards ? 'list' : 'cards' })}><Icon name="grid" /></button>
 }
+

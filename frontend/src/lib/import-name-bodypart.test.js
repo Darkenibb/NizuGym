@@ -47,3 +47,4 @@ describe('body part from an exercise name', () => {
     expect(bp('Something Unheard Of')).toBe(null)
   })
 })
+

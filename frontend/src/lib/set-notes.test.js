@@ -11,3 +11,4 @@ describe('a note on one set', () => {
     expect(setNoteOf(null)).toBe('')
   })
 })
+

@@ -220,3 +220,4 @@ export function calculate1RMAccuracy(reps, rir = null, formula = 'weighted') {
 
   return Math.round(repFactor * rirFactor * spreadFactor * 100) / 100
 }
+

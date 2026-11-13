@@ -25,3 +25,4 @@ describe('week and month recap', () => {
     expect(recapDue(S({ workouts: [] }), '2026-10-26')).toBe(null)
   })
 })
+

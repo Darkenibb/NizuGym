@@ -71,3 +71,4 @@ describe('fmtNum / fmtVol', () => {
     expect(fmtNum(-0.05)).toBe('-0.05')
   })
 })
+

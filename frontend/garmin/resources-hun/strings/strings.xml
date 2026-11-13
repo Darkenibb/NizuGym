@@ -1,7 +1,7 @@
-<!-- openGym on Garmin, hun. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
+<!-- NizuGym on Garmin, hun. Written by frontend/garmin/garmin-strings.mjs: change that, not this. -->
 <strings>
     <string id="all_sets_done">Minden sorozat kész</string>
-    <string id="app_name">openGym</string>
+    <string id="app_name">NizuGym</string>
     <string id="bodyweight">Testsúly</string>
     <string id="continue_workout">Edzés folytatása</string>
     <string id="discard_q">Elveted az edzést?</string>
@@ -21,7 +21,7 @@
     <string id="next_set">Következik: $1$, $2$. sorozat</string>
     <string id="no_workout">Nincs folyamatban edzés</string>
     <string id="not_synced">Még nincs szinkronizálva</string>
-    <string id="open_phone_once">Nyisd meg egyszer az openGymet a telefonon, és itt lesznek a rutinjaid.</string>
+    <string id="open_phone_once">Nyisd meg egyszer az NizuGymet a telefonon, és itt lesznek a rutinjaid.</string>
     <string id="phone_away">A telefon hatótávon kívül. A sorozataid itt várnak.</string>
     <string id="prs">Rekordok</string>
     <string id="quick_start">Gyors indítás</string>
@@ -43,10 +43,11 @@
     <string id="time">Idő</string>
     <string id="today">Ma</string>
     <string id="volume">Volumen</string>
-    <string id="waiting_phone">Várok a telefonra. Ha sokáig tart, nyisd meg ott az openGymet.</string>
+    <string id="waiting_phone">Várok a telefonra. Ha sokáig tart, nyisd meg ott az NizuGymet.</string>
     <string id="warmup">Bemelegítés</string>
     <string id="week_streak">Heti sorozat</string>
     <string id="weight">Súly</string>
     <string id="workout">Edzés</string>
     <string id="workout_saved">Edzés mentve</string>
 </strings>
+

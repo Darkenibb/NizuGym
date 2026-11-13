@@ -127,3 +127,4 @@ describe('OwedSheet with photos and videos waiting', () => {
     expect(button('Pair again')).toBeFalsy()
   })
 })
+

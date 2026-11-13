@@ -46,3 +46,4 @@ describe('a shared routine carries its warm-ups', () => {
     expect(back.routines[0].ex[0].warmupRows).toEqual([{ wb: true, r: 10 }, { wp: 95, r: 3 }])
   })
 })
+

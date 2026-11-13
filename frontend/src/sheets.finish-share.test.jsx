@@ -66,3 +66,4 @@ describe('finish summary: Share', () => {
     expect(labels).toEqual(['Story 9:16', 'Square 1:1', 'Dark', 'Light'])
   })
 })
+

@@ -13,3 +13,4 @@
  * @returns {boolean} true when the guest entrance may be shown and used.
  */
 export const guestAllowed = config => !(config && config.allow_guest === false)
+

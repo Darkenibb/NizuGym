@@ -99,3 +99,4 @@ describe('CoachSetup and an http:// endpoint', () => {
     expect(mocks.toast).toHaveBeenLastCalledWith(expect.stringMatching(REFUSAL))
   })
 })
+

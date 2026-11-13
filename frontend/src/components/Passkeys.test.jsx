@@ -554,3 +554,4 @@ describe('the other device: redeeming a code', () => {
     expect(mocks.calls).toHaveLength(0)
   })
 })
+

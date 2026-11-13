@@ -98,3 +98,4 @@ export function wantedPack(choice, figure, device, builtin = BUILTIN_PX) {
   const want = wantedQuality(choice, device, builtin)
   return typeof want === 'number' ? packId(want, figure) : null
 }
+

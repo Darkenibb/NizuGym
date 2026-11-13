@@ -27,3 +27,4 @@ describe('stateJson', () => {
     expect(() => stateJson({ workouts })).toThrow(/changed in place/)
   })
 })
+

@@ -62,3 +62,4 @@ export function recapDue(S, today = todayISO()) {
   const r = recapOf(S, p, today)
   return r.workouts > 0 ? r : null
 }
+

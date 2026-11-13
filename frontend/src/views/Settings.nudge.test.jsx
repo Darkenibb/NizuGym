@@ -165,3 +165,4 @@ describe('Settings — the background check before the nudge (mobile)', () => {
     expect(host.textContent).not.toContain(NOTE)
   })
 })
+
