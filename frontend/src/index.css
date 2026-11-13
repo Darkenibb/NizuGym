@@ -3273,3 +3273,23 @@ button.wl-summary{width:100%;padding:0 0 10px;text-align:start;border-radius:var
   .kpis .tile .v{font-size:var(--fs-title3)}
 }
 
+/* ========================================================================== */
+/* CUSTOMIZAÇÃO NIZUGYM: Linha Divisória Neon                                 */
+/* ========================================================================== */
+
+.linha-divisoria-svg {
+  position: absolute;
+  bottom: -20px; /* Alterado de -8px para -20px para descer a linha */
+  left: 0;
+  width: 100%;
+  height: 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hdr > div, 
+.hdr > button {
+  position: relative;
+  z-index: 10;
+}
+
