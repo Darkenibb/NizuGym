@@ -82,7 +82,6 @@ export default function Home() {
   const on = id => isOn(S, id)
   const bwPoints = S.bodyweight.slice(-30).map(b => ({ t: weighInAt(b), y: b.w, d: b.d }))
 
-  // --- CORREÇÃO DO CLIQUE ---
   const onToday = () => { 
     if (S.active) {
       nav('/workout');
@@ -98,7 +97,6 @@ export default function Home() {
   const progChip = programmeChip(S)
   const onQueueStart = id => { if (S.active) nav('/workout'); else startFlow([id]) }
 
-  // --- LÓGICA DA IMAGEM DO CARD ---
   const heroImageName = doneToday ? 'descanso' : todayName;
   const heroImageCustom = doneToday ? null : routine?.image;
 
@@ -108,7 +106,6 @@ export default function Home() {
     
     const lower = name.toLowerCase();
     
-    // CORREÇÃO AQUI: Verifica explicitamente se é descanso
     if (lower.includes('descanso') || lower.includes('rest') || lower.includes('off')) {
       return "url('/descanso.png')";
     }
@@ -157,9 +154,23 @@ export default function Home() {
     return { backgroundPosition: 'center', minHeight: '380px' };
   };
 
-  // --- CÁLCULO REAL DE SÉRIES E DESCANSO ---
-  const totalSets = routine?.exercises?.reduce((acc, ex) => acc + (Number(ex.sets) || 3), 0) || 0;
-  const restTime = routine?.rest || S.rest || S.defaultRest || 60;
+  // --- LÓGICA ROBUSTA DE CÁLCULO DE SÉRIES ---
+  let displayExercises = 0;
+  let displaySets = 0;
+  let displayRest = S.rest || S.defaultRest || 60;
+
+  if (S.active) {
+    // Se o treino estiver ativo, usa os dados da sessão ativa (é de onde vem o "9 séries")
+    displayExercises = S.active.exercises?.length || 0;
+    displaySets = S.active.exercises?.reduce((sum, ex) => sum + (ex.sets?.length || Number(ex.sets) || 0), 0) || 0;
+    displayRest = S.active.rest || displayRest;
+  } else if (routine) {
+    // Se não começou, tenta achar os exercícios na rotina
+    const rExs = routine.exercises || routine.items || [];
+    displayExercises = rExs.length;
+    displaySets = rExs.reduce((sum, ex) => sum + (Number(ex.sets) || Number(ex.setsCount) || 3), 0);
+    displayRest = routine.rest || displayRest;
+  }
 
   return <div className="narrow">
     <div className="hdr" style={{ position: 'relative' }}>
@@ -208,13 +219,13 @@ export default function Home() {
           {routine && !doneToday && (
             <div className="hero-stats">
               <div className="h-stat">
-                <Icon name="calendar" /> <span>Séries</span> <b>{totalSets}</b>
+                <Icon name="calendar" /> <span>Séries</span> <b>{displaySets || '-'}</b>
               </div>
               <div className="h-stat">
-                <Icon name="activity" /> <span>Exercícios</span> <b>{routine.exercises?.length || 0}</b>
+                <Icon name="activity" /> <span>Exercícios</span> <b>{displayExercises || '-'}</b>
               </div>
               <div className="h-stat">
-                <Icon name="clock" /> <span>Descanso</span> <b>{restTime}s</b>
+                <Icon name="clock" /> <span>Descanso</span> <b>{displayRest}s</b>
               </div>
             </div>
           )}
