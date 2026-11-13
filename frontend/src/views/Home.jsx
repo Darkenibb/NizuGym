@@ -82,7 +82,20 @@ export default function Home() {
   const on = id => isOn(S, id)
   const bwPoints = S.bodyweight.slice(-30).map(b => ({ t: weighInAt(b), y: b.w, d: b.d }))
 
-  const onToday = () => { if (S.active) nav('/workout'); else if (todayRoutines.length) startFlow(effectiveRoutineIds(S, todayISO())); else dayOverrideSheet(todayISO()) }
+  // --- CORREÇÃO DO CLIQUE DO CARD (Ver Detalhes) ---
+  const onToday = () => { 
+    if (S.active) {
+      nav('/workout'); // Se tem treino rodando, volta pra ele
+    } else if (doneToday) {
+      nav('/history'); // Se já acabou, vai para o histórico ver os detalhes
+    } else if (todayRoutines.length) {
+      startFlow(effectiveRoutineIds(S, todayISO())); // Inicia o treino do dia
+    } else {
+      dayOverrideSheet(todayISO()); // Abre o modal de escolha para o dia de descanso
+    }
+  }
+  // ------------------------------------------------
+
   const progChip = programmeChip(S)
   const onQueueStart = id => { if (S.active) nav('/workout'); else startFlow([id]) }
 
@@ -91,7 +104,6 @@ export default function Home() {
   const heroImageCustom = doneToday ? null : routine?.image;
   // --------------------------------
 
-  // Função atualizada: Tenta a imagem do usuário primeiro, depois busca os arquivos locais (.png)
   const getHeroImage = (name, customImage) => {
     if (customImage) return `url(${customImage})`;
     if (!name) return "url('/descanso.png')";
@@ -117,28 +129,27 @@ export default function Home() {
     return "url('/descanso.png')";
   };
 
-  // Função para customizar o enquadramento e tamanho de cada imagem
   const getHeroStyle = (name) => {
-    if (!name) return { backgroundPosition: 'center', minHeight: '320px' };
+    if (!name) return { backgroundPosition: 'center', minHeight: '380px' };
     const lower = name.toLowerCase();
 
     if (lower.includes('push') || lower.includes('peito') || lower.includes('chest')) {
-      return { backgroundPosition: 'center 25%', minHeight: '320px' };
+      return { backgroundPosition: 'center 25%', minHeight: '380px' };
     }
     if (lower.includes('pull') || lower.includes('costa') || lower.includes('back')) {
-      return { backgroundPosition: 'center 30%', minHeight: '320px' };
+      return { backgroundPosition: 'center 30%', minHeight: '380px' };
     }
     if (lower.includes('leg') || lower.includes('perna') || lower.includes('lower')) {
-      return { backgroundPosition: 'center 15%', minHeight: '380px' };
+      return { backgroundPosition: 'center 15%', minHeight: '450px' };
     }
     if (lower.includes('ombro') || lower.includes('shoulder')) {
-      return { backgroundPosition: 'center 20%', minHeight: '320px' };
+      return { backgroundPosition: 'center 20%', minHeight: '380px' };
     }
     if (lower.includes('braço') || lower.includes('braco') || lower.includes('arm')) {
-      return { backgroundPosition: 'center 25%', minHeight: '320px' };
+      return { backgroundPosition: 'center 25%', minHeight: '380px' };
     }
     
-    return { backgroundPosition: 'center', minHeight: '320px' };
+    return { backgroundPosition: 'center', minHeight: '380px' };
   };
 
   return <div className="narrow">
@@ -169,7 +180,6 @@ export default function Home() {
         {left.left > 0 ? tn('{0} of {1} left this week', '{0} of {1} left this week', left.left, left.of) : t('All done this week. Nice.')}
       </div>}
 
-      {/* CARD DE TREINO DINÂMICO */}
       <div className="hero-workout-card" onClick={onToday}>
         <div 
           className="hero-bg" 
@@ -199,7 +209,7 @@ export default function Home() {
             </div>
           )}
 
-          <button className="hero-btn">
+          <button className="hero-btn" type="button">
             <Icon name={doneToday ? "checkCircle" : "play"} />
             {S.active ? t('Continuar Treino') : doneToday ? t('Ver Detalhes') : routine ? t('Iniciar Treino') : t('Escolher Treino')}
           </button>
