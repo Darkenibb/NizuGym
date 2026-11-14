@@ -9,6 +9,7 @@ seja tão empolgante quanto o próprio treino.
 
 ✨ Principais Funcionalidades
 🎨 Visual Imersivo (Anime Style): Cartões de treino dinâmicos que mudam de acordo com o grupo muscular do dia (Peito, Costas, Perna, etc.), com artes épicas e interface Neon.
+
 🔊 Alarme Personalizado: Cansado do mesmo bip chato? O cronômetro de descanso conta com alarmes customizáveis (como o clássico "John Cena").
 📴 100% Offline: Se a sua academia não tem um bom Wi-Fi ou 4G, não tem problema. Todos os seus dados e o catálogo de exercícios funcionam direto no seu celular.
 📊 Acompanhamento de Progresso: Registre as cargas, séries e repetições. Acompanhe sua evolução ao longo das semanas com gráficos detalhados.
