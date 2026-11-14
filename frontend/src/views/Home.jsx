@@ -305,16 +305,59 @@ export default function Home() {
       </>}
     </div>}
 
-    {on('motivation') ? <div className="card tap-host streak-card">
-      <SeasonDeco spot="home-streak" />
-      <CardHead className="streak-head" glyph={<span className="streak-flame-wrap"><StreakFlame lit={streak.current > 0} /><SeasonDeco spot="streak-flame" /></span>}
-        title={t('{0} week streak', streak.current)} open={{ onClick: () => calendarSheet(), haspopup: 'dialog' }}
-        sub={<>{doneThisWeek}{plannedPerWeek ? ' / ' + plannedPerWeek : ''} {t('this week')} · {tn('{0} workout total', '{0} workouts total', S.workouts.length)}</>}
-        action={<Icon name="calendar" className="chev" style={{ fontSize: 'var(--fs-title3)' }} />} />
-      {(streak.best > 0 || streak.freezes > 0) && <div className="muted small card-head-indent streak-meta-line"><StreakMeta info={streak} /></div>}
-      <StreakParty S={S} info={streak} tally={tally} />
-      {S.homeMuscleSets === true && <WeeklySetsHomeLine S={S} onOpen={() => nav('/stats?section=lifts')} />}
-    </div>
-      : S.homeMuscleSets === true && <div className="card wsets-solo"><WeeklySetsHomeLine S={S} onOpen={() => nav('/stats?section=lifts')} /></div>}
+    {/* NOVO VISUAL PREMIUM DA STREAK */}
+    {on('motivation') ? (
+      <div className="premium-streak-card" onClick={() => calendarSheet()}>
+        <SeasonDeco spot="home-streak" />
+        <div className="streak-top-row">
+          <div className="streak-title-group">
+            <span className="streak-fire-icon">🔥</span>
+            <span className="streak-title-text">
+              {streak.current === 1 ? '1 semana seguida' : `${streak.current} semanas seguidas`}
+            </span>
+          </div>
+          <Icon name="calendar" style={{ fontSize: 20, color: 'var(--label-2)' }} />
+        </div>
+
+        <div className="streak-progress-section">
+          <div className="streak-progress-text">
+            <span>Meta da semana</span>
+            <span><b>{doneThisWeek}</b> / {plannedPerWeek || 1}</span>
+          </div>
+          <div className="streak-progress-bar">
+            <div 
+              className="streak-progress-fill" 
+              style={{ width: `${Math.min(100, (doneThisWeek / (plannedPerWeek || 1)) * 100)}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="streak-footer">
+          <div className="streak-freezes">
+            <span>Melhor: <b>{streak.best}</b></span>
+            {streak.freezes > 0 && (
+              <span style={{ marginLeft: 8 }}>
+                {Array.from({ length: streak.freezes }).map((_, i) => (
+                  <span key={i} className="streak-freeze-icon">❄️</span>
+                ))}
+              </span>
+            )}
+          </div>
+          <span style={{ fontSize: 12, color: 'var(--label-3)' }}>
+            {tn('{0} treinos no total', '{0} treinos no total', S.workouts.length)}
+          </span>
+        </div>
+        
+        {typeof StreakParty !== 'undefined' && <StreakParty S={S} info={streak} tally={tally} />}
+
+        {S.homeMuscleSets === true && (
+          <div style={{ marginTop: 12, borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 12 }}>
+            <WeeklySetsHomeLine S={S} onOpen={(e) => { e.stopPropagation(); nav('/stats?section=lifts') }} />
+          </div>
+        )}
+      </div>
+    ) : (
+      S.homeMuscleSets === true && <div className="card wsets-solo"><WeeklySetsHomeLine S={S} onOpen={() => nav('/stats?section=lifts')} /></div>
+    )}
   </div>
 }
