@@ -2,15 +2,15 @@
   "configVersion": "v3",
   "app": {
     "appId": 9990145,
-    "appName": "openGym",
+    "appName": "NizuGym",
     "appType": "app",
     "version": {
       "code": 10404,
       "name": "1.4.4"
     },
     "icon": "icon.png",
-    "vender": "openGym",
-    "description": "openGym on your wrist: start a routine, log sets with the crown, rest with a ring. Pairs with your own openGym server."
+    "vender": "NizuGym",
+    "description": "NizuGym on your wrist: start a routine, log sets with the crown, rest with a ring. Pairs with your own NizuGym server."
   },
   "permissions": [
     "data:os.device.info",
@@ -38,7 +38,7 @@
             {
               "path": "app-widget/index",
               "icon": "icon.png",
-              "name": "openGym",
+              "name": "NizuGym",
               "runtime": {
                 "type": "js"
               }
@@ -66,64 +66,64 @@
   },
   "i18n": {
     "en-US": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "de-DE": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "fr-FR": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "es-ES": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "it-IT": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "pt-PT": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "pt-BR": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "pl-PL": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "hu-HU": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "tr-TR": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "ru-RU": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "uk-UA": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "ar-EG": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "hi-IN": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "bn-BD": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "th-TH": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "ko-KR": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "sv-SE": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "zh-CN": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     },
     "zh-TW": {
-      "appName": "openGym"
+      "appName": "NizuGym"
     }
   },
   "defaultLanguage": "en-US"
