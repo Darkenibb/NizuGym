@@ -4,7 +4,7 @@ import { useStore } from '../store/useStore.js'
 import { dayPhotosOf } from '../lib/day-photos.js'
 import { EXIDX, matchExercise, betterWeight, isAssisted } from '../lib/exercises.js'
 import { lastBW, setLabel, modeOf, effortOf, entriesForExercise, metricEntriesForExercise, metricModeForEntry, bestWeightForEntry, completedRepsOf, workoutDay, workoutAt, lifetimeVolume } from '../lib/history.js'
-import { fmtNum, fmtDate, fmtVol, fmtDur, todayISO, isoOf, weekKey, weekStartOf, exerciseNameText } from '../lib/format.js'
+import { fmtNum, fmtDate, fmtVol, fmtDur, todayISO, isoOf, weekKey, weekStartOf, weekDayOffset, exerciseNameText } from '../lib/format.js'
 import { entryTimes, exerciseTimeRows } from '../lib/exercise-time.js'
 import { speedUnitOf, speedLabel, toSpeed } from '../lib/speed.js'
 import { t, exerciseNameFor, exerciseNameClass, getLang } from '../lib/i18n.js'
@@ -46,20 +46,12 @@ import { isWarmupRow } from '../lib/workout-model.js'
 import { exView, exUnitOf, shownWeight } from '../lib/ex-unit.js'
 import { isOn } from '../lib/modules.js'
 
-// Set 1 to 5 on the per-set chart — system colours, so each line keeps its hue in dark mode.
 const SET_COLORS = ['var(--blue)', 'var(--green)', 'var(--orange)', 'var(--purple)', 'var(--pink)']
 
-// The date range buttons under Body weight, and since issue #511 under Exercise progress too.
-// In days, 0 = everything; a function because the labels follow the current language.
 const rangeOptions = () => [{ value: 30, label: '1M' }, { value: 90, label: '3M' }, { value: 365, label: '1Y' }, { value: 0, label: t('All') }]
-// Where a range starts, in ms. Worked out once per pick rather than from each render's clock, so
-// the memoised chart arrays below keep their identity (LineChart drops its hover on a new one).
 const rangeStart = days => (days ? Date.now() - days * 86400000 : 0)
-// Recent workouts on Overview: three, then History has them all.
 const RECENT_ROWS = 3
 
-// Which muscles the training in a window actually hit — and, the point of the card,
-// which ones it keeps missing. Shading is relative within the window (lib/muscles.js).
 function latestMuscleTraining(workouts) {
   const latest = {}
   for (const workout of workouts || []) {
@@ -92,11 +84,6 @@ export const STRENGTH_LEVELS = [
   { at: 1, level: 4 },
 ]
 
-// The time the fatigue and strength figures are worked out for: taken again once a minute (they
-// decay with it) and whenever the data they read changes, but not on every render. It used to be
-// Date.now() of each render, so every useMemo below that depends on it ran again on any tap on
-// this screen (a chip, a week arrow): the whole history walked twice per tap. Hidden, the minute
-// is not counted; shown again, it is taken at once.
 function useNow(...data) {
   const [tick, setTick] = useState(0)
   useEffect(() => {
@@ -108,13 +95,6 @@ function useNow(...data) {
   return useMemo(() => Date.now(), [tick, ...data])
 }
 
-/**
- * Return the whole weeks since a completed muscle-training timestamp.
- *
- * @param {number} now Current render-time timestamp in milliseconds.
- * @param {number} lastTrained Timestamp of the latest completed training event.
- * @returns {number} Non-negative whole weeks, including zero for ages under seven days.
- */
 export function weeksSinceTraining(now, lastTrained) {
   return Math.max(0, Math.floor((now - lastTrained) / 86400000 / 7))
 }
@@ -127,10 +107,6 @@ function FatigueLegend() {
   </div>
 }
 
-/* The three map bands as one zone bar: a marker at the selected muscle's value with the
-   percentage above it, the 0–100% endpoints below, and each band's name under its own
-   zone. Zones are the legend's own ramp (grey ready, yellow recovering, red fatigued) and
-   their boundaries match fatigueStateOf, so the bar and the map shade never disagree. */
 function FatigueBar({ value }) {
   const pct = Math.round(Math.min(1, Math.max(0, value)) * 100)
   const at = `clamp(0px, calc(${pct}% - 1.5px), calc(100% - 3px))`
@@ -166,8 +142,6 @@ function fatigueLabel(value) {
   return t(state === 'ready' ? 'Ready' : state === 'recovering' ? 'Recovering' : 'Fatigued')
 }
 
-// The user's own last registered bodyweight, in kg: the body-mass part of a bodyweight
-// exercise's load for fatigue and for estimated effort, so both read the same set the same way.
 function profileBodyweightKg(S) {
   const entries = S.bodyweight || []
   if (!entries.length) return null
@@ -176,8 +150,6 @@ function profileBodyweightKg(S) {
   return S.unit === 'lb' ? last.w * LB_TO_KG : last.w
 }
 
-// The weeks a window spans, so a 30-day, 90-day or all-time window reads as sets a week and can sit
-// against the same weekly target range as this week does. All time runs from the first workout.
 function weeksIn(win, workouts, now) {
   if (win) return win / 7
   const first = Math.min(...(workouts || []).map(workoutAt).filter(Number.isFinite))
@@ -187,12 +159,6 @@ const round1 = n => Math.round((Number(n) || 0) * 10) / 10
 const MUSCLE_ROWS = 5
 const SET_STATUS = { below: () => t('room for more'), in: () => t('in range'), above: () => t('above range') }
 
-/* Muscles (stats redesign): one card where there were three lists of sets per muscle ("Muscle
-   balance", "Sets per muscle this week", "Weekly muscle volume"). The map on top, then one bar per
-   main muscle against its target range (lib/muscle-targets.js): Completed counts the sets you did
-   (a week, or the weekly average of a longer window), Planned the sets your plan programs in a
-   week. This week's plan rides along on the Completed bars as a tick, so the old "11/11 · 100%"
-   is still there to read. Fatigue and Strength stay one tap away in the same card. */
 function MusclesCard({ S, planFocus = false }) {
   const nav = useNavigate()
   const [view, setView] = useState('sets')
@@ -218,7 +184,6 @@ function MusclesCard({ S, planFocus = false }) {
   }
   const toggleSel = m => setSel(s => (s === m ? null : m))
   const reset = () => { setSel(null); setMore(false) }
-  // The exercises for a muscle (#553): the untrained chips, and an untrained muscle picked.
   const openMuscle = m => nav('/muscles?m=' + encodeURIComponent(m), { state: { from: '/stats' } })
   const findExercises = m => <button type="button" className="mchip mfind" data-find-exercises={m}
     aria-label={t('Exercises for {0}', t(MUSCLE_NAME[m]))} onClick={() => openMuscle(m)}>{t('Exercises')}<Icon name="chevronRight" /></button>
@@ -235,9 +200,6 @@ function MusclesCard({ S, planFocus = false }) {
   const inWin = weekly
     ? workouts.filter(workout => workoutDay(workout) && weekKey(workoutDay(workout), ws) === selectedWeek)
     : muscleBalanceWindow(workouts, win, now, todayISO(), ws)
-  // Counting only the sets taken near failure turns the bars from "where did the volume go" into
-  // "where did the stimulus go". Offered only when the window holds ratings at all, since with
-  // none the hard view would just be empty and read as "you trained nothing".
   const rated = inWin.some(w => w.entries.some(e => e.sets.some(s => s.done && isHardSet(s))))
   const on = !planned && !weekly && hard && rated
   const done = loadOfWorkouts(inWin, on ? isHardSet : null)
@@ -246,14 +208,10 @@ function MusclesCard({ S, planFocus = false }) {
   const weeks = weekly ? 1 : weeksIn(win, inWin, now)
   const tickOn = !planned && weekly && weekOffset === 0 && hasPlan
   const rowOf = m => ({ m, v: round1(planned ? plan[m] : (done[m] || 0) / weeks), range: targetOf(S, m), plan: tickOn ? round1(plan[m]) : null })
-  // The ten main muscles (they have a target range), most sets first, and any other muscle that got
-  // or is planned sets after them. Five rows until Show more; a muscle not trained and not on a row
-  // is a chip under the bars, so each muscle shows up once.
   const byLoad = (a, b) => b.v - a.v || (b.plan || 0) - (a.plan || 0) || MUSCLES.indexOf(a.m) - MUSCLES.indexOf(b.m)
   const main = TARGET_MUSCLES.map(rowOf).sort(byLoad)
   const extra = MUSCLES.filter(m => !TARGET_MUSCLES.includes(m)).map(rowOf).filter(r => r.v > 0 || r.plan > 0).sort(byLoad)
   const all = [...main, ...extra]
-  // One scale for every row, so a longer bar is more sets wherever it sits.
   const top = Math.max(1, ...all.map(r => Math.max(r.v, r.plan || 0, r.range ? r.range[1] : 0))) * 1.08
   const rows = sel ? [rowOf(sel)] : more ? all : all.slice(0, MUSCLE_ROWS)
   const onRows = new Set(rows.map(r => r.m))
@@ -281,7 +239,6 @@ function MusclesCard({ S, planFocus = false }) {
     <Segmented className="seg-range" value={view} onChange={v => { setView(v); setMore(false) }}
       options={[{ value: 'sets', label: t('Sets') }, { value: 'fatigue', label: t('Fatigue') }, { value: 'strength', label: t('Strength') }]} />
     {view === 'sets' ? <div data-weekly-volume-comparison data-mode={mode} data-week={weekly && !planned ? selectedWeek : undefined}>
-      {/* One line of controls: what to count, and over which stretch. */}
       <div className="mus-ctl">
         <Segmented className="seg-inline mus-mode" value={mode} onChange={v => { setMode(v); reset() }}
           options={[{ value: 'done', label: t('Completed') }, { value: 'planned', label: t('Planned') }]} />
@@ -311,8 +268,6 @@ function MusclesCard({ S, planFocus = false }) {
           {!sel && all.length > MUSCLE_ROWS && <Button className="weekly-volume-toggle" trailingIcon={more ? 'chevronUp' : 'chevronDown'} aria-expanded={more}
             onClick={() => setMore(v => !v)}>{t(more ? 'Show less' : 'Show more')}</Button>}
           <div className="mus-key">
-            {/* The fill is the figure at the end of its row; the key names the two marks that
-                are not written out: the range and the plan. */}
             <ChartLegend items={[
               { key: 'r', mark: 'band', label: t('Target range') },
               ...(tickOn ? [{ key: 'p', mark: 'tick', label: t('Planned') }] : []),
@@ -321,8 +276,6 @@ function MusclesCard({ S, planFocus = false }) {
           </div>
         </>}
       {!sel && missed.length > 0 && inWin.length > 0 && <>
-        {/* Folded to one line with its count, the chips a tap away; a chip opens the exercises
-            for that muscle (#553). A muscle on a row above is not repeated here. */}
         <button type="button" className="mus-miss" aria-expanded={missOpen} onClick={() => setMissOpen(o => !o)}>
           <span>{on ? t('No hard sets in this period') : t('Not trained in this period')}</span>
           <span className="mus-miss-n">{missed.length}</span>
@@ -347,8 +300,6 @@ function MusclesCard({ S, planFocus = false }) {
       <div className="muted small" style={{ marginTop: 10 }}>{t('Strength shows retained muscle strength. Train again to reset it.')}</div>
       {sel && <>
         <h4 className="sec" style={{ marginTop: 14 }}>{t('Exercises')} · {t(MUSCLE_NAME[sel])}</h4>
-        {/* A row quotes the exercise's estimated 1RM, so a tap opens the exercise history
-            sheet: the curve behind that number plus the last sessions set by set. */}
         {muscleExercises.length ? <div className="sbar-list">{muscleExercises.map(row => (
           <BarRow key={row.id} className="sbar-2l" fill={Math.round(row.decay * 100) / 100}
             label={<>
@@ -361,8 +312,6 @@ function MusclesCard({ S, planFocus = false }) {
         ))}</div> : <div className="muted small">{t('No exercises with an estimated 1RM yet.')}</div>}
       </>}
       {!sel && <div className="muted small" style={{ marginTop: 10 }}>{t('Tap a muscle to see its exercises.')}</div>}
-      {/* Detrained muscles: the bar is retained strength, the value says how long ago the muscle
-          was last trained, with its sets in the last 90 days when there are any. */}
       {detrainedRows(strength, workouts, now, strengthHint)}
     </>}
   </div>
@@ -381,32 +330,16 @@ function detrainedRows(strength, workouts, now, strengthHint) {
   })}</div>
 }
 
-
-// How hard the training was: the half of the picture a volume chart cannot show. Everything
-// is computed in RIR (lib/effort.js) and converted to whichever scale this profile reads.
-// Every number carries how much of the training it speaks for: rating is optional and off by
-// default, so a partly rated history is the normal case, and an average without its
-// denominator would quietly speak for sets that were never rated.
-// The bins of the stacked bar, hardest first, as one ordered ramp of the effort colour: the
-// harder the set, the more ink (dataviz: ordered categories take one hue, light to dark). Steps of
-// opacity on the one ink, so the ramp needs no colour-mix fallback. Sets past the hard line are
-// grey, as their bars were.
 const EFFORT_RAMP = [1, 0.72, 0.5, 0.34]
 function EffortCard({ S }) {
   const [win, setWin] = useState(90)
   const kind = displayScale(S)
   const hd = scaleName(kind)
-  // Every set without a logged rating is estimated (the same precedence fatigue scoring uses:
-  // logged effort first, Epley-inverse estimate against the 90-day anchor second), so the
-  // average always speaks for the whole training, not just the rated subset. Estimates never
-  // override a real rating, so a fully rated window still reads exactly its logged numbers.
   const opts = useMemo(() => ({ unit: S.unit, bodyweightKg: profileBodyweightKg(S) }), [S.unit, S.bodyweight])
   const anchors = useMemo(
     () => anchorsByWorkout(S.workouts, opts),
     [S.workouts, opts],
   )
-  // The summary, the weekly curve and the histogram each walk the same sets; a set's reading
-  // depends only on the anchors and options, so it is worked out once per set, not three times.
   const resolve = useMemo(() => {
     const seen = new WeakMap()
     return (s, w, e) => {
@@ -420,10 +353,7 @@ function EffortCard({ S }) {
   const weeks = effortWeeks(S, win, resolve)
   const hist = effortHistogram(S, win, resolve)
   const estimated = sum.est > 0
-  // The week's set count rides along in the tooltip, because the pair is the reading:
-  // volume up with effort up is fatigue piling up, volume up with effort flat is adaptation.
   const pts = weeks.map(w => ({ t: w.t, y: toScale(kind, w.rir), note: t('{0} sets', w.sets) }))
-  // Bins run hardest-first in both scales: RIR 0 and RPE 10 are the same set.
   const binLabel = b => kind === 'rpe' ? (b.tail ? '≤ 6' : String(10 - b.rir)) : (b.tail ? b.rir + '+' : String(b.rir))
   const parts = hist.map((b, i) => b.rir <= HARD_RIR
     ? { key: b.rir, label: hd + ' ' + binLabel(b), n: b.n, share: b.pct || 0, color: 'var(--gold-ink)', opacity: EFFORT_RAMP[Math.min(i, 3)] }
@@ -434,8 +364,6 @@ function EffortCard({ S }) {
     <Segmented className="seg-range" value={win} onChange={setWin}
       options={[{ value: 30, label: '30d' }, { value: 90, label: '90d' }, { value: 365, label: '1Y' }, { value: 0, label: t('All') }]} />
     {sum.rated === 0 && sum.est === 0 ? <div className="muted small">{t('No rated sets in this period.')}</div> : <>
-      {/* One figure leads (the average); the share of hard sets is its sentence, in ink, not a
-          second headline in yellow competing with it. */}
       <div className="effort-head">
         <span className="stat-v">{sum.avg == null ? '–' : fmtNum(toScale(kind, sum.avg)) + ' ' + hd}</span>
         <span className="small dim">{t('average effort')}</span>
@@ -451,8 +379,6 @@ function EffortCard({ S }) {
       </div>}
       {pts.length > 1 && <>
         <h4 className="sec">{t('Week by week')}</h4>
-        {/* Harder is up on either scale, and the axis says so in words: an RIR axis counts down
-            as the sets get harder, so its 0 sits at the top. */}
         <div className="chart"><LineChart points={pts} h={140} unit={hd} color="var(--gold-ink)" invert={kind === 'rir'}
           yHint={{ hi: t('Harder') }} tickPrefix={hd + ' '} /></div>
       </>}
@@ -466,9 +392,6 @@ function EffortCard({ S }) {
   </div>
 }
 
-// How long each exercise takes, on average a session, from when its sets were ticked
-// (lib/exercise-time.js): the rest before a set and the setup count, so it is what an exercise
-// costs in a workout. Only workouts with tick times count; imported history has none.
 const TIME_ROWS = 6
 export function ExerciseTimeCard({ S }) {
   const [win, setWin] = useState(90)
@@ -489,16 +412,11 @@ export function ExerciseTimeCard({ S }) {
   </div>
 }
 
-// The sticky index over Stats (redesign 1.4.5, P5): Overview, Body, Lifts and, when there is any,
-// Effort. A tap scrolls to that part and puts it in the address (#/stats?section=lifts, so the
-// part can be linked and comes back on reload); scrolling moves the highlight along. The address
-// is rewritten with replaceState, not a router navigation, so the app's own scroll restore for a
-// route change never fights the scroll the tap just started.
 const sectionOfHash = () => (/[?&]section=([a-z]+)/.exec(typeof window === 'undefined' ? '' : window.location.hash || '') || [])[1] || ''
 export function StatsIndex({ sections }) {
   const asked = sectionOfHash()
   const [cur, setCur] = useState(sections.some(x => x.value === asked) ? asked : 'overview')
-  const quietUntil = useRef(0)   // the scroll a tap started is not the reader's: hold the spy
+  const quietUntil = useRef(0)
   const go = (v, smooth = true) => {
     setCur(v)
     quietUntil.current = Date.now() + 900
@@ -512,8 +430,6 @@ export function StatsIndex({ sections }) {
   }
   useEffect(() => {
     if (!asked || asked === 'overview' || !sections.some(x => x.value === asked)) return
-    // Once now, and once more when the cards above have drawn their charts and grown: the first
-    // jump alone landed a screen short. Not again if the reader has started scrolling by then.
     const frame = window.requestAnimationFrame(() => go(asked, false))
     let moved = false
     const mark = () => { moved = true }
@@ -521,15 +437,12 @@ export function StatsIndex({ sections }) {
     window.addEventListener('wheel', mark, { passive: true, once: true })
     const settle = window.setTimeout(() => { if (!moved) go(asked, false) }, 450)
     return () => { window.cancelAnimationFrame(frame); window.clearTimeout(settle); window.removeEventListener('touchstart', mark); window.removeEventListener('wheel', mark) }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
   useEffect(() => {
     let raf = 0
     const spy = () => {
       raf = 0
       if (Date.now() < quietUntil.current) return
-      // A sheet pins the body (Modals.jsx): scrollY is 0 and the page as tall as the screen, which
-      // read as "at the very bottom" and moved the highlight to Effort behind every sheet opened
-      // from Stats (Ranges, About you). The pinned page has not moved; leave the highlight.
       if (document.body.style.position === 'fixed') return
       const bar = document.querySelector('.stats-index')
       const line = (bar ? bar.getBoundingClientRect().bottom : 0) + 24
@@ -538,14 +451,13 @@ export function StatsIndex({ sections }) {
         const el = document.getElementById('stats-' + x.value)
         if (el && el.getBoundingClientRect().top <= line) on = x.value
       }
-      // the last part may be too short to reach the line: at the very bottom it is the one read
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) on = sections[sections.length - 1].value
       setCur(c => (c === on ? c : on))
     }
     const onScroll = () => { if (!raf) raf = window.requestAnimationFrame(spy) }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => { window.removeEventListener('scroll', onScroll); if (raf) window.cancelAnimationFrame(raf) }
-  }, [sections.length]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [sections.length])
   return <nav className="stats-index" aria-label={t('Stats')}>
     <Segmented className="stats-index-seg" value={cur} onChange={v => go(v)} options={sections} />
   </nav>
@@ -555,28 +467,21 @@ export default function Stats() {
   const nav = useNavigate()
   const S = useStore(s => s.S)
   const [range, setRange] = useState(90)
-  // Plan's "Weekly muscle volume" row lands here (/stats?focus=weekly-volume): the Muscles card
-  // opens on Planned and scrolls into view. The router is a HashRouter, so the query sits in the
-  // hash; the scroll waits a frame for the page's own scroll-to-top on navigation to happen first.
   const [planFocus] = useState(() => /[?&]focus=weekly-volume\b/.test(typeof window === 'undefined' ? '' : window.location.hash || ''))
   useEffect(() => {
     if (!planFocus) return
     const frame = window.requestAnimationFrame(() => document.getElementById('weekly-volume')?.scrollIntoView?.({ block: 'start', behavior: 'smooth' }))
     return () => window.cancelAnimationFrame(frame)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
   const [exId, setExId] = useState(null)
   const [exMetric, setExMetric] = useState('top')
-  // What the Body weight view measures the lift by: 'e1rm' (default) or the heaviest set.
   const [relBasis, setRelBasis] = useState('e1rm')
-  // Exercise progress over a date range (issue #511), All by default. Only the chart follows it:
-  // "Best:" and the recent sessions under it stay all-time.
   const [exRange, setExRange] = useState(0)
   const exFrom = useMemo(() => rangeStart(exRange), [exRange])
   const inExRange = p => p.t >= exFrom
   const now = Date.now()
   const kind = displayScale(S)
   const hd = scaleName(kind)
-  // Settings → Modules (lib/modules.js): a module switched off takes its parts of Stats with it.
   const on = id => isOn(S, id)
   const effortOn = on('effort'), bodyOn = on('body'), motivationOn = on('motivation')
 
@@ -587,11 +492,18 @@ export default function Stats() {
   const workouts = S.workouts
   const monthW = workouts.filter(w => workoutDay(w)?.slice(0, 7) === todayISO().slice(0, 7)).length
   const lifetime = lifetimeVolume(S)
-  // The streak with its best run, freezes and badges (lib/streak.js).
+  
+  // --- NOVO CÁLCULO: LEVANTADO NA SEMANA ---
+  const ws = weekStartOf(S)
+  const todayDate = new Date()
+  const wkStart = new Date(todayDate)
+  wkStart.setDate(todayDate.getDate() - weekDayOffset(todayDate.getDay(), ws))
+  const wsISO = isoOf(wkStart)
+  const volSemana = workouts.filter(w => w.d >= wsISO).reduce((acc, w) => acc + (w.vol || w.volume || 0), 0)
+  // -----------------------------------------
+
   const streak = streakInfo(S)
 
-  // Dumbbell weights are read in each exercise's current meaning (lib/dumbbells.js), so the
-  // chart and its best compare like with like across a switch between per bell and total.
   const meantIn = {}
   const metricDataOf = (workout, id) => {
     const entries = metricEntriesForExercise(workoutAs(workout, id, meantIn[id] ??= currentDbLoad(S, id)), id)
@@ -636,7 +548,6 @@ export default function Stats() {
       desc: snapshot.desc || entry?.desc || '',
     }
   }
-  // Cardio is charted and ranked in the profile's speed unit; the sets keep km/h (lib/speed.js).
   const speedUnit = speedUnitOf(S)
   const currentOf = id => {
     for (let i = workouts.length - 1; i >= 0; i--) {
@@ -648,10 +559,7 @@ export default function Stats() {
         ? data.best
         : Math.max(0, ...rows.map(s => mode === 'cardio' ? toSpeed(s.speed || 0, speedUnit) : mode === 'time' ? (s.sec || 0) : (s.w || 0)))
       if (mx > 0) return mode === 'cardio' || mode === 'time' ? { mx, unit: mode === 'cardio' ? speedLabel(speedUnit) : 's' }
-        // Sorted by the stored weight, labelled in the exercise's own unit (#657).
         : { mx, shown: shownWeight(S, id, mx), unit: exUnitOf(S, id) }
-      // Unloaded reps work still has a current figure — its rep count. Without this the whole
-      // picker label went blank and the exercise sorted to the bottom as if it had no history.
       if (mode === 'reps') {
         const reps = Math.max(0, ...rows.map(completedRepsOf))
         if (reps > 0) return { mx: reps, unit: t('reps') }
@@ -663,10 +571,6 @@ export default function Stats() {
   const exCurrent = Object.fromEntries(exHist.map(id => [id, currentOf(id)]))
   exHist.sort((a, b) => exCurrent[b].mx - exCurrent[a].mx || nameOf(a).localeCompare(nameOf(b)))
   const curEx = exId && exHist.includes(exId) ? exId : exHist[0] || null
-  // A completed reps work row is authoritative for strength metrics, even when the parent
-  // target also contains timed/cardio work. Entries without reps rows use their selected mode.
-  // The chosen exercise is charted in its own weight unit when it has one (#657, lib/ex-unit.js):
-  // its history read as it sees it. The tiles and totals above stay in the profile's unit.
   const XS = exView(S, curEx)
   const xw = XS.workouts
   const curMode = curEx ? (() => {
@@ -683,11 +587,6 @@ export default function Stats() {
   })() : 'reps'
   const curCardio = curMode === 'cardio'
   const curTimed = curMode === 'time'
-  // A pull-up or a push-up carries no weight, so its "best weight" is 0 — and dropping every
-  // zero point left the card reading "No data yet" for exercises with a full history behind
-  // them (issue #5). When nothing in an exercise's history was ever loaded, the progress IS
-  // the rep count, so plot that. Add a weighted set later and it switches back to weight on
-  // its own, which is also the honest reading: that is when load became the thing improving.
   const repsOnly = curEx && curMode === 'reps' && !xw.some(w =>
     entriesForExercise(w, curEx).some(en => bestWeightForEntry(en) > 0))
   const metric = s => curCardio ? toSpeed(s.speed || 0, speedUnit) : curTimed ? (s.sec || 0) : (s.w || 0)
@@ -704,8 +603,6 @@ export default function Stats() {
           : Math.max(0, ...doneSets.map(metric))
         if (mx > 0) {
           exPts.push({ t: w.start, y: mx, d: w.d, sets: doneSets, target: representative?.target })
-          // Weighted work on an assistance machine reads the other way: the smallest load is the
-          // best (issue #232). Reps, duration and speed are always "more is better".
           const better = curMode === 'reps' && !repsOnly ? betterWeight(curEx, exBest || mx, mx) : Math.max(exBest, mx)
           exBest = exBest > 0 ? better : mx
         }
@@ -713,12 +610,6 @@ export default function Stats() {
     })
     exList = exPts.slice(-5).reverse()
   }
-  // Estimated 1RM (issue #18) — only reps-mode training produces one, so cardio and timed
-  // work simply have no points and the toggle stays hidden.
-  // Both memoised on the same inputs, and it has to start at e1rmSeries: LineChart clears its
-  // hover whenever `points` changes identity, so a chart array rebuilt on every render made the
-  // tooltip vanish under your finger the moment anything else on this screen re-rendered.
-  // Memoising only the .map() would not have helped — its dependency was itself rebuilt each time.
   const e1Pts = useMemo(
     () => (curEx && curMode === 'reps' ? e1rmSeries(XS, curEx) : []),
     [XS, curEx, curMode],
@@ -726,14 +617,9 @@ export default function Stats() {
   const e1ChartPts = useMemo(() => e1Pts.filter(p => p.t >= exFrom).map(p => ({ t: p.t, y: p.y, d: p.d })), [e1Pts, exFrom])
   const e1Best = curEx && curMode === 'reps' ? best1RM(XS, curEx) : null
   const showE1 = e1Pts.length > 0
-  // Effort on this exercise, per session. It rides on the top-set curve as well as having a
-  // curve of its own, because the two only mean something together: the same weight moved
-  // with more left in the tank is progress a weight-only chart draws as a flat line.
   const exRir = exPts.map(p => avgRir(p.sets))
   const showEff = effortOn && exRir.filter(v => v != null).length >= 3
   const effPts = exPts.map((p, i) => (exRir[i] == null ? null : { t: p.t, y: toScale(kind, exRir[i]), d: p.d })).filter(p => p && inExRange(p))
-  // Pyramid sets' Max sets: the most reps in one, per workout — the point of a Max set is seeing
-  // that number climb, which the top-set weight line does not show.
   const maxPts = useMemo(
     () => (curEx && curMode === 'reps' ? maxRepsSeries(xw, curEx).map(p => ({ t: p.t, y: p.y, d: p.d, note: p.w > 0 ? fmtNum(p.w) + ' ' + XS.unit : undefined })) : []),
     [xw, curEx, curMode, XS.unit],
@@ -741,12 +627,6 @@ export default function Stats() {
   const showMax = maxPts.length > 0
   const maxBest = showMax ? Math.max(...maxPts.map(p => p.y)) : 0
   const maxChartPts = useMemo(() => maxPts.filter(p => p.t >= exFrom), [maxPts, exFrom])
-  // Per set (issue #145): one line per set number, to see which set you drop off on — often not
-  // the last. Offered once two sessions are logged and one of them has two sets or more.
-  // Memoised like e1Pts: LineChart drops its hover whenever `points` changes identity.
-  // Loaded work is drawn as each set's estimated 1RM, so straight sets at one weight still part
-  // where reps were lost. Reps instead for unloaded work, an assistance machine (where a 1RM
-  // reads backwards), or a history of sets all past the estimate's rep cap.
   const oneRmFormula = formulaOf(S)
   const perSet = useMemo(() => {
     if (!curEx || curMode !== 'reps') return null
@@ -769,17 +649,11 @@ export default function Stats() {
       drop: dropOffSet(sessions),
     }
   }, [xw, curEx, curMode, repsOnly, oneRmFormula])
-  // The same sessions cut to the range; a set number with nothing left in it drops out of the legend.
   const perSetChart = useMemo(() => {
     if (!perSet) return null
     const series = perSet.series.map(s => ({ ...s, points: s.points.filter(p => p.t >= exFrom) })).filter(s => s.points.length)
     return { anchors: perSet.anchors.filter(p => p.t >= exFrom), series, ns: series.map(s => s.n) }
   }, [perSet, exFrom])
-  // Progress against body weight: the lift's effective load (body weight included for bodyweight
-  // and assisted work) as a share of the body weight at the time, so it only rises when you got
-  // stronger for your size. Both bases are memoised on the same inputs as e1Pts, for the same reason.
-  // On a top-set basis a bare bodyweight exercise is a flat 100%, so that basis is only offered
-  // when it actually varies.
   const relE1 = useMemo(() => (curEx && curMode === 'reps' ? relativeSeries(XS, curEx, { basis: 'e1rm' }) : []), [XS, curEx, curMode])
   const relTop = useMemo(() => (curEx && curMode === 'reps' ? relativeSeries(XS, curEx, { basis: 'top' }) : []), [XS, curEx, curMode])
   const canRelE1 = relE1.length >= 2 && !relE1.some(p => p.assisted)
@@ -798,16 +672,11 @@ export default function Stats() {
   const onMax = showMax && exMetric === 'max'
   const topPts = exPts.map((p, i) => ({
     t: p.t, y: p.y, d: p.d,
-    // 0 RIR (nothing left) is a full dot, 4+ a faint one; unrated sessions keep the plain line.
     m: exRir[i] == null ? null : 1 - Math.min(4, Math.max(0, exRir[i])) / 4,
     note: exRir[i] == null ? undefined : hd + ' ' + fmtNum(toScale(kind, exRir[i]))
   })).filter(inExRange)
   const chartPts = onSets ? perSetChart.anchors : onRel ? relChartPts : onMax ? maxChartPts : onEff ? effPts : onE1 ? e1ChartPts : topPts
-  // A line needs two workouts. A range that holds fewer says so, instead of a lone dot or an empty box.
   const rangeTooShort = exRange !== 0 && chartPts.length < 2
-  // The chart menu (stats redesign): the metrics were a segmented control of five or six options
-  // that ran past the card ("Bod…") with a second one under it for the body weight basis. Now it is
-  // one row that opens a sheet, and the basis is two entries of the same list.
   const relBoth = canRelE1 && canRelTop
   const exOpts = [{ value: 'top', label: t('Top set') }]
   if (perSet) exOpts.push({ value: 'sets', label: t('Per set') })
@@ -820,17 +689,12 @@ export default function Stats() {
   const pickMetric = v => {
     if (v.startsWith('bw-')) { setRelBasis(v.slice(3)); setExMetric('bodyweight') } else setExMetric(v)
   }
-  // The table under the chart: one row a day, its top set, effort as a small tag beside it
-  // instead of "(RIR 3)" after every set (it wrapped on every row). The whole session is a tap
-  // away in the exercise's history sheet.
   const strip = s => ({ ...s, rir: undefined, rpe: undefined, sides: s.sides ? { L: { ...s.sides.L, rir: undefined, rpe: undefined }, R: { ...s.sides.R, rir: undefined, rpe: undefined } } : s.sides })
   const topSetOf = sets => {
     let best = null, bv = 0
     for (const s of sets) {
       const v = curMode === 'reps' ? (repsOnly ? completedRepsOf(s) : (s.w || 0)) : metric(s)
       if (!(v > 0)) continue
-      // Heavier wins; an assistance machine's lighter load wins (betterWeight, #232); on a tie
-      // the set with more reps.
       const wins = !best ? true
         : v === bv ? completedRepsOf(s) > completedRepsOf(best)
           : curMode === 'reps' && !repsOnly ? betterWeight(curEx, bv, v) === v : v > bv
@@ -841,7 +705,6 @@ export default function Stats() {
 
   const effortCard = effortOn && (hasEffort(S) || hasEstimableEffort(S))
   const timeCard = workouts.some(w => entryTimes(w).length)
-  // With Effort off the time per exercise moves to the end of Lifts, so no part is a lone card.
   const hasEffortSect = effortCard || (effortOn && timeCard)
   const sections = [
     { value: 'overview', label: t('Overview') },
@@ -853,9 +716,6 @@ export default function Stats() {
   const wrapped = motivationOn ? wrappedYears(S).slice(0, 4) : []
   const thisYear = new Date().getFullYear()
   const exLegend = onSets && !rangeTooShort && perSetChart.ns.length > 0
-  // The pages behind Stats as one grouped list (stats redesign): they were four cards with a
-  // paragraph and an Open button each, dressed as content. Under Body, where two of them live;
-  // with the Body module off, at the end of Lifts, without the two that are Body's.
   const linkRows = [
     bodyOn && <Row key="m" title={t('Body measurements')} accessory="chevron" tour="stats-measure" className="stats-link"
       value={(S.measurements || []).length ? fmtDate(S.measurements[S.measurements.length - 1].d, true) : null}
@@ -877,26 +737,32 @@ export default function Stats() {
         <button className="iconbtn" data-tour="stats-history" onClick={() => nav('/history')} aria-label={t('History')}><Icon name="history" /></button>
       </div></div>
 
-    {/* The page in four parts (redesign 1.4.5, P5), each with its own heading, and a sticky index
-        that jumps to them and follows the scroll. It is still one page: every card is where a
-        scroll finds it. /stats?section=lifts (and body, effort) opens on that part. */}
     <StatsIndex sections={sections} />
 
     <section className="stats-sect" id="stats-overview" data-stats-sect="overview" aria-label={t('Overview')}>
-    {/* The headline numbers as one divided card: three across, the lifetime total under them at
-        full width (a few hundred sessions make a long number). The week streak is not a tile any
-        more: it is the card right below, once. */}
     <div className={'kpis' + (bodyOn ? '' : ' two')} data-tour="stats-tiles">
       <div className="tile"><div className="l">{t('Workouts')}</div><div className="v">{workouts.length}</div></div>
       <div className="tile"><div className="l">{t('This month')}</div><div className="v">{monthW}</div></div>
       {bodyOn && <div className="tile"><div className="l">{t('Weight 30d')}</div><div className="v" style={{ color: bwDelta30 === null ? 'inherit' : bwDeltaColor(bwDelta30, (lastBW(S) || {}).w || 0) }}>{bwDelta30 === null ? '–' : (bwDelta30 > 0 ? '+' : '') + fmtNum(bwDelta30) + ' ' + S.unit}</div></div>}
-      {/* Everything ever lifted (Discord): imports included, warm-ups only when the profile
-          counts them (#719). */}
-      {lifetime > 0 && <div className="tile wide" data-lifetime-volume><SeasonDeco spot="stats-tile" /><div className="l">{t('Lifted in total')}</div><div className="v">{fmtVol(Math.round(lifetime), S.unit)}</div></div>}
+      
+      {/* PAINEL DUPLO DE VOLUME */}
+      {(lifetime > 0 || volSemana > 0) && (
+        <div className="tile wide" data-lifetime-volume style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 16px' }}>
+          <SeasonDeco spot="stats-tile" />
+          <div style={{ flex: 1, textAlign: 'center' }}>
+            <div className="l">{t('Lifted this week')}</div>
+            <div className="v">{fmtVol(Math.round(volSemana), S.unit)}</div>
+          </div>
+          <div style={{ width: 1, background: 'var(--sep)' }}></div>
+          <div style={{ flex: 1, textAlign: 'center' }}>
+            <div className="l">{t('Lifted in total')}</div>
+            <div className="v">{fmtVol(Math.round(lifetime), S.unit)}</div>
+          </div>
+        </div>
+      )}
     </div>
 
     {workouts.length > 0 && motivationOn && <StreakCard info={streak} />}
-    {/* The month's challenges and the trophy shelf (lib/challenges.js), folded to one line. */}
     {workouts.length > 0 && motivationOn && <ChallengesStatsCard S={S} />}
 
     <div className="card">
@@ -933,9 +799,7 @@ export default function Stats() {
       <Segmented className="seg-range" value={range} onChange={setRange}
         options={rangeOptions()} />
       <div className="chart"><LineChart points={bwPts} h={160} unit={S.unit} goal={S.targetW} /></div>
-      {/* the weekly rate and, with one set, how it sits in its corridor (#759) */}
       {S.bodyweight.length > 0 && <WeightRate S={S} />}
-      {/* every weigh-in, week by week with its average (Discord 'Weight') */}
       {S.bodyweight.length > 0 && <div className="row" style={{ justifyContent: 'flex-end', marginTop: 4 }}>
         <Button size="sm" variant="ghost" trailingIcon="chevronRight" onClick={weighInsSheet}>{t('All weigh-ins')}</Button>
       </div>}
@@ -950,7 +814,6 @@ export default function Stats() {
       <SeasonDeco spot="stats-peek" />
       <h2>{t('Exercise progress')}</h2>
       {exHist.length ? <>
-        {/* What to chart, as one grouped list: the exercise, then the chart of it. */}
         <div className="sect-b ex-pick">
           <SelectRow title={t('Exercise')} sheetTitle={t('Exercise progress')} value={curEx} onChange={setExId} stackedValue
             options={exHist.map(id => ({ value: id, label: (EXIDX[id] ? exerciseNameText(EXIDX[id]) : nameOf(id)) + (exCurrent[id].mx ? ' · ' + fmtNum(exCurrent[id].shown ?? exCurrent[id].mx) + ' ' + exCurrent[id].unit : '') }))}
@@ -1013,7 +876,6 @@ export default function Stats() {
       </> : <div className="muted small">{t('Finish your first workout and your progress curves will show up here.')}</div>}
     </div>
     {(workouts.length > 0 || Object.keys(loadOfWeeklyPlan(S)).length > 0) && <MusclesCard S={S} planFocus={planFocus} />}
-    {/* Beginner to Elite for the main lifts (lib/strength-level.js); hidden without a weigh-in. */}
     {workouts.length > 0 && on('strength') && <StrengthLevelsCard S={S} />}
     {!effortOn && timeCard && <ExerciseTimeCard S={S} />}
     {!bodyOn && statsLinks}
@@ -1026,4 +888,3 @@ export default function Stats() {
     </section>}
   </>
 }
-

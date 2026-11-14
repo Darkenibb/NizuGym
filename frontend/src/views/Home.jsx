@@ -160,12 +160,10 @@ export default function Home() {
   let displayRest = S.rest || S.defaultRest || 60;
 
   if (S.active) {
-    // Se o treino estiver ativo, usa os dados da sessão ativa (é de onde vem o "9 séries")
     displayExercises = S.active.exercises?.length || 0;
     displaySets = S.active.exercises?.reduce((sum, ex) => sum + (ex.sets?.length || Number(ex.sets) || 0), 0) || 0;
     displayRest = S.active.rest || displayRest;
   } else if (routine) {
-    // Se não começou, tenta achar os exercícios na rotina
     const rExs = routine.exercises || routine.items || [];
     displayExercises = rExs.length;
     displaySets = rExs.reduce((sum, ex) => sum + (Number(ex.sets) || Number(ex.setsCount) || 3), 0);
@@ -235,6 +233,13 @@ export default function Home() {
             {S.active ? t('Continuar Treino') : doneToday ? t('Ver Detalhes') : routine ? t('Iniciar Treino') : t('Escolher Treino')}
           </div>
         </div>
+      </div>
+
+      {/* BOTÃO DE ACESSO À GUILDA */}
+      <div style={{ marginTop: 16 }}>
+        <Button variant="tinted" icon="users" onClick={() => nav('/guild')} style={{ width: '100%' }}>
+          Acessar Guilda
+        </Button>
       </div>
 
       {!S.active && <div style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
