@@ -139,8 +139,6 @@ function useRoutineReorder(routineIdentity, exercises, onDrop) {
       releaseCapture(gesture)
       suppressClickRef.current = true
       window.clearTimeout(suppressTimerRef.current)
-      // The compatibility click lands synchronously after pointerup; anything
-      // later is a real tap, so the guard only needs to outlive that one event.
       suppressTimerRef.current = window.setTimeout(() => { suppressClickRef.current = false }, 150)
       setDrag(null)
       const rect = list.getBoundingClientRect()
@@ -206,7 +204,6 @@ function useRoutineReorder(routineIdentity, exercises, onDrop) {
       updateDrag(gesture, gesture.lastX, gesture.lastY)
     }
     const onPointerDown = event => {
-      // a new touch is intentional — never let the post-drop guard eat its click
       suppressClickRef.current = false
       window.clearTimeout(suppressTimerRef.current)
       const current = gestureRef.current
@@ -229,10 +226,6 @@ function useRoutineReorder(routineIdentity, exercises, onDrop) {
         snapshot: JSON.stringify(exercisesRef.current), active: false, timer: null,
       }
       gestureRef.current = gesture
-      // The grip, pressed with a mouse, picks the row up at once (#277): the hold exists so a
-      // finger can still scroll the list, and a mouse scrolls with its wheel. preventDefault
-      // keeps the press from starting a text selection or the row's swipe-to-delete, which
-      // listen to the mouse events a pointerdown would otherwise go on to fire.
       if (event.pointerType === 'mouse' && target.closest('[data-drag-handle]')) {
         event.preventDefault()
         lift(gesture)
@@ -274,11 +267,6 @@ function useRoutineReorder(routineIdentity, exercises, onDrop) {
     const onVisibility = () => { if (document.visibilityState === 'hidden') cancelActive() }
     const onContextMenu = event => { if (gestureRef.current?.active && event.target.closest?.('[data-routine-row]')) event.preventDefault() }
     const onDragStart = event => { if (event.target.closest?.('[data-routine-row]')) event.preventDefault() }
-
-    // Touch: the rows keep `touch-action: pan-y` so the list still scrolls with a finger, but once
-    // a long-press has lifted a row the browser must not claim the vertical drag as a pan — it
-    // would fire pointercancel and scroll instead. preventDefault on a pointer event cannot stop
-    // that; only a non-passive touchmove listener can, and only while a drag is actually active.
     const onTouchMove = event => { if (gestureRef.current?.active) event.preventDefault() }
 
     document.addEventListener('pointerdown', onPointerDown)
@@ -316,17 +304,10 @@ function useRoutineReorder(routineIdentity, exercises, onDrop) {
     window.clearTimeout(suppressTimerRef.current)
     event.preventDefault(); event.stopPropagation()
   }
-  // Whether a long press has picked a row up: the row's swipe stays out of the way while it has.
   const lifted = () => !!gestureRef.current?.active
   return { listRef, drag, onClickCapture, lifted }
 }
 
-/**
- * Takes exercise `i` out of routine `routineId` with an Undo (v1.3.11: the row's swipe and the
- * exercise sheet's Remove). While the routine's exercises are still what the removal left, Undo
- * puts the list back as it was, superset links included (a partner left alone loses its link,
- * cleanupSg). Once something else changed them, the exercise goes back in at its old place.
- */
 export function removeRoutineExercise(routineId, i) {
   const st = useStore.getState()
   const routine = st.S.routines.find(x => x.id === routineId)
@@ -353,8 +334,6 @@ export function undoRemoveRoutineExercise({ routineId, i, before, after, base, d
   }
   useStore.getState().update(s => {
     const routine = s.routines.find(x => x.id === routineId)
-    // Put back exactly, so a change another device made to these exercises before it saw the
-    // removal still wins (lib/sync-merge.js, "Undo").
     if (JSON.stringify(routine.ex) === after) { routine.ex = structuredClone(before); if (del) markEntryUndone(routine, 'ex', base, del); return }
     routine.ex.splice(Math.min(i, routine.ex.length), 0, structuredClone(before[i]))
     cleanupSg(routine.ex)
@@ -370,19 +349,14 @@ export default function RoutineEdit() {
   const toast = useUI(s => s.toast)
   const r = S.routines.find(x => x.id === id)
   useEffect(() => { if (!r) nav('/plan') }, [!!r])
-  // Editing here has no explicit "save" — every field change persists immediately. A single
-  // auto-backup on the way out (not per keystroke) covers the whole editing session, deletion
-  // included: this still unmounts after the delete button navigates away.
   useEffect(() => () => useStore.getState().autoBackupNow(), [])
   const edit = fn => update(s => { fn(s.routines.find(x => x.id === id).ex) })
   const reorder = useRoutineReorder(r, r?.ex || [], (sourceIndex, targetSlot) => {
     edit(exercises => { reorderRoutineUnit(exercises, sourceIndex, targetSlot) })
   })
   if (!r) return null
-  // The arrows move one exercise (#377): inside its superset, out of it at the edge, and past a
-  // whole neighbouring unit otherwise (lib/history.js moveRoutineEntry). Drag moves supersets whole.
+  
   const move = (i, dir) => {
-    // Guard before update so a stale/boundary activation cannot trigger persistence or cleanup.
     if (!moveRoutineEntry(r.ex, i, dir)) return
     edit(ex => {
       const reordered = moveRoutineEntry(ex, i, dir)
@@ -391,11 +365,7 @@ export default function RoutineEdit() {
       cleanupSg(ex)
     })
   }
-  // Replace (#110): the picker chooses what goes into slot `i`, and the slot keeps its sets, reps,
-  // weight and the rest (lib/routines.js replaceSlotExercise). "+" on a picker row replaces at
-  // once; tapping the row opens the new exercise's settings at those numbers first, the way the
-  // add flow does. One pick and the picker closes — it is a chooser here, not a stack you keep
-  // adding from. A slot that is no longer the exercise the sheet was opened on is left alone.
+  
   const replace = i => {
     const openedOn = r.ex[i]?.id
     const commit = (ex, fn) => {
@@ -405,25 +375,18 @@ export default function RoutineEdit() {
       if (done) toast(t('Replaced with “{0}”', exerciseNameText(ex)))
     }
     const picker = exercisePicker((ex, quick) => {
-      // The slot and the history as they are now, not as this render saw them: a sync can land
-      // while the picker is open, and the new exercise's weight comes from its own sessions.
       const live = useStore.getState().S
       const slot = live.routines.find(x => x.id === id)?.ex[i]
       if (!slot || slot.id !== openedOn) { picker.close(); return }
-      // "+" on the exercise that is already in the slot: nothing to replace, and no toast that
-      // says something was.
       if (quick && ex.id === openedOn) { picker.close(); return }
       if (quick) { commit(ex, current => replaceSlotExercise(current, ex.id, live, id)); return }
       const next = replaceSlotExercise(slot, ex.id, live, id)
       exConfigSheet(ex, next, cfg => commit(ex, current => ({ id: ex.id, sg: current.sg, ...cfg })), null, r, null, null, t('Replace'), { backups: true })
     }, { title: t('Replace exercise'), like: openedOn, backups: r.ex[i]?.subs })
   }
-  // This routine on paper (#282): the print step (sheets.jsx printPlanSheet, "With pictures"
-  // #817), then the weekly printout's page for one session through the same two print paths: the
-  // browser's print dialog (→ Save as PDF) on the web, the native Print plugin in the app.
-  // Android's print manager refuses a job without a name. The editor never leaves a name blank,
-  // but a routine that arrived from an import or another client may have none.
+  
   const printRoutine = () => printPlanSheet({ routineId: id, name: r.name || t('Routine') })
+  
   const toggleLink = i => edit(ex => {
     if (i < 1) return
     const cur = ex[i], prev = ex[i - 1]
@@ -443,8 +406,6 @@ export default function RoutineEdit() {
 
   const units = supersetUnits(r.ex)
   const unitFirst = new Set(units.filter(u => u.length > 1).map(u => u[0]))
-  // Each superset gets a letter and each member its place in the round (A1, A2, B1…), so the
-  // order you do them in reads off the list (#293).
   const ssPos = new Map()
   units.filter(u => u.length > 1).forEach((u, k) => u.forEach((idx, n) => ssPos.set(idx, String.fromCharCode(65 + (k % 26)) + (n + 1))))
   const unitOf = new Map(units.flatMap(u => u.map(idx => [idx, u])))
@@ -457,6 +418,39 @@ export default function RoutineEdit() {
   const profile = activeProfile(S)
   const missingCount = profile ? r.ex.filter(e => !exAvailable(S, exOr(e.id))).length : 0
   const swipe = workoutControls(S).swipeSets
+
+  // --- INÍCIO DA LÓGICA DE FOTO PERSONALIZADA ---
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      const img = new Image()
+      img.onload = () => {
+        const maxWidth = 1000
+        const scale = maxWidth / img.width
+        const canvas = document.createElement('canvas')
+        canvas.width = maxWidth
+        canvas.height = img.height * scale
+
+        const ctx = canvas.getContext('2d')
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+        const base64String = canvas.toDataURL('image/jpeg', 0.8)
+
+        update(s => {
+          const routine = s.routines.find(x => x.id === id)
+          if (routine) routine.image = base64String
+        })
+        
+        toast(t('Foto de capa atualizada!'))
+      }
+      img.src = event.target.result
+    }
+    reader.readAsDataURL(file)
+  }
+  // --- FIM DA LÓGICA DE FOTO PERSONALIZADA ---
 
   return <div className="narrow">
     <div className="hdr">
@@ -472,11 +466,6 @@ export default function RoutineEdit() {
       <SelectRow icon="chartLine" title={t('Progression')} sheetTitle={t('Progression')}
         value={r.prog || profileRule(S)} onChange={v => update(s => { s.routines.find(x => x.id === id).prog = v })}
         options={POLICIES_FOR.reps.map(p => ({ value: p, label: t(POLICY_NAME[p]), subtitle: t(POLICY_DESC[p]) }))} />
-      {/* Two controls that read alike and are not (issue #294). Progression picks how this
-          routine's own targets move, and "No automatic progression" keeps them where they are.
-          This switch decides whether the routine's workouts count at all: a deload routine's
-          sessions open at its own numbers and are never the baseline the next regular session
-          progresses from (session-start.js, history.js entryExcluded). */}
       <Row icon="chartLineSlash" iconTint="var(--orange)" title={t('Deload routine')}
         subtitle={t('Its workouts do not count toward progression. They still show in history and statistics.')}>
         <Switch checked={r.excludeFromProgression === true} onChange={v => update(s => {
@@ -492,6 +481,44 @@ export default function RoutineEdit() {
         : t(POLICY_DESC[r.prog || profileRule(S)] || POLICY_DESC.linear) + ' ' + t('Applies to every exercise in this routine that does not set its own rule.')}
     </div>
 
+    {/* --- INÍCIO DO CARD DE FOTO DE CAPA --- */}
+    <div className="card" style={{ marginBottom: 16, padding: 16 }}>
+      <h2 style={{ fontSize: 16, marginBottom: 8 }}>{t('Foto de Capa')}</h2>
+      <p className="small dim" style={{ marginBottom: 16 }}>
+        {t('Escolha uma foto para aparecer na tela inicial no lugar da imagem padrão.')}
+      </p>
+      
+      {r.image && (
+        <div style={{ 
+          marginBottom: 16, borderRadius: 'var(--r-sm)', overflow: 'hidden', height: 120, 
+          background: `url(${r.image}) center/cover`, border: '1px solid var(--sep)'
+        }} />
+      )}
+
+      <div style={{ display: 'flex', gap: 10, flexDirection: 'column' }}>
+        <label className="btn ghost" style={{ 
+          display: 'flex', cursor: 'pointer', justifyContent: 'center', alignItems: 'center', 
+          gap: 8, border: '1px solid var(--sep)', background: 'var(--surface-2)' 
+        }}>
+          <Icon name="image" /> {t('Escolher Imagem da Galeria')}
+          <input type="file" accept="image/*" onChange={handleImageUpload} style={{ display: 'none' }} />
+        </label>
+        
+        {r.image && (
+          <Button variant="danger" onClick={() => {
+            update(s => {
+              const routine = s.routines.find(x => x.id === id)
+              if (routine) delete routine.image
+            })
+            toast(t('Imagem removida! A padrão voltou.'))
+          }}>
+            {t('Remover Imagem')}
+          </Button>
+        )}
+      </div>
+    </div>
+    {/* --- FIM DO CARD DE FOTO DE CAPA --- */}
+
     {missingCount > 0 && <div className="card" style={{ marginBottom: 16, borderColor: 'var(--orange)' }}>
       <div className="row" style={{ gap: 8, alignItems: 'center' }}>
         <Icon name="warning" style={{ color: 'var(--orange)' }} />
@@ -499,43 +526,27 @@ export default function RoutineEdit() {
       </div>
     </div>}
 
-    {/* "Add exercise" heads the list (v1.3.11): with it under the last exercise, a long routine
-        had to be scrolled to the bottom before anything could be added. */}
     <div className="row between plan-sec-h routine-ex-h">
       <h4 className="sec">{t('Exercises')}</h4>
       <Button size="sm" variant="tinted" icon="plus" data-tour="routine-add" onClick={addExercise}>{t('Add exercise')}</Button>
     </div>
     {r.ex.length ? <div ref={reorder.listRef} onClickCapture={reorder.onClickCapture}
       className={'list routine-list' + (reorder.drag ? ' is-reordering' : '')}>{r.ex.map((e, i) => {
-      // An unresolvable id is shown rather than skipped — hiding it left an entry you
-      // could neither see nor delete, but that still turned up in the workout.
       const ex = exOr(e.id)
       const noEquip = profile && !exAvailable(S, ex)
       const linkedPrev = i > 0 && e.sg && r.ex[i - 1].sg === e.sg
-      // At a superset's edge an arrow takes the exercise out of it rather than past a neighbour.
       const leavesUp = inSS.has(i) && !linkedPrev
       const leavesDown = inSS.has(i) && r.ex[i + 1]?.sg !== e.sg
       const isDragging = reorder.drag && i >= reorder.drag.first && i <= reorder.drag.last
       const removeHere = () => removeRoutineExercise(id, i)
-      // A tap anywhere on the row opens the exercise's sheet; its Remove is the keyboard's way
-      // to take it out. The row itself is no button (it holds the link and Move buttons, which a
-      // screen reader would lose inside one): the name is, a real <button> stretched over the row
-      // (.tap-main, card dismiss pass), with the rail's buttons above it, so pressing Move up
-      // neither opens the sheet nor fills the row. The long press treats it as the row
-      // (data-row-open, useRoutineReorder).
       const openEx = () => exConfigSheet(ex, e, cfg => edit(x => { x[i] = { id: x[i].id, sg: x[i].sg, ...(x[i].sg ? { sgName: x[i].sgName, sgRest: x[i].sgRest } : {}), ...cfg }; cleanupSg(x) }), removeHere, r, null, () => replace(i), undefined, { backups: true })
       const item = <div className={'item tap-host' + (inSS.has(i) ? ' in-ss' : '')}>
-          {/* Shown on pointer devices only (index.css .routine-grip); the Move buttons and the
-              long press stay the way in for a keyboard and a finger. */}
           <span className="routine-grip" data-drag-handle aria-hidden="true" title={t('Reorder exercises')}><Icon name="grip" /></span>
           {ssPos.has(i) && <span className="ss-pos" aria-label={t('Superset position {0}', ssPos.get(i))}>{ssPos.get(i)}</span>}
           <Thumb ex={ex} />
           <button type="button" className="grow item-open tap-main" data-row-open aria-haspopup="dialog" onClick={openEx}><span className={`tt ${exerciseNameClass(ex)}`}>{exerciseNameFor(ex)}</span><span className="ss">{exLine(viewTarget(S, e.id, e), exUnitOf(S, e.id), speedUnitOf(S))}</span>
             {e.note && <span className="small dim" style={{ marginTop: 2 }}>{e.note}</span>}</button>
           {noEquip && <span className="tag" style={{ color: 'var(--orange)', borderColor: 'var(--orange)' }} title={t('Needs {0}, which isn’t in your active profile', t(ex.eq))}><Icon name="warning" /></span>}
-          {/* One rail (P4): the superset link beside the two move buttons, each a finger-sized
-              target (index.css .re-rail). The first exercise has nothing above to link to, so its
-              link cell stays empty and the arrows keep their place down the list. */}
           <div className="re-rail">
             {i > 0 ? <button className={'iconbtn re-link' + (linkedPrev ? ' on-ss' : '')} title={t('Superset with exercise above')} aria-label={t('Superset with exercise above')} aria-pressed={!!linkedPrev} onClick={() => toggleLink(i)}><Icon name="link" /></button>
               : <span className="re-link" aria-hidden="true" />}
@@ -554,10 +565,6 @@ export default function RoutineEdit() {
             <Icon name="pencil" />
           </button>
         })()}
-        {/* Swipe (v1.3.11, Settings → Swipe actions): toward the start takes the exercise out,
-            with an Undo; nothing on the other side. The long press still picks the row up to
-            reorder it (a press that has lifted keeps the swipe out), and the row's sheet keeps
-            Remove for a keyboard. Rows are keyed by index, so the row shuts when the count changes. */}
         {swipe
           ? <SwipeRow className="swrow-item" deleteLabel={t('Remove')} deleteIcon="minus" closeKey={r.ex.length}
             canSwipe={() => !reorder.lifted()} onDelete={removeHere}>{item}</SwipeRow>
@@ -566,8 +573,6 @@ export default function RoutineEdit() {
     })}{reorder.drag && <div className="routine-drop-indicator" data-testid="routine-drop-indicator"
       aria-hidden="true" style={{ top: `${reorder.drag.indicatorTop}px` }} />}</div> : <div className="empty"><div className="ico"><Icon name="dumbbell" /></div>{t('No exercises yet. Add your first one!')}</div>}
 
-    {/* Coverage of the routine as planned, so a gap shows up while you're building it
-        rather than after a month of training around it. */}
     {r.ex.length > 0 && (() => {
       const load = loadOfRoutine(r)
       const { worked } = rankOf(load)
@@ -581,15 +586,13 @@ export default function RoutineEdit() {
     })()}
 
     <div className="small dim row" style={{ margin: '10px 2px', gap: 5 }}><Icon name="link" style={{ fontSize: 'var(--fs-footnote)' }} />{t('Tap the link button on an exercise to superset it with the one above. You’ll do them back-to-back.')}</div>
-    {/* The routine's own actions (P4): one grouped list instead of three stacked buttons, and
-        Delete on its own below it, a red row that says what it removes. */}
+    
     <div className="sect-b re-acts">
       <button type="button" className="lrow tap" onClick={() => {
         const copy = copyRoutine(r, t('Copy'))
         update(s => { s.routines.push(copy) })
         nav('/plan/r/' + copy.id)
       }}><Icon name="copy" className="re-act-i" /><span className="lrow-m"><span className="lrow-t">{t('Copy routine')}</span></span></button>
-      {/* A link a friend taps to add this routine to their own NizuGym (components/RoutineShare.jsx). */}
       <button type="button" className="lrow tap" disabled={!r.ex.length} onClick={() => shareRoutineSheet(r)}><Icon name="share" className="re-act-i" /><span className="lrow-m"><span className="lrow-t">{t('Share with a friend')}</span></span></button>
       <button type="button" className="lrow tap" disabled={!r.ex.length} onClick={printRoutine}><Icon name="download" className="re-act-i" /><span className="lrow-m"><span className="lrow-t">{t('Print / Save as PDF')}</span></span></button>
     </div>
@@ -605,4 +608,3 @@ export default function RoutineEdit() {
     </div>
   </div>
 }
-
