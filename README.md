@@ -40,12 +40,3 @@ Este projeto foi construído utilizando o que há de mais moderno no desenvolvim
 2. Baixe o arquivo `.apk` mais recente.
 3. No seu celular Android, permita a instalação de "Fontes Desconhecidas" nas configurações.
 4. Instale e comece a treinar!
-
----
-
-## ⚖️ Licença e Créditos
-
-Este projeto é um *fork* derivado do **[openGym](https://github.com/DuarteSantos8/openGym)**, criado por Duarte Santos, e é distribuído sob a licença **AGPL-3.0**. Agradecemos imensamente à comunidade de código aberto por fornecer a base para esta ferramenta.
-
----
-*Feito com dedicação para quem não aceita treinar fofo.* 🦍💨
